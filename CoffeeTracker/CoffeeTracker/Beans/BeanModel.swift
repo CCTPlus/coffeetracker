@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-struct BeanModel: Identifiable {
+struct BeanModel: Identifiable, Hashable {
     var id: UUID = UUID()
     var name: String
     var style: String

@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct BeansCollectionView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var beansOO: BeansCollectionViewOO
+    
     var body: some View {
         NavigationView {
-            List(allRoasts) { bean in
-                NavigationLink {
-                    BeanDetailView(bean: bean)
-                } label: {
-                    BeanRowView(bean: bean)
+            List {
+                ForEach(beansOO.beans, id: \.self) { bean in
+                    NavigationLink {
+                        BeanDetailView(bean: bean)
+                    } label: {
+                        BeanRowView(bean: bean)
+                    }
                 }
             }.navigationTitle(Text("Beans"))
         }

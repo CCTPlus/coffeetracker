@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct CoffeeTrackerMain: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @State private var showButtons = false
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             BeansCollectionView()
-            NewBeansView()
+            NewBeansView(showForm: $showButtons)
                 .opacity(showButtons ? 1 : 0)
             Button(action: {showButtons.toggle()}) {
                 Image(systemName: SFSymbols.plus)

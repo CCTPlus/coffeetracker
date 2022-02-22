@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class BeansCollectionViewOO: NSObject, ObservableObject {
-    @Published var data: [BeanModel] = []
+    @Published var beans: [BeanModel] = []
 
     private let fetchedBeanResultsController: NSFetchedResultsController<Bean>
 
@@ -30,7 +30,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
 
         do {
             try fetchedBeanResultsController.performFetch()
-            data = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
+            beans = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
                 return BeanModel(id: foundBean.id ?? UUID(),
                                         name: foundBean.name ?? "",
                                         style: foundBean.style ?? "",
@@ -48,7 +48,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
 
 extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        data = (controller.fetchedObjects as? [Bean] ?? []).map({ foundBean -> BeanModel in
+        beans = (controller.fetchedObjects as? [Bean] ?? []).map({ foundBean -> BeanModel in
             return BeanModel(id: foundBean.id ?? UUID(),
                                     name: foundBean.name ?? "",
                                     style: foundBean.style ?? "",

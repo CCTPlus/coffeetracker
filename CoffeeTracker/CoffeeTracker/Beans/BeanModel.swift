@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 struct BeanModel: Identifiable {
     var id: UUID = UUID()
@@ -12,5 +13,24 @@ struct BeanModel: Identifiable {
 
     mutating func updateNotes(_ note: String) {
         notes = note
+    }
+
+    func addBeansToData(context: NSManagedObjectContext) {
+        let newBean = Bean(context: context)
+        newBean.id = id
+        newBean.name = name
+        newBean.style = style
+        newBean.buyAgain = buyAgain
+        newBean.roaster = roaster
+        newBean.roastedOn = roastedOn
+        newBean.boughtOn = boughtOn
+        newBean.notes = notes
+
+        do {
+            try context.save()
+            print("Bean saved correctly")
+        } catch {
+            print("Failed: \(error)")
+        }
     }
 }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct NewBeansView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @Binding var showForm: Bool
+
     @State var beans = BeanModel(name: "",
                                   style: "",
                                   buyAgain: false,
@@ -57,7 +60,15 @@ struct NewBeansView: View {
                 HStack{
                     Spacer()
                     Button {
-                        print("SAVE")
+                        beans.addBeansToData(context: viewContext)
+                        showForm = false
+                        beans = BeanModel(name: "",
+                                          style: "",
+                                          buyAgain: false,
+                                          roaster: "",
+                                          roastedOn: Date(),
+                                          boughtOn: Date(),
+                                          notes: "")
                     } label: {
                         Text("Save").padding(.horizontal, 30)
                     }.buttonStyle(BorderedButtonStyle())
@@ -74,6 +85,6 @@ struct NewBeansView: View {
 
 struct NewBeansView_Previews: PreviewProvider {
     static var previews: some View {
-        NewBeansView()
+        NewBeansView(showForm: Binding(projectedValue: .constant(true)))
     }
 }

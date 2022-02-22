@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		371E294B27C40D2100C8ACBF /* Coffee+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Coffee+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		371E294B27C40D2100C8ACBF /* Coffee_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coffee_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeTrackerApp.swift; sourceTree = "<group>"; };
 		371E295027C40D2100C8ACBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		371E295227C40D2200C8ACBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		371E294C27C40D2100C8ACBF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				371E294B27C40D2100C8ACBF /* Coffee+.app */,
+				371E294B27C40D2100C8ACBF /* Coffee_.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			);
 			name = CoffeeTracker;
 			productName = CoffeeTracker;
-			productReference = 371E294B27C40D2100C8ACBF /* Coffee+.app */;
+			productReference = 371E294B27C40D2100C8ACBF /* Coffee_.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -352,7 +352,7 @@
 				);
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.cctplus.CoffeeTracker;
-				PRODUCT_NAME = "Coffee+";
+				PRODUCT_NAME = Coffee_;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -382,7 +382,7 @@
 				);
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.cctplus.CoffeeTracker;
-				PRODUCT_NAME = "Coffee+";
+				PRODUCT_NAME = Coffee_;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

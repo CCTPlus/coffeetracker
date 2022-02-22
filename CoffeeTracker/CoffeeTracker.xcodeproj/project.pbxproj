@@ -21,6 +21,7 @@
 		371E297127C40FB300C8ACBF /* BeanFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297027C40FB300C8ACBF /* BeanFixtures.swift */; };
 		371E297327C40FEF00C8ACBF /* BeansCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */; };
 		371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297427C4100900C8ACBF /* NewBeansView.swift */; };
+		3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		371E297027C40FB300C8ACBF /* BeanFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanFixtures.swift; sourceTree = "<group>"; };
 		371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionView.swift; sourceTree = "<group>"; };
 		371E297427C4100900C8ACBF /* NewBeansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeansView.swift; sourceTree = "<group>"; };
+		3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionViewOO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
 				371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */,
 				371E297427C4100900C8ACBF /* NewBeansView.swift */,
+				3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */,
 			);
 			path = Beans;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				371E296727C40EF100C8ACBF /* BeanRow.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
+				3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */,
 				371E296227C40E8800C8ACBF /* CoffeeTrackerMain.swift in Sources */,
 				371E295127C40D2100C8ACBF /* ContentView.swift in Sources */,
 				371E296527C40EC900C8ACBF /* BeanModel.swift in Sources */,

@@ -1,7 +1,7 @@
 import Foundation
 
 struct BeanModel: Identifiable {
-    let id: UUID = UUID()
+    var id: UUID = UUID()
     var name: String
     var style: String
     var buyAgain: Bool
@@ -9,4 +9,8 @@ struct BeanModel: Identifiable {
     var roastedOn: Date
     var boughtOn: Date
     var notes: String
+
+    mutating func updateNotes(_ note: String) {
+        notes = note
+    }
 }

@@ -12,6 +12,8 @@ struct CoffeeTrackerMain: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             BeansCollectionView()
+            NewBeansView()
+                .opacity(showButtons ? 1 : 0)
             Button(action: {showButtons.toggle()}) {
                 Image(systemName: SFSymbols.plus)
                     .padding(12)
@@ -19,8 +21,8 @@ struct CoffeeTrackerMain: View {
                     .rotationEffect(Angle.degrees(showButtons ? 45 : 0))
             }.padding(20)
             .tint(.white)
-            .animation(.default, value: showButtons)
         }
+        .animation(.default, value: showButtons)
     }
 }
 

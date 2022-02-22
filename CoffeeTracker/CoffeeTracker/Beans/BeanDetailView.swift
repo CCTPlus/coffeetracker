@@ -96,6 +96,14 @@ struct BeanDetailView: View {
             //                    .padding(.bottom)
             //            }
         }.padding(.horizontal)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {print("show editView")}) {
+                        Image(systemName: SFSymbols.pencil)
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     func formatDate(_ date: Date) -> String {
@@ -108,7 +116,9 @@ struct BeanDetailView: View {
 
 struct BeanDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BeanDetailView(bean: testRoast)
-            .preferredColorScheme(.dark)
+        NavigationView {
+            BeanDetailView(bean: testRoast)
+                .preferredColorScheme(.dark)
+        }
     }
 }

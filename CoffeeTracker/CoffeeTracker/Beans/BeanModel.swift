@@ -10,6 +10,7 @@ struct BeanModel: Identifiable, Hashable {
     var roastedOn: Date
     var boughtOn: Date
     var notes: String
+    var objectID: NSManagedObjectID?
 
     mutating func updateNotes(_ note: String) {
         notes = note
@@ -31,6 +32,27 @@ struct BeanModel: Identifiable, Hashable {
             print("Bean saved correctly")
         } catch {
             print("Failed: \(error)")
+        }
+    }
+
+    func updateBean(context: NSManagedObjectContext) {
+        guard let objectID = objectID else {
+            print("❌ No object ID for update")
+            return
+        }
+
+        do {
+            let object: Bean = try context.existingObject(with: objectID) as! Bean
+            object.name = name
+            object.style = style
+            object.buyAgain = buyAgain
+            object.roaster = roaster
+            object.roastedOn = roastedOn
+            object.boughtOn = boughtOn
+            object.notes = notes
+            try context.save()
+        } catch {
+            print("❌ Error")
         }
     }
 }

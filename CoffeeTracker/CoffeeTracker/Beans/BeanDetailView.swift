@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @State private var showEditView = false
+
     var bean: BeanModel
     var body: some View {
         VStack(alignment: .leading) {
@@ -71,6 +73,12 @@ struct BeanDetailView: View {
                     .cornerRadius(10)
                 }
             }
+            .sheet(isPresented: $showEditView) {
+                showEditView = false
+            } content: {
+                NewBeansView(showForm: $showEditView, beans: bean, isEdit: true)
+            }
+
             //            HStack {
             //                Button {
             //                    print("EDIT")
@@ -98,7 +106,7 @@ struct BeanDetailView: View {
         }.padding(.horizontal)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {print("show editView")}) {
+                    Button(action: {showEditView.toggle()}) {
                         Image(systemName: SFSymbols.pencil)
                     }
                 }

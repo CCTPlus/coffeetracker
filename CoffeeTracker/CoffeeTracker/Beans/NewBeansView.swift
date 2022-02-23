@@ -17,7 +17,10 @@ struct NewBeansView: View {
                                   roaster: "",
                                   roastedOn: Date(),
                                   boughtOn: Date(),
-                                  notes: "")
+                                 notes: "")
+
+    var isEdit = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -60,15 +63,19 @@ struct NewBeansView: View {
                 HStack{
                     Spacer()
                     Button {
-                        beans.addBeansToData(context: viewContext)
+                        if isEdit {
+                            beans.updateBean(context: viewContext)
+                        } else {
+                            beans.addBeansToData(context: viewContext)
+                            beans = BeanModel(name: "",
+                                              style: "",
+                                              buyAgain: false,
+                                              roaster: "",
+                                              roastedOn: Date(),
+                                              boughtOn: Date(),
+                                              notes: "")
+                        }
                         showForm = false
-                        beans = BeanModel(name: "",
-                                          style: "",
-                                          buyAgain: false,
-                                          roaster: "",
-                                          roastedOn: Date(),
-                                          boughtOn: Date(),
-                                          notes: "")
                     } label: {
                         Text("Save").padding(.horizontal, 30)
                     }.buttonStyle(BorderedButtonStyle())

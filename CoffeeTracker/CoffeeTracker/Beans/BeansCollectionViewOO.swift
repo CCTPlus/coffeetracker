@@ -32,13 +32,14 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
             try fetchedBeanResultsController.performFetch()
             beans = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
                 return BeanModel(id: foundBean.id ?? UUID(),
-                                        name: foundBean.name ?? "",
-                                        style: foundBean.style ?? "",
-                                        buyAgain: foundBean.buyAgain,
-                                        roaster: foundBean.roaster ?? "",
-                                        roastedOn: foundBean.roastedOn ?? Date.distantPast,
-                                        boughtOn: foundBean.boughtOn ?? Date.now,
-                                        notes: foundBean.notes ?? "")
+                                 name: foundBean.name ?? "",
+                                 style: foundBean.style ?? "",
+                                 buyAgain: foundBean.buyAgain,
+                                 roaster: foundBean.roaster ?? "",
+                                 roastedOn: foundBean.roastedOn ?? Date.distantPast,
+                                 boughtOn: foundBean.boughtOn ?? Date.now,
+                                 notes: foundBean.notes ?? "",
+                                 objectID: foundBean.objectID)
             })
         } catch {
             print("Error")
@@ -50,13 +51,14 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         beans = (controller.fetchedObjects as? [Bean] ?? []).map({ foundBean -> BeanModel in
             return BeanModel(id: foundBean.id ?? UUID(),
-                                    name: foundBean.name ?? "",
-                                    style: foundBean.style ?? "",
-                                    buyAgain: foundBean.buyAgain,
-                                    roaster: foundBean.roaster ?? "",
-                                    roastedOn: foundBean.roastedOn ?? Date.distantPast,
-                                    boughtOn: foundBean.boughtOn ?? Date.now,
-                                    notes: foundBean.notes ?? "")
+                             name: foundBean.name ?? "",
+                             style: foundBean.style ?? "",
+                             buyAgain: foundBean.buyAgain,
+                             roaster: foundBean.roaster ?? "",
+                             roastedOn: foundBean.roastedOn ?? Date.distantPast,
+                             boughtOn: foundBean.boughtOn ?? Date.now,
+                             notes: foundBean.notes ?? "",
+                             objectID: foundBean.objectID)
         })
     }
 }

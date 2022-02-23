@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @State private var showEditView = false
+
     var bean: BeanModel
     var body: some View {
         VStack(alignment: .leading) {
@@ -71,6 +73,12 @@ struct BeanDetailView: View {
                     .cornerRadius(10)
                 }
             }
+            .sheet(isPresented: $showEditView) {
+                showEditView = false
+            } content: {
+                NewBeansView(showForm: $showEditView, beans: bean, isEdit: true)
+            }
+
             //            HStack {
             //                Button {
             //                    print("EDIT")
@@ -96,6 +104,14 @@ struct BeanDetailView: View {
             //                    .padding(.bottom)
             //            }
         }.padding(.horizontal)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {showEditView.toggle()}) {
+                        Image(systemName: SFSymbols.pencil)
+                    }
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     func formatDate(_ date: Date) -> String {
@@ -108,7 +124,9 @@ struct BeanDetailView: View {
 
 struct BeanDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BeanDetailView(bean: testRoast)
-            .preferredColorScheme(.dark)
+        NavigationView {
+            BeanDetailView(bean: testRoast)
+                .preferredColorScheme(.dark)
+        }
     }
 }

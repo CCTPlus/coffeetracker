@@ -12,6 +12,6 @@ enum SFSymbols {
     static var thumbsup = "hand.thumbsup.fill"
     static var thumbsdown = "hand.thumbsdown.fill"
     static var trash = "trash"
-    static var pencil = "pencil"
+    static var pencil = "pencil.and.outline"
     static var plus = "plus"
 }

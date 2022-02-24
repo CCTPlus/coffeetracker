@@ -30,8 +30,10 @@ struct BeanRowView: View {
                     }.foregroundColor(bean.buyAgain ? .green : .red)
                 }
             }
-        }
-        .padding()
+        }.padding()
+            .background(Material.ultraThick)
+            .cornerRadius(10)
+            .padding(.vertical, 5)
     }
 }
 

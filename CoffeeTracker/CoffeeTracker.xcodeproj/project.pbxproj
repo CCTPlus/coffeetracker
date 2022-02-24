@@ -15,7 +15,7 @@
 		371E295B27C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 371E295927C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld */; };
 		371E296227C40E8800C8ACBF /* CoffeeTrackerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296127C40E8800C8ACBF /* CoffeeTrackerMain.swift */; };
 		371E296527C40EC900C8ACBF /* BeanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296427C40EC900C8ACBF /* BeanModel.swift */; };
-		371E296727C40EF100C8ACBF /* BeanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296627C40EF100C8ACBF /* BeanRow.swift */; };
+		371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296627C40EF100C8ACBF /* BeanRowView.swift */; };
 		371E296C27C40F5E00C8ACBF /* SFSymbolHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */; };
 		371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */; };
 		371E297127C40FB300C8ACBF /* BeanFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297027C40FB300C8ACBF /* BeanFixtures.swift */; };
@@ -35,7 +35,7 @@
 		371E295A27C40D2200C8ACBF /* CoffeeTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoffeeTracker.xcdatamodel; sourceTree = "<group>"; };
 		371E296127C40E8800C8ACBF /* CoffeeTrackerMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeTrackerMain.swift; sourceTree = "<group>"; };
 		371E296427C40EC900C8ACBF /* BeanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanModel.swift; sourceTree = "<group>"; };
-		371E296627C40EF100C8ACBF /* BeanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRow.swift; sourceTree = "<group>"; };
+		371E296627C40EF100C8ACBF /* BeanRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRowView.swift; sourceTree = "<group>"; };
 		371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbolHelper.swift; sourceTree = "<group>"; };
 		371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanDetailView.swift; sourceTree = "<group>"; };
 		371E297027C40FB300C8ACBF /* BeanFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanFixtures.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				371E296427C40EC900C8ACBF /* BeanModel.swift */,
-				371E296627C40EF100C8ACBF /* BeanRow.swift */,
+				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
 				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
 				371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */,
 				371E297427C4100900C8ACBF /* NewBeansView.swift */,
@@ -210,7 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				371E296727C40EF100C8ACBF /* BeanRow.swift in Sources */,
+				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
 				3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */,
 				371E296227C40E8800C8ACBF /* CoffeeTrackerMain.swift in Sources */,

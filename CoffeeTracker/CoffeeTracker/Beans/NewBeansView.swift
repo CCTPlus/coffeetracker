@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct NewBeansView: View {
+    enum Field {
+        case name
+        case style
+        case roaster
+        case notes
+    }
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var showForm: Bool
 
@@ -18,6 +24,7 @@ struct NewBeansView: View {
                                   roastedOn: Date(),
                                   boughtOn: Date(),
                                  notes: "")
+    @FocusState private var focusedField: Field?
 
     var isEdit = false
     
@@ -27,8 +34,10 @@ struct NewBeansView: View {
                 Section("Bean Information") {
                     TextField("Name", text: $beans.name)
                         .textFieldStyle(.roundedBorder)
+                        .focused($focusedField, equals: .name)
                     TextField("Style", text: $beans.style)
                         .textFieldStyle(.roundedBorder)
+                        .focused($focusedField, equals: .style)
                 }
                 Section("Roaster Information") {
                     DatePicker("Roasted On",
@@ -36,6 +45,7 @@ struct NewBeansView: View {
                                displayedComponents: .date)
                     TextField("Roaster", text: $beans.roaster)
                         .textFieldStyle(.roundedBorder)
+                        .focused($focusedField, equals: .roaster)
                 }
                 Section("Purchase Information") {
                     DatePicker("Purchased on",
@@ -75,6 +85,7 @@ struct NewBeansView: View {
                                               boughtOn: Date(),
                                               notes: "")
                         }
+                        focusedField = nil
                         showForm = false
                     } label: {
                         Text("Save").padding(.horizontal, 30)
@@ -87,6 +98,9 @@ struct NewBeansView: View {
 
             }.padding()
         }.background(.ultraThickMaterial)
+            .onDisappear {
+                focusedField = nil
+            }
     }
 }
 

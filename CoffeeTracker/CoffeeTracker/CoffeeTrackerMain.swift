@@ -15,8 +15,10 @@ struct CoffeeTrackerMain: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             BeansCollectionView()
-            NewBeansView(showForm: $showButtons)
-                .opacity(showButtons ? 1 : 0)
+            if showButtons {
+                NewBeansView(showForm: $showButtons)
+                    .opacity(showButtons ? 1 : 0)
+            }
             Button(action: {showButtons.toggle()}) {
                 Image(systemName: SFSymbols.plus)
                     .padding(12)

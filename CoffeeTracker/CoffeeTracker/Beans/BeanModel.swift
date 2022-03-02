@@ -16,7 +16,7 @@ struct BeanModel: Identifiable, Hashable {
         notes = note
     }
 
-    func addBeansToData(context: NSManagedObjectContext) {
+    mutating func addBeansToData(context: NSManagedObjectContext) {
         let newBean = Bean(context: context)
         newBean.id = id
         newBean.name = name
@@ -26,6 +26,8 @@ struct BeanModel: Identifiable, Hashable {
         newBean.roastedOn = roastedOn
         newBean.boughtOn = boughtOn
         newBean.notes = notes
+
+        self.objectID = newBean.objectID
 
         do {
             try context.save()
@@ -41,18 +43,26 @@ struct BeanModel: Identifiable, Hashable {
             return
         }
 
+        let fetchRequest: NSFetchRequest<Bean>
+        fetchRequest = Bean.fetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+
         do {
-            let object: Bean = try context.existingObject(with: objectID) as! Bean
-            object.name = name
-            object.style = style
-            object.buyAgain = buyAgain
-            object.roaster = roaster
-            object.roastedOn = roastedOn
-            object.boughtOn = boughtOn
-            object.notes = notes
-            try context.save()
+            let objects = try context.fetch(fetchRequest)
+            print(objects.count)
+            for object in objects {
+                object.name = name
+                object.style = style
+                object.buyAgain = buyAgain
+                object.roaster = roaster
+                object.roastedOn = roastedOn
+                object.boughtOn = boughtOn
+                object.notes = notes
+                try context.save()
+            }
         } catch {
-            print("❌ Error")
+            print("\(error)")
         }
     }
 }

@@ -14,4 +14,5 @@ enum SFSymbols {
     static var trash = "trash"
     static var pencil = "pencil.and.outline"
     static var plus = "plus"
+    static var share = "square.and.arrow.up"
 }

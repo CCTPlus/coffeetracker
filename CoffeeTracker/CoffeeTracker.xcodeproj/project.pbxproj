@@ -23,6 +23,7 @@
 		371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297427C4100900C8ACBF /* NewBeansView.swift */; };
 		3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */; };
 		3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C327D6A52F000FE457 /* View+Extensions.swift */; };
+		3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C527D6A6F3000FE457 /* Color+Extension.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		371E297427C4100900C8ACBF /* NewBeansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeansView.swift; sourceTree = "<group>"; };
 		3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionViewOO.swift; sourceTree = "<group>"; };
 		3797E1C327D6A52F000FE457 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		3797E1C527D6A6F3000FE457 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeTracker.entitlements; sourceTree = "<group>"; };
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */,
 				3797E1C327D6A52F000FE457 /* View+Extensions.swift */,
+				3797E1C527D6A6F3000FE457 /* Color+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
+				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
 				3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */,
 				371E296227C40E8800C8ACBF /* CoffeeTrackerMain.swift in Sources */,

@@ -12,27 +12,12 @@ struct BeansCollectionView: View {
     @EnvironmentObject var beansOO: BeansCollectionViewOO
     @State private var search: String = ""
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                VStack {
-                    HStack {
-                        Text("Beans")
-                            .font(.largeTitle)
-                        Spacer()
-                    }.padding(.top, 20)
-                }
-                ScrollView {
-                    ForEach(beansOO.beans, id: \.self) { bean in
-                        NavigationLink {
-                            BeanDetailView(bean: bean)
-                        } label: {
-                            BeanRowView(bean: bean)
-                        }
-                    }.tint(.primary)
-                }
-            }.navigationBarTitle("Beans")
-                .navigationBarHidden(true)
-        }.padding(.horizontal)
+        ScrollView {
+            ForEach(beansOO.beans, id: \.self) { bean in
+                BeanRowView(bean: bean)
+                    .padding()
+            }
+        }
     }
 }
 

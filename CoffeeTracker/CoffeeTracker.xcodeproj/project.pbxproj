@@ -22,6 +22,7 @@
 		371E297327C40FEF00C8ACBF /* BeansCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */; };
 		371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297427C4100900C8ACBF /* NewBeansView.swift */; };
 		3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */; };
+		3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C327D6A52F000FE457 /* View+Extensions.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionView.swift; sourceTree = "<group>"; };
 		371E297427C4100900C8ACBF /* NewBeansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeansView.swift; sourceTree = "<group>"; };
 		3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionViewOO.swift; sourceTree = "<group>"; };
+		3797E1C327D6A52F000FE457 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeTracker.entitlements; sourceTree = "<group>"; };
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */,
+				3797E1C327D6A52F000FE457 /* View+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */,
 				371E297327C40FEF00C8ACBF /* BeansCollectionView.swift in Sources */,
 				371E296C27C40F5E00C8ACBF /* SFSymbolHelper.swift in Sources */,
+				3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */,
 				371E294F27C40D2100C8ACBF /* CoffeeTrackerApp.swift in Sources */,
 				371E297127C40FB300C8ACBF /* BeanFixtures.swift in Sources */,
 				371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */,

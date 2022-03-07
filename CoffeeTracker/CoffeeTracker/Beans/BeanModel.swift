@@ -38,11 +38,7 @@ struct BeanModel: Identifiable, Hashable {
     }
 
     func updateBean(context: NSManagedObjectContext) {
-        guard let objectID = objectID else {
-            print("❌ No object ID for update")
-            return
-        }
-
+        
         let fetchRequest: NSFetchRequest<Bean>
         fetchRequest = Bean.fetchRequest()
 

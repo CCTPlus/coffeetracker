@@ -35,19 +35,20 @@ struct BeanDetailView: View {
             }.padding(.all)
 
             HStack {
-                Button(action: {print("Share")}) {
+                /* Commented out for now Not ready to add share and delete
+                 Button(action: {print("Share")}) {
                     Image(systemName: SFSymbols.share)
                 }
                 Spacer()
                 Button(action: {print("delete")}) {
                     Image(systemName: SFSymbols.trash)
-                }
+                } */
                 Spacer()
                 Button(action: {showEditView.toggle()}) {
                     Image(systemName: SFSymbols.pencil)
                 }
             }.padding()
-                .background(.ultraThickMaterial)
+                .background(.thinMaterial)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .sheet(isPresented: $showEditView) {
                     showEditView = false

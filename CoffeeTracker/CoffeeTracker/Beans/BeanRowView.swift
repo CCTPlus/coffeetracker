@@ -13,6 +13,13 @@ struct BeanRowView: View {
 
     var bean: BeanModel
 
+    var tap: some Gesture {
+        TapGesture(count: 1)
+            .onEnded { _ in
+                showingDetails.toggle()
+            }
+    }
+
     var body: some View {
         VStack{
             HStack(spacing: 20) {
@@ -36,13 +43,18 @@ struct BeanRowView: View {
                     Text(bean.style)
                         .font(.footnote)
                 }
-            }
+            }.gesture(tap)
             .padding(.horizontal)
-            BeanDetailView(bean: bean)
-        }.padding(.top)
+            if showingDetails {
+                BeanDetailView(bean: bean)
+                    .opacity(showingDetails ? 1 : 0)
+            }
+        }.padding(.top, 10)
+            .padding(.bottom, showingDetails ? 0 : 10)
             .background(Color.UI.bone)
             .cornerRadius(10)
             .padding(.vertical, 5)
+            .animation(.default, value: showingDetails)
     }
 }
 

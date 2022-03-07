@@ -19,22 +19,18 @@ struct BeanDetailView: View {
                     Text("Bought on")
                     Spacer()
                     Text(formatDate(bean.boughtOn))
-                        .padding()
-                        .background(.thinMaterial)
-                        .cornerRadius(10)
                 }
                 HStack {
                     Text("Roasted on")
                     Spacer()
                     Text(formatDate(bean.roastedOn))
-                        .padding()
-                        .background(.thinMaterial)
-                        .cornerRadius(10)
                 }
-                HStack {
-                    Text(bean.notes)
-                        .lineLimit(nil)
-                    Spacer()
+                if bean.notes.count > 0 {
+                    HStack {
+                        Text(bean.notes)
+                            .lineLimit(nil)
+                        Spacer()
+                    }
                 }
             }.padding(.all)
 

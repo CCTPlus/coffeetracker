@@ -19,24 +19,28 @@ struct BeanRowView: View {
                 Image(systemName: SFSymbols.bag)
                     .font(.title)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(bean.name)
-                        .font(.headline)
-                    Text(bean.roaster)
-                        .font(.subheadline)
-                        .padding(.bottom, 10)
-                    HStack {
-                        Text(bean.style)
-                            .font(.subheadline)
+                    HStack(alignment: .top) {
+                        VStack {
+                            Text(bean.name)
+                                .font(.headline)
+                            Text(bean.roaster)
+                                .font(.subheadline)
+                                .padding(.bottom, 10)
+                        }
                         Spacer()
-                        Group {
-                            bean.buyAgain ? Image(systemName: SFSymbols.thumbsup) : Image(systemName: SFSymbols.thumbsdown)
-                        }.foregroundColor(bean.buyAgain ? .green : .red)
+                        if bean.buyAgain {
+                            Image(systemName: SFSymbols.thumbsup)
+                                .opacity(0.60)
+                        }
                     }
+                    Text(bean.style)
+                        .font(.footnote)
                 }
             }
+            .padding(.horizontal)
             BeanDetailView(bean: bean)
         }.padding(.top)
-            .background(Color.brown)
+            .background(Color.UI.bone)
             .cornerRadius(10)
             .padding(.vertical, 5)
     }

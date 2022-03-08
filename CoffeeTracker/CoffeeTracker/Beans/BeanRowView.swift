@@ -16,7 +16,9 @@ struct BeanRowView: View {
     var tap: some Gesture {
         TapGesture(count: 1)
             .onEnded { _ in
-                showingDetails.toggle()
+                withAnimation {
+                    showingDetails.toggle()
+                }
             }
     }
 
@@ -27,7 +29,7 @@ struct BeanRowView: View {
                     .font(.title)
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(alignment: .top) {
-                        VStack {
+                        VStack(alignment: .leading) {
                             Text(bean.name)
                                 .font(.headline)
                             Text(bean.roaster)
@@ -43,18 +45,18 @@ struct BeanRowView: View {
                     Text(bean.style)
                         .font(.footnote)
                 }
-            }.gesture(tap)
+            }
             .padding(.horizontal)
             if showingDetails {
                 BeanDetailView(bean: bean)
-                    .opacity(showingDetails ? 1 : 0)
             }
+
         }.padding(.top, 10)
             .padding(.bottom, showingDetails ? 0 : 10)
             .background(Color.UI.bone)
             .cornerRadius(10)
-            .padding(.vertical, 5)
-            .animation(.default, value: showingDetails)
+            .gesture(tap)
+//            .animation(.default, value: showingDetails)
     }
 }
 

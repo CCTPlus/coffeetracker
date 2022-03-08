@@ -10,7 +10,9 @@ import SwiftUI
 struct BeansCollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var beansOO: BeansCollectionViewOO
+
     @State private var search: String = ""
+
     var body: some View {
         ScrollView {
             ForEach(beansOO.beans, id: \.self) { bean in

@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 extension Color {
-
-    struct UI {
-        static let bone = Color("Bone")
-    }
+    static let bone = Color("Bone")
+    static let sage = Color("Sage")
 }

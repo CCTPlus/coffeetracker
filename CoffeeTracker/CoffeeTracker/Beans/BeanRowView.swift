@@ -53,7 +53,7 @@ struct BeanRowView: View {
 
         }.padding(.top, 10)
             .padding(.bottom, showingDetails ? 0 : 10)
-            .background(Color.UI.bone)
+            .background(Color.bone)
             .cornerRadius(10)
             .gesture(tap)
 //            .animation(.default, value: showingDetails)

@@ -110,12 +110,12 @@
 		371E296327C40EA500C8ACBF /* Beans */ = {
 			isa = PBXGroup;
 			children = (
+				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
 				371E296427C40EC900C8ACBF /* BeanModel.swift */,
 				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
-				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
 				371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */,
-				371E297427C4100900C8ACBF /* NewBeansView.swift */,
 				3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */,
+				371E297427C4100900C8ACBF /* NewBeansView.swift */,
 			);
 			path = Beans;
 			sourceTree = "<group>";

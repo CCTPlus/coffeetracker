@@ -11,6 +11,7 @@ struct BeanDetailView: View {
     @State private var showEditView = false
 
     var bean: BeanModel
+
     var body: some View {
         VStack(alignment: .leading) {
 

@@ -22,7 +22,7 @@ struct CoffeeTrackerMain: View {
             Button(action: {showButtons.toggle()}) {
                 Image(systemName: SFSymbols.plus)
                     .padding(12)
-                    .background(Circle().fill(showButtons ? Color.red : Color.green)).shadow(radius: 8, x: 4, y: 4)
+                    .background(Circle().fill(showButtons ? Color.red : Color.sage)).shadow(radius: 8, x: 4, y: 4)
                     .rotationEffect(Angle.degrees(showButtons ? 45 : 0))
             }.padding(20)
             .tint(.white)

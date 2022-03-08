@@ -14,10 +14,15 @@ struct BeansCollectionView: View {
     @State private var search: String = ""
 
     var body: some View {
-        ScrollView {
-            ForEach(beansOO.beans, id: \.self) { bean in
-                BeanRowView(bean: bean)
-                    .padding()
+        VStack(alignment: .leading) {
+            Text("Beans")
+                .font(.largeTitle)
+                .padding()
+            ScrollView {
+                ForEach(beansOO.beans, id: \.self) { bean in
+                    BeanRowView(bean: bean)
+                        .padding()
+                }
             }
         }
     }

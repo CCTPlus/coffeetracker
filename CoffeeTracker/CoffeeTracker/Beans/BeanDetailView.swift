@@ -67,10 +67,10 @@ struct BeanDetailView: View {
     }
 }
 
-struct BeanDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            BeanDetailView(bean: testRoast)
-        }
-    }
-}
+//struct BeanDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            BeanDetailView(bean: testRoast)
+//        }
+//    }
+//}

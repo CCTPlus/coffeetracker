@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import UIKit
 
 struct BeanModel: Identifiable, Hashable {
     var id: UUID = UUID()
@@ -11,6 +12,7 @@ struct BeanModel: Identifiable, Hashable {
     var boughtOn: Date
     var notes: String
     var objectID: NSManagedObjectID?
+    var image: UIImage
 
     mutating func updateNotes(_ note: String) {
         notes = note
@@ -26,6 +28,7 @@ struct BeanModel: Identifiable, Hashable {
         newBean.roastedOn = roastedOn
         newBean.boughtOn = boughtOn
         newBean.notes = notes
+        newBean.beanPhoto = image.pngData()
 
         self.objectID = newBean.objectID
 
@@ -55,6 +58,7 @@ struct BeanModel: Identifiable, Hashable {
                 object.roastedOn = roastedOn
                 object.boughtOn = boughtOn
                 object.notes = notes
+                object.beanPhoto = image.pngData()
                 try context.save()
             }
         } catch {

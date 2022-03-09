@@ -25,8 +25,10 @@ struct BeanRowView: View {
     var body: some View {
         VStack{
             HStack(spacing: 20) {
-                Image(systemName: SFSymbols.bag)
-                    .font(.title)
+                Image(uiImage: bean.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100, alignment: .center)
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {

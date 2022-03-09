@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct NewBeansView: View {
     enum Field {
@@ -14,6 +15,7 @@ struct NewBeansView: View {
         case roaster
         case notes
     }
+
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var showForm: Bool
 
@@ -23,21 +25,55 @@ struct NewBeansView: View {
                                   roaster: "",
                                   roastedOn: Date(),
                                   boughtOn: Date(),
-                                 notes: "")
+                                 notes: "", image: UIImage())
+
+    @State private var isImageSelected = false
+    @State var selectedImage = UIImage()
+    @State private var showingPhotoPicker = false
     @FocusState private var focusedField: Field?
 
     var isEdit = false
     
     var body: some View {
-        ScrollView {
+        VStack {
             VStack(alignment: .leading, spacing: 20) {
                 Section("Bean Information") {
-                    TextField("Name", text: $beans.name)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($focusedField, equals: .name)
-                    TextField("Style", text: $beans.style)
-                        .textFieldStyle(.roundedBorder)
-                        .focused($focusedField, equals: .style)
+                    HStack(spacing: 10) {
+                        Button {
+                            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                                switch status {
+                                case .notDetermined:
+                                    print("Not determined")
+                                case .authorized:
+                                    showingPhotoPicker.toggle()
+                                case .restricted:
+                                    print("Restricted")
+                                case .denied:
+                                    print("DENIED")
+                                default:
+                                    print("IDK WHAT HAPPENED")
+                                }
+                            }
+                        } label: {
+                            if isImageSelected {
+                                Image(uiImage: beans.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100, height: 100, alignment: .center)
+                            } else {
+                                Image(systemName: SFSymbols.photo)
+                                    .font(.system(size: 75))
+                            }
+                        }
+                        VStack {
+                            TextField("Name", text: $beans.name)
+                                .textFieldStyle(.roundedBorder)
+                                .focused($focusedField, equals: .name)
+                            TextField("Style", text: $beans.style)
+                                .textFieldStyle(.roundedBorder)
+                                .focused($focusedField, equals: .style)
+                        }
+                    }
                 }
                 Section("Roaster Information") {
                     DatePicker("Roasted On",
@@ -83,7 +119,8 @@ struct NewBeansView: View {
                                               roaster: "",
                                               roastedOn: Date(),
                                               boughtOn: Date(),
-                                              notes: "")
+                                              notes: "",
+                                              image: UIImage())
                         }
                         focusedField = nil
                         showForm = false
@@ -97,7 +134,10 @@ struct NewBeansView: View {
                 }
 
             }.padding()
-        }.background(.ultraThickMaterial)
+            Spacer()
+        }.background(.ultraThickMaterial).sheet(isPresented: $showingPhotoPicker) {
+                                ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
+        }
             .onDisappear {
                 focusedField = nil
             }

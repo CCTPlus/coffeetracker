@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class BeansCollectionViewOO: NSObject, ObservableObject {
     @Published var beans: [BeanModel] = []
@@ -31,6 +32,15 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
         do {
             try fetchedBeanResultsController.performFetch()
             beans = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
+
+                let image = UIImage(data: foundBean.beanPhoto ?? Data())
+
+                var savedImage = UIImage(systemName: SFSymbols.photo)!
+
+                if let image = image {
+                    savedImage = image
+                }
+
                 return BeanModel(id: foundBean.id ?? UUID(),
                                  name: foundBean.name ?? "",
                                  style: foundBean.style ?? "",
@@ -39,7 +49,8 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                  roastedOn: foundBean.roastedOn ?? Date.distantPast,
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
-                                 objectID: foundBean.objectID)
+                                 objectID: foundBean.objectID,
+                                 image: savedImage)
             })
         } catch {
             print("Error")
@@ -58,7 +69,7 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                              roastedOn: foundBean.roastedOn ?? Date.distantPast,
                              boughtOn: foundBean.boughtOn ?? Date.now,
                              notes: foundBean.notes ?? "",
-                             objectID: foundBean.objectID)
+                             objectID: foundBean.objectID, image: UIImage())
         })
     }
 }

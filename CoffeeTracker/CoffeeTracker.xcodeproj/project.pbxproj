@@ -21,6 +21,7 @@
 		371E297127C40FB300C8ACBF /* BeanFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297027C40FB300C8ACBF /* BeanFixtures.swift */; };
 		371E297327C40FEF00C8ACBF /* BeansCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */; };
 		371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E297427C4100900C8ACBF /* NewBeansView.swift */; };
+		376A5E5327D844D60038BDA0 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */; };
 		3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */; };
 		3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C327D6A52F000FE457 /* View+Extensions.swift */; };
 		3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C527D6A6F3000FE457 /* Color+Extension.swift */; };
@@ -43,6 +44,7 @@
 		371E297027C40FB300C8ACBF /* BeanFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanFixtures.swift; sourceTree = "<group>"; };
 		371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionView.swift; sourceTree = "<group>"; };
 		371E297427C4100900C8ACBF /* NewBeansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeansView.swift; sourceTree = "<group>"; };
+		376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionViewOO.swift; sourceTree = "<group>"; };
 		3797E1C327D6A52F000FE457 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		3797E1C527D6A6F3000FE457 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		371E294D27C40D2100C8ACBF /* CoffeeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				376A5E5127D844BF0038BDA0 /* PhotoPicker */,
 				37B776A727C67A7800EFD566 /* Info.plist */,
 				37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */,
 				371E296F27C40FA600C8ACBF /* Fixtures */,
@@ -136,6 +139,14 @@
 				371E297027C40FB300C8ACBF /* BeanFixtures.swift */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		376A5E5127D844BF0038BDA0 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */,
+			);
+			path = PhotoPicker;
 			sourceTree = "<group>";
 		};
 		37B776A427C67A6F00EFD566 /* Frameworks */ = {
@@ -219,6 +230,7 @@
 				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
 				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
+				376A5E5327D844D60038BDA0 /* PhotoPickerView.swift in Sources */,
 				3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */,
 				371E296227C40E8800C8ACBF /* CoffeeTrackerMain.swift in Sources */,
 				371E295127C40D2100C8ACBF /* ContentView.swift in Sources */,

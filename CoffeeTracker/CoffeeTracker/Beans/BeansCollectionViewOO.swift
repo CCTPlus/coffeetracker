@@ -33,11 +33,13 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
             try fetchedBeanResultsController.performFetch()
             beans = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
 
-                var image = UIImage()
+                let image = UIImage(data: foundBean.beanPhoto ?? Data())
 
-                if let data = foundBean.beanPhoto {
-                    image = UIImage(data: data) ?? UIImage(imageLiteralResourceName: SFSymbols.photo)
-                } 
+                var savedImage = UIImage(systemName: SFSymbols.photo)!
+
+                if let image = image {
+                    savedImage = image
+                }
 
                 return BeanModel(id: foundBean.id ?? UUID(),
                                  name: foundBean.name ?? "",
@@ -48,7 +50,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
                                  objectID: foundBean.objectID,
-                                 image: image)
+                                 image: savedImage)
             })
         } catch {
             print("Error")

@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import UIKit
 
 struct BeanModel: Identifiable, Hashable {
     var id: UUID = UUID()
@@ -11,6 +12,7 @@ struct BeanModel: Identifiable, Hashable {
     var boughtOn: Date
     var notes: String
     var objectID: NSManagedObjectID?
+    var image: UIImage
 
     mutating func updateNotes(_ note: String) {
         notes = note

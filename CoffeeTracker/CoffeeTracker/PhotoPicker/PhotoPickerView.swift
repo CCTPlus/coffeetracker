@@ -14,8 +14,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
     @Binding var selectedImage: UIImage
     @Binding var isImageSelected: Bool
-    @Binding var images: [UIImage]
-
+    
     var itemProviders: [NSItemProvider] = []
 
     @Environment(\.presentationMode) private var presentationMode
@@ -51,7 +50,6 @@ struct ImagePicker: UIViewControllerRepresentable {
 
             if !results.isEmpty {
                 parent.itemProviders = []
-                parent.images = []
             }
 
             parent.itemProviders = results.map(\.itemProvider)
@@ -64,8 +62,8 @@ struct ImagePicker: UIViewControllerRepresentable {
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                         if let image = image as? UIImage {
-                            self.parent.images.append(image)
                             self.parent.selectedImage = image
+                            self.parent.isImageSelected = true
                         } else {
                             print("Could not load image", error?.localizedDescription ?? "")
                         }

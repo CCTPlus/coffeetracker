@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class BeansCollectionViewOO: NSObject, ObservableObject {
     @Published var beans: [BeanModel] = []
@@ -39,7 +40,8 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                  roastedOn: foundBean.roastedOn ?? Date.distantPast,
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
-                                 objectID: foundBean.objectID)
+                                 objectID: foundBean.objectID,
+                                 image: UIImage())
             })
         } catch {
             print("Error")
@@ -58,7 +60,7 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                              roastedOn: foundBean.roastedOn ?? Date.distantPast,
                              boughtOn: foundBean.boughtOn ?? Date.now,
                              notes: foundBean.notes ?? "",
-                             objectID: foundBean.objectID)
+                             objectID: foundBean.objectID, image: UIImage())
         })
     }
 }

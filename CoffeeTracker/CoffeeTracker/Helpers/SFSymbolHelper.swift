@@ -8,11 +8,12 @@
 import Foundation
 
 enum SFSymbols {
-    static var bag = "bag"
-    static var thumbsup = "hand.thumbsup.fill"
-    static var thumbsdown = "hand.thumbsdown.fill"
-    static var trash = "trash"
-    static var pencil = "pencil.and.outline"
-    static var plus = "plus"
-    static var share = "square.and.arrow.up"
+    static let bag = "bag"
+    static let thumbsup = "hand.thumbsup.fill"
+    static let thumbsdown = "hand.thumbsdown.fill"
+    static let trash = "trash"
+    static let pencil = "pencil.and.outline"
+    static let plus = "plus"
+    static let share = "square.and.arrow.up"
+    static let photo = "photo"
 }

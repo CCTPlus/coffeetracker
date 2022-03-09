@@ -14,6 +14,7 @@ struct NewBeansView: View {
         case roaster
         case notes
     }
+
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var showForm: Bool
 
@@ -32,6 +33,12 @@ struct NewBeansView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 Section("Bean Information") {
+                    Button {
+                        print("Image selection")
+                    } label: {
+                        Image(systemName: SFSymbols.photo)
+                    }
+
                     TextField("Name", text: $beans.name)
                         .textFieldStyle(.roundedBorder)
                         .focused($focusedField, equals: .name)

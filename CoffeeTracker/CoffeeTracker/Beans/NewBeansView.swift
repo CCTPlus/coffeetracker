@@ -113,14 +113,7 @@ struct NewBeansView: View {
                             beans.updateBean(context: viewContext)
                         } else {
                             beans.addBeansToData(context: viewContext)
-                            beans = BeanModel(name: "",
-                                              style: "",
-                                              buyAgain: false,
-                                              roaster: "",
-                                              roastedOn: Date(),
-                                              boughtOn: Date(),
-                                              notes: "",
-                                              image: UIImage())
+                            resetBeans()
                         }
                         focusedField = nil
                         showForm = false
@@ -141,6 +134,17 @@ struct NewBeansView: View {
             .onDisappear {
                 focusedField = nil
             }
+    }
+
+    func resetBeans() {
+        beans = BeanModel(name: "",
+                          style: "",
+                          buyAgain: false,
+                          roaster: "",
+                          roastedOn: Date(),
+                          boughtOn: Date(),
+                          notes: "",
+                          image: UIImage())
     }
 }
 

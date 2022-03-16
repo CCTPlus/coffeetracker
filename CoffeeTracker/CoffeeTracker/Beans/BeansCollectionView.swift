@@ -19,6 +19,9 @@ struct BeansCollectionView: View {
                 .font(.largeTitle)
                 .padding()
             ScrollView {
+                HStack {
+                    Spacer()
+                }
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
                         .padding()

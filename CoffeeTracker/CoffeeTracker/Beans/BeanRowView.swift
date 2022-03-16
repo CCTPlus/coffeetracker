@@ -53,10 +53,11 @@ struct BeanRowView: View {
                 BeanDetailView(bean: bean)
             }
 
-        }.padding(.top, 10)
-            .padding(.bottom, showingDetails ? 0 : 10)
-            .background(Color.bone)
+        }.padding(.top, 5)
+            .padding(.bottom, showingDetails ? 0 : 5)
+            .background(.thickMaterial)
             .cornerRadius(10)
+            .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 0)
             .gesture(tap)
 //            .animation(.default, value: showingDetails)
     }
@@ -64,8 +65,14 @@ struct BeanRowView: View {
 
 struct BeanRowView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            BeanRowView(bean: testRoast)
+        ZStack {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+            ScrollView {
+                BeanRowView(bean: testRoast)
+                BeanRowView(bean: testRoast)
+            }.padding()
         }
     }
 }

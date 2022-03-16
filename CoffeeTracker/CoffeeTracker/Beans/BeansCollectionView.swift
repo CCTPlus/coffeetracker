@@ -24,7 +24,8 @@ struct BeansCollectionView: View {
                 }
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
-                        .padding()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
                 }
             }
         }

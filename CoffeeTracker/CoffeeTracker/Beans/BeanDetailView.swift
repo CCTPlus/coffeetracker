@@ -49,7 +49,8 @@ struct BeanDetailView: View {
                     Image(systemName: SFSymbols.pencil)
                 }
             }.padding()
-                .background(.thinMaterial)
+                .background(.gray.opacity(0.5))
+                .background(.ultraThickMaterial)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .sheet(isPresented: $showEditView) {
                     showEditView = false
@@ -67,10 +68,10 @@ struct BeanDetailView: View {
     }
 }
 
-//struct BeanDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            BeanDetailView(bean: testRoast)
-//        }
-//    }
-//}
+struct BeanDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            BeanDetailView(bean: testRoast)
+        }
+    }
+}

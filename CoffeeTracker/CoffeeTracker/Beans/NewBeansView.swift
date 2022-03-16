@@ -9,28 +9,29 @@ import SwiftUI
 import Photos
 
 struct NewBeansView: View {
+
     enum Field {
         case name
         case style
         case roaster
-        case notes
     }
 
     @Environment(\.managedObjectContext) private var viewContext
     @Binding var showForm: Bool
 
     @State var beans = BeanModel(name: "",
-                                  style: "",
-                                  buyAgain: false,
-                                  roaster: "",
-                                  roastedOn: Date(),
-                                  boughtOn: Date(),
+                                 style: "",
+                                 buyAgain: false,
+                                 roaster: "",
+                                 roastedOn: Date(),
+                                 boughtOn: Date(),
                                  notes: "", image: UIImage())
 
     @State private var isImageSelected = false
     @State var selectedImage = UIImage()
     @State private var showingPhotoPicker = false
-    @FocusState private var focusedField: Field?
+
+    @FocusState private var focusField: Field?
 
     var isEdit = false
     
@@ -68,10 +69,10 @@ struct NewBeansView: View {
                         VStack {
                             TextField("Name", text: $beans.name)
                                 .textFieldStyle(.roundedBorder)
-                                .focused($focusedField, equals: .name)
+                                .focused($focusField, equals: .name)
                             TextField("Style", text: $beans.style)
                                 .textFieldStyle(.roundedBorder)
-                                .focused($focusedField, equals: .style)
+                                .focused($focusField, equals: .style)
                         }
                     }
                 }
@@ -81,7 +82,7 @@ struct NewBeansView: View {
                                displayedComponents: .date)
                     TextField("Roaster", text: $beans.roaster)
                         .textFieldStyle(.roundedBorder)
-                        .focused($focusedField, equals: .roaster)
+                        .focused($focusField, equals: .roaster)
                 }
                 Section("Purchase Information") {
                     DatePicker("Purchased on",
@@ -100,23 +101,32 @@ struct NewBeansView: View {
                             Button("No") {
                                 beans.buyAgain = false
                             }.padding()
-                            .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
-                            .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
-                            .cornerRadius(5)
+                                .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
+                                .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
+                                .cornerRadius(5)
                         }
                     }
                 }
                 HStack{
                     Spacer()
                     Button {
-                        if isEdit {
-                            beans.updateBean(context: viewContext)
+                        if beans.name.isEmpty {
+                            focusField = .name
+                        } else if beans.style.isEmpty {
+                            focusField = .style
+                        } else if beans.roaster.isEmpty {
+                            focusField = .roaster
                         } else {
-                            beans.addBeansToData(context: viewContext)
-                            resetBeans()
+                            if isEdit {
+                                beans.updateBean(context: viewContext)
+                            } else {
+                                beans.addBeansToData(context: viewContext)
+                                resetBeans()
+                            }
+                            showForm = false
+                            focusField = nil // dismisses keyboard
                         }
-                        focusedField = nil
-                        showForm = false
+
                     } label: {
                         Text("Save").padding(.horizontal, 30)
                     }.buttonStyle(BorderedButtonStyle())
@@ -129,11 +139,8 @@ struct NewBeansView: View {
             }.padding()
             Spacer()
         }.background(.ultraThickMaterial).sheet(isPresented: $showingPhotoPicker) {
-                                ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
+            ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
         }
-            .onDisappear {
-                focusedField = nil
-            }
     }
 
     func resetBeans() {

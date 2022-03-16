@@ -14,6 +14,9 @@ struct CoffeeTrackerMain: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
             BeansCollectionView()
             if showButtons {
                 NewBeansView(showForm: $showButtons)

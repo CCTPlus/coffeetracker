@@ -28,6 +28,7 @@ struct BeanRowView: View {
                 Image(uiImage: bean.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
                     .frame(width: 100, height: 100, alignment: .center)
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(alignment: .top) {
@@ -48,16 +49,17 @@ struct BeanRowView: View {
                         .font(.footnote)
                 }
             }
-            .padding(.horizontal)
+            .padding(.leading, 10)
+            .padding(.trailing)
             if showingDetails {
                 BeanDetailView(bean: bean)
             }
 
-        }.padding(.top, 5)
-            .padding(.bottom, showingDetails ? 0 : 5)
+        }.padding(.top, 0)
+            .padding(.bottom, 0)
             .background(.thinMaterial)
             .cornerRadius(10)
-            .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 0)
+            .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 0)
             .gesture(tap)
 //            .animation(.default, value: showingDetails)
     }
@@ -71,9 +73,13 @@ struct BeanRowView_Previews: PreviewProvider {
                 .ignoresSafeArea()
             ScrollView {
                 BeanRowView(bean: testRoast)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
                 BeanRowView(bean: testRoast)
-            }.padding()
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+            }
         }
-        .preferredColorScheme(.light)
+        .preferredColorScheme(.dark)
     }
 }

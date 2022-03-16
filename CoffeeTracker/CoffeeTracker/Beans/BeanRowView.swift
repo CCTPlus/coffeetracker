@@ -55,7 +55,7 @@ struct BeanRowView: View {
 
         }.padding(.top, 5)
             .padding(.bottom, showingDetails ? 0 : 5)
-            .background(.thickMaterial)
+            .background(.thinMaterial)
             .cornerRadius(10)
             .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 0)
             .gesture(tap)
@@ -74,5 +74,6 @@ struct BeanRowView_Previews: PreviewProvider {
                 BeanRowView(bean: testRoast)
             }.padding()
         }
+        .preferredColorScheme(.light)
     }
 }

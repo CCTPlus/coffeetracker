@@ -49,8 +49,7 @@ struct BeanDetailView: View {
                     Image(systemName: SFSymbols.pencil)
                 }
             }.padding()
-                .background(.gray.opacity(0.5))
-                .background(.ultraThickMaterial)
+                .background(.thickMaterial)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .sheet(isPresented: $showEditView) {
                     showEditView = false

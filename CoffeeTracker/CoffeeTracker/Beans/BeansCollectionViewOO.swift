@@ -33,13 +33,21 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
             try fetchedBeanResultsController.performFetch()
             beans = (fetchedBeanResultsController.fetchedObjects ?? []).map({ foundBean -> BeanModel in
 
-                let image = UIImage(data: foundBean.beanPhoto ?? Data())
+                guard let data = foundBean.beanPhoto else {
 
-                var savedImage = UIImage(systemName: SFSymbols.photo)!
-
-                if let image = image {
-                    savedImage = image
+                    return BeanModel(id: foundBean.id ?? UUID(),
+                                     name: foundBean.name ?? "",
+                                     style: foundBean.style ?? "",
+                                     buyAgain: foundBean.buyAgain,
+                                     roaster: foundBean.roaster ?? "",
+                                     roastedOn: foundBean.roastedOn ?? Date.distantPast,
+                                     boughtOn: foundBean.boughtOn ?? Date.now,
+                                     notes: foundBean.notes ?? "",
+                                     objectID: foundBean.objectID,
+                                     image: UIImage(systemName: SFSymbols.photo)!)
                 }
+
+                let image = UIImage(data: data)
 
                 return BeanModel(id: foundBean.id ?? UUID(),
                                  name: foundBean.name ?? "",
@@ -50,7 +58,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
                                  objectID: foundBean.objectID,
-                                 image: savedImage)
+                                 image: image!)
             })
         } catch {
             print("Error")
@@ -61,6 +69,22 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
 extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         beans = (controller.fetchedObjects as? [Bean] ?? []).map({ foundBean -> BeanModel in
+            guard let data = foundBean.beanPhoto else {
+
+                return BeanModel(id: foundBean.id ?? UUID(),
+                                 name: foundBean.name ?? "",
+                                 style: foundBean.style ?? "",
+                                 buyAgain: foundBean.buyAgain,
+                                 roaster: foundBean.roaster ?? "",
+                                 roastedOn: foundBean.roastedOn ?? Date.distantPast,
+                                 boughtOn: foundBean.boughtOn ?? Date.now,
+                                 notes: foundBean.notes ?? "",
+                                 objectID: foundBean.objectID,
+                                 image: UIImage(systemName: SFSymbols.photo)!)
+            }
+
+            let image = UIImage(data: data)
+
             return BeanModel(id: foundBean.id ?? UUID(),
                              name: foundBean.name ?? "",
                              style: foundBean.style ?? "",
@@ -69,7 +93,8 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                              roastedOn: foundBean.roastedOn ?? Date.distantPast,
                              boughtOn: foundBean.boughtOn ?? Date.now,
                              notes: foundBean.notes ?? "",
-                             objectID: foundBean.objectID, image: UIImage())
+                             objectID: foundBean.objectID,
+                             image: image!)
         })
     }
 }

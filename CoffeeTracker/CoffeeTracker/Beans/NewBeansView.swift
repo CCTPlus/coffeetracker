@@ -25,7 +25,8 @@ struct NewBeansView: View {
                                  roaster: "",
                                  roastedOn: Date(),
                                  boughtOn: Date(),
-                                 notes: "", image: UIImage())
+                                 notes: "",
+                                 image: UIImage())
 
     @State private var isImageSelected = false
     @State var selectedImage = UIImage()
@@ -52,6 +53,7 @@ struct NewBeansView: View {
                                 case .denied:
                                     print("DENIED")
                                 default:
+                                    print("\(status)")
                                     print("IDK WHAT HAPPENED")
                                 }
                             }

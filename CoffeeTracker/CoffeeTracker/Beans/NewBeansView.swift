@@ -140,7 +140,7 @@ struct NewBeansView: View {
 
             }.padding()
             Spacer()
-        }.background(.ultraThickMaterial).sheet(isPresented: $showingPhotoPicker) {
+        }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
             ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
         }
     }

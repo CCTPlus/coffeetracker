@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct BeanRowView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @State private var showingDetails = false
 
     var bean: BeanModel
@@ -49,17 +51,24 @@ struct BeanRowView: View {
                         .font(.footnote)
                 }
             }
+            .foregroundColor(colorScheme == .dark ? .black : .primary)
             .padding(.leading, 10)
             .padding(.trailing)
             if showingDetails {
                 BeanDetailView(bean: bean)
+                    .foregroundColor(colorScheme == .dark ? .black : .primary)
             }
 
         }.padding(.top, 0)
             .padding(.bottom, 0)
+            .background(colorScheme == .dark ? .primary : .secondary)
             .background(.thinMaterial)
             .cornerRadius(10)
-            .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 0)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.tertiary, lineWidth: 0.5)
+            )
+            .shadow(radius: 2)
             .gesture(tap)
 //            .animation(.default, value: showingDetails)
     }

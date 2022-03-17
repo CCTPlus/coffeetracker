@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @State private var showEditView = false
 
     var bean: BeanModel
@@ -47,7 +49,7 @@ struct BeanDetailView: View {
                 Spacer()
                 Button(action: {showEditView.toggle()}) {
                     Image(systemName: SFSymbols.pencil)
-                }
+                }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
             }.padding()
                 .background(.thickMaterial)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @State private var showEditView = false
 
     var bean: BeanModel
@@ -47,9 +49,9 @@ struct BeanDetailView: View {
                 Spacer()
                 Button(action: {showEditView.toggle()}) {
                     Image(systemName: SFSymbols.pencil)
-                }
+                }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
             }.padding()
-                .background(.thinMaterial)
+                .background(.thickMaterial)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .sheet(isPresented: $showEditView) {
                     showEditView = false
@@ -67,10 +69,10 @@ struct BeanDetailView: View {
     }
 }
 
-//struct BeanDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            BeanDetailView(bean: testRoast)
-//        }
-//    }
-//}
+struct BeanDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            BeanDetailView(bean: testRoast)
+        }
+    }
+}

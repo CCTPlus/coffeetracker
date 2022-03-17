@@ -14,6 +14,9 @@ struct CoffeeTrackerMain: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
             BeansCollectionView()
             if showButtons {
                 NewBeansView(showForm: $showButtons)
@@ -21,8 +24,12 @@ struct CoffeeTrackerMain: View {
             }
             Button(action: {showButtons.toggle()}) {
                 Image(systemName: SFSymbols.plus)
+                    .font(.largeTitle)
+                    .background(Circle()
+                        .fill(showButtons ? Color.red : Color.sage)
+                        .frame(width: 60, height: 60))
                     .padding(12)
-                    .background(Circle().fill(showButtons ? Color.red : Color.sage)).shadow(radius: 8, x: 4, y: 4)
+                    .shadow(radius: 8, x: 4, y: 4)
                     .rotationEffect(Angle.degrees(showButtons ? 45 : 0))
             }.padding(20)
             .tint(.white)

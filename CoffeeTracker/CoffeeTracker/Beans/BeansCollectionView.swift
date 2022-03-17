@@ -8,31 +8,61 @@
 import SwiftUI
 
 struct BeansCollectionView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var beansOO: BeansCollectionViewOO
 
     @State private var search: String = ""
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Beans")
-                .font(.largeTitle)
-                .padding()
+        ZStack(alignment: .top) {
             ScrollView {
                 HStack {
                     Spacer()
+                        .frame(height: 100)
                 }
+#if DEBUG
+                ForEach([testRoast, lightRoast, mediumRoast], id: \.self) { bean in
+                    BeanRowView(bean: bean)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
+                }
+#else
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
-                        .padding()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal)
                 }
+#endif
             }
+            Group {
+                GeometryReader { geometry in
+                    HStack(alignment: .bottom) {
+                        Text("Beans")
+                            .font(.largeTitle)
+                            .bold()
+                            .padding(.top, 10)
+                            .padding(.leading)
+                        Spacer()
+                    }
+                    .frame(height: geometry.safeAreaInsets.top+80)
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(10, corners: .bottomLeft)
+                    .cornerRadius(10, corners: .bottomRight)
+                    .edgesIgnoringSafeArea(.top)
+                }
+            }.shadow(radius: 2)
         }
     }
 }
 
 struct BeansCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        BeansCollectionView()
+        ZStack {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+            BeansCollectionView()
+        }.preferredColorScheme(.dark)
     }
 }

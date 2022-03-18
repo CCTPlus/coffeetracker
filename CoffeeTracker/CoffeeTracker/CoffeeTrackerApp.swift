@@ -11,11 +11,19 @@
  */
 
 import SwiftUI
+import RevenueCat
+
+
 
 @main
 struct CoffeeTrackerApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
+
+    init() {
+        Purchases.configure(withAPIKey: APIKeys.revenueCat)
+        Purchases.logLevel = .debug
+    }
 
     var body: some Scene {
         WindowGroup {

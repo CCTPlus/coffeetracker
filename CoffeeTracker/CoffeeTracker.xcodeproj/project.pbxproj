@@ -26,7 +26,10 @@
 		3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C327D6A52F000FE457 /* View+Extensions.swift */; };
 		3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C527D6A6F3000FE457 /* Color+Extension.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
+		37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C9838327E4E4D4007C85E3 /* Constants.swift */; };
+		37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 37C9838627E4E5B8007C85E3 /* RevenueCat */; };
 		37F18B2827E4C09500F609DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2727E4C09500F609DF /* AboutView.swift */; };
+		37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +55,9 @@
 		37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeTracker.entitlements; sourceTree = "<group>"; };
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		37C9838327E4E4D4007C85E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		37F18B2727E4C09500F609DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyDevCoffeeSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */,
 				37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +138,7 @@
 				371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */,
 				3797E1C327D6A52F000FE457 /* View+Extensions.swift */,
 				3797E1C527D6A6F3000FE457 /* Color+Extension.swift */,
+				37C9838327E4E4D4007C85E3 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -164,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				37F18B2727E4C09500F609DF /* AboutView.swift */,
+				37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -184,6 +192,9 @@
 			dependencies = (
 			);
 			name = CoffeeTracker;
+			packageProductDependencies = (
+				37C9838627E4E5B8007C85E3 /* RevenueCat */,
+			);
 			productName = CoffeeTracker;
 			productReference = 371E294B27C40D2100C8ACBF /* Coffee_.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +223,9 @@
 				Base,
 			);
 			mainGroup = 371E294227C40D2100C8ACBF;
+			packageReferences = (
+				37C9838527E4E5B8007C85E3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+			);
 			productRefGroup = 371E294C27C40D2100C8ACBF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -239,7 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
+				37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */,
 				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
+				37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */,
 				37F18B2827E4C09500F609DF /* AboutView.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
 				376A5E5327D844D60038BDA0 /* PhotoPickerView.swift in Sources */,
@@ -463,6 +479,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		37C9838527E4E5B8007C85E3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		37C9838627E4E5B8007C85E3 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37C9838527E4E5B8007C85E3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		371E295927C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld */ = {

@@ -6,8 +6,21 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 struct BuyDevCoffeeSection: View {
+    @State private var package: Package? = nil
+    @State private var cupsPurchased = 0
+
+    var amount: Double {
+        guard let package = package else {
+            return 0.0
+        }
+        return Double(cupsPurchased) * Double(truncating: package.storeProduct.priceDecimalNumber)
+    }
+
+    let formatter = FloatingPointFormatStyle<Double>.Currency.currency(code: Locale.current.currencyCode ?? "USD")
+
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
@@ -20,16 +33,20 @@ struct BuyDevCoffeeSection: View {
                 Text("Cups purchased")
                     .font(.headline)
                 Spacer()
-                Text("1")
+                Text("\(cupsPurchased)")
             }
             HStack {
                 Text("Amount spent")
                     .font(.headline)
                 Spacer()
-                Text("$3.99")
+                Text(amount, format: formatter)
             }
             Button {
-                print("Buy a cup of coffee")
+                Purchases.shared.purchase(package: package!) { transaction, customerInfo, error, cancelled in
+                    if transaction != nil {
+                        cupsPurchased += 1
+                    }
+                }
             } label: {
                 Text("Buy the dev a cup of coffee")
                     .foregroundColor(.primary)
@@ -50,6 +67,31 @@ struct BuyDevCoffeeSection: View {
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.secondary, lineWidth: 0.5)
                 .shadow(color: .secondary, radius: 2, x: 0, y: 0))
+            .onAppear {
+                Purchases.shared.getOfferings { (offerings, error) in
+                    if let packages = offerings?.current?.availablePackages {
+                        for package in packages {
+                            self.package = package
+                        }
+                        getAllPurchases()
+                    }
+                }
+            }
+    }
+
+    func getAllPurchases() {
+        Purchases.shared.getCustomerInfo { customerInfo, error in
+            guard let customerInfo = customerInfo else {
+                return
+            }
+
+            for transaction in customerInfo.nonSubscriptionTransactions {
+                print(transaction.productIdentifier)
+                if package?.storeProduct.productIdentifier == transaction.productIdentifier {
+                    cupsPurchased += 1
+                }
+            }
+        }
     }
 }
 

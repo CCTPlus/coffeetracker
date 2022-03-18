@@ -26,6 +26,7 @@
 		3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C327D6A52F000FE457 /* View+Extensions.swift */; };
 		3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C527D6A6F3000FE457 /* Color+Extension.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
+		37F18B2827E4C09500F609DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2727E4C09500F609DF /* AboutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeTracker.entitlements; sourceTree = "<group>"; };
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		37F18B2727E4C09500F609DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		371E294D27C40D2100C8ACBF /* CoffeeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				37F18B2627E4C08500F609DF /* About */,
 				376A5E5127D844BF0038BDA0 /* PhotoPicker */,
 				37B776A727C67A7800EFD566 /* Info.plist */,
 				37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */,
@@ -155,6 +158,14 @@
 				37B776A527C67A6F00EFD566 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37F18B2627E4C08500F609DF /* About */ = {
+			isa = PBXGroup;
+			children = (
+				37F18B2727E4C09500F609DF /* AboutView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 			files = (
 				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
 				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
+				37F18B2827E4C09500F609DF /* AboutView.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,
 				376A5E5327D844D60038BDA0 /* PhotoPickerView.swift in Sources */,
 				3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */,

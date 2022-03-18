@@ -28,7 +28,7 @@ struct BuyDevCoffeeSection: View {
             HStack {
                 Image(systemName: SFSymbols.coffee)
                     .font(.title2)
-                    .foregroundColor(colorScheme == .light ? .blue : Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1))
+                    .foregroundColor(colorScheme == .light ? .blue : Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0))
                 Text("Coffee fund")
                     .font(.title2).bold()
             }
@@ -65,7 +65,7 @@ struct BuyDevCoffeeSection: View {
         }.padding()
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.colorScheme == .light ? .quaternary : .primary)
+                    .fill(colorScheme == .light ? .quaternary : .primary)
             )
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.secondary, lineWidth: 0.5)

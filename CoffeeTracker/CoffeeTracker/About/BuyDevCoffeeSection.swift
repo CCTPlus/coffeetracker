@@ -69,7 +69,7 @@ struct BuyDevCoffeeSection: View {
             )
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.secondary, lineWidth: 0.5)
-                .shadow(color: .secondary, radius: 2, x: 0, y: 0))
+                .shadow(color: .secondary, radius: 20, x: 0, y: 0))
             .onAppear {
                 Purchases.shared.getOfferings { (offerings, error) in
                     if let packages = offerings?.current?.availablePackages {

@@ -23,14 +23,7 @@ struct ShareApp: View {
                 Text("Share coffee_ with someone")
                     .foregroundColor(.primary)
             }.frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(colorScheme == .light ? .quaternary : .primary)
-                )
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.secondary, lineWidth: 0.5)
-                    .shadow(color: .secondary, radius: 20, x: 0, y: 0))
+                .row()
         }
         .sheet(isPresented: $showingSheet) {
             ActivityView(activityItems: [NSURL(string: "https://cctplus.dev")!] as [Any], applicationActivities: nil)

@@ -20,15 +20,13 @@ struct AboutView: View {
             VStack {
                 HStack {
                     Spacer()
-                        .frame(height: 80)
+                        .frame(height: 70)
                 }
-                BuyDevCoffeeSection()
-                    .padding(.bottom, 10)
                 ScrollView {
+                    BuyDevCoffeeSection()
                     ShareApp()
-                        .padding(.vertical, 10)
                 }
-            }.padding()
+            }
             Group {
                 GeometryReader { geometry in
                     HStack(alignment: .bottom) {
@@ -54,5 +52,8 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         AboutView()
+            .preferredColorScheme(.dark)
+        AboutView()
+            .preferredColorScheme(.light)
     }
 }

@@ -26,10 +26,10 @@ struct BeanRowView: View {
 
     var body: some View {
         VStack{
-            HStack(spacing: 20) {
+            HStack(alignment: .top, spacing: 20) {
                 Image(uiImage: bean.image)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .cornerRadius(10)
                     .frame(maxWidth: 100)
                 VStack(alignment: .leading, spacing: 5) {
@@ -70,7 +70,7 @@ struct BeanRowView_Previews: PreviewProvider {
                 .resizable()
                 .ignoresSafeArea()
             ScrollView {
-                BeanRowView(bean: testRoast)
+                BeanRowView(bean: mediumRoast)
                     .padding(.vertical, 5)
                     .padding(.horizontal)
                 BeanRowView(bean: testRoast)

@@ -12,6 +12,10 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+
+    func row(padding: Bool = true) -> some View {
+        modifier(RowModifier(padding: padding))
+    }
 }
 
 struct RoundedCorner: Shape {

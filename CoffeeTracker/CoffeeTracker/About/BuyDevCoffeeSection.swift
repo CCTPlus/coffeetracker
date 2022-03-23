@@ -62,14 +62,7 @@ struct BuyDevCoffeeSection: View {
             Text("This just shows support to Maegan and helps the app continue to be developed in the wee hours of the morning and the evening.")
                 .font(.caption2)
                 .foregroundColor(.secondary)
-        }.padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(colorScheme == .light ? .quaternary : .primary)
-            )
-            .overlay(RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.secondary, lineWidth: 0.5)
-                .shadow(color: .secondary, radius: 20, x: 0, y: 0))
+        }.row()
             .onAppear {
                 Purchases.shared.getOfferings { (offerings, error) in
                     if let packages = offerings?.current?.availablePackages {

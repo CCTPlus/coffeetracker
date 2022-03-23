@@ -29,9 +29,9 @@ struct BeanRowView: View {
             HStack(spacing: 20) {
                 Image(uiImage: bean.image)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFill()
                     .cornerRadius(10)
-                    .frame(width: 100, height: 100, alignment: .center)
+                    .frame(maxWidth: 100)
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
@@ -50,25 +50,14 @@ struct BeanRowView: View {
                     Text(bean.style)
                         .font(.footnote)
                 }
-            }
-            .foregroundColor(colorScheme == .dark ? .black : .primary)
-            .padding(.leading, 10)
-            .padding(.trailing)
+            }.padding(.horizontal, 10).padding(.top, 10)
+                .padding(.bottom, !showingDetails ? 10 : 0)
             if showingDetails {
                 BeanDetailView(bean: bean)
-                    .foregroundColor(colorScheme == .dark ? .black : .primary)
             }
 
-        }.padding(.top, 0)
-            .padding(.bottom, 0)
-            .background(colorScheme == .dark ? .primary : .secondary)
-            .background(.thinMaterial)
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.tertiary, lineWidth: 0.5)
-            )
-            .shadow(radius: 2)
+        }.frame(maxWidth: .infinity)
+            .row(padding: false)
             .gesture(tap)
 //            .animation(.default, value: showingDetails)
     }
@@ -90,5 +79,19 @@ struct BeanRowView_Previews: PreviewProvider {
             }
         }
         .preferredColorScheme(.dark)
+        ZStack {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+            ScrollView {
+                BeanRowView(bean: testRoast)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+                BeanRowView(bean: testRoast)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal)
+            }
+        }
+        .preferredColorScheme(.light)
     }
 }

@@ -52,13 +52,11 @@ struct BuyDevCoffeeSection: View {
                 }
             } label: {
                 Text("Buy the dev a cup of coffee")
-                    .foregroundColor(.primary)
-                    .padding(5)
-            }.buttonStyle(.bordered)
-                .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.green)
-                        .shadow(radius: 2))
+                    .foregroundColor(.black)
+                    .padding(15)
+                    .background(Color.green)
+                    .cornerRadius(10)
+            }
             Text("This just shows support to Maegan and helps the app continue to be developed in the wee hours of the morning and the evening.")
                 .font(.caption2)
                 .foregroundColor(.secondary)
@@ -93,6 +91,17 @@ struct BuyDevCoffeeSection: View {
 
 struct BuyDevCoffeeSection_Previews: PreviewProvider {
     static var previews: some View {
+        ZStack {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
         BuyDevCoffeeSection().preferredColorScheme(.dark).padding()
+        }.preferredColorScheme(.dark)
+        ZStack {
+            Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+        BuyDevCoffeeSection().preferredColorScheme(.dark).padding()
+        }.preferredColorScheme(.light)
     }
 }

@@ -8,94 +8,58 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
+
+    @StateObject var navRouter: NavigationRouter
+    @State private var showEditView = false
+
     var bean: BeanModel
+
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: SFSymbols.bag)
-                    .padding(.trailing, 10)
-                VStack(alignment: .leading) {
-                    Text(bean.name)
-                    Text(bean.roaster)
-                        .font(.subheadline)
-                }
-                Spacer()
-            }.font(.largeTitle)
-                .padding(.bottom, 25)
 
-            ScrollView {
-                Group {
-                    HStack {
-                        Text("Bought on")
-                        Spacer()
-                        Text(formatDate(bean.boughtOn))
-                            .padding()
-                            .background(.thinMaterial)
-                            .cornerRadius(10)
-                    }
-                    HStack {
-                        Text("Roasted on")
-                        Spacer()
-                        Text(formatDate(bean.roastedOn))
-                            .padding()
-                            .background(.thinMaterial)
-                            .cornerRadius(10)
-                    }
-                }.padding(.vertical)
-
+            Group {
                 HStack {
-                    Text("Buy again?")
+                    Text("Bought on")
                     Spacer()
-                    HStack {
-                        Text(bean.buyAgain ? "Yes" : "No")
-                        Image(systemName: bean.buyAgain ? SFSymbols.thumbsup : SFSymbols.thumbsdown)
-                    }.padding()
-                        .background(.thinMaterial)
-                        .cornerRadius(10)
-                        .background(bean.buyAgain ? Color.green : Color.red)
-                        .cornerRadius(10)
-                }.padding(.vertical)
-                GroupBox {
-                    HStack {
-                        Text("Notes")
-                        Spacer()
-                    }
+                    Text(formatDate(bean.boughtOn))
+                }
+                HStack {
+                    Text("Roasted on")
+                    Spacer()
+                    Text(formatDate(bean.roastedOn))
+                }
+                if bean.notes.count > 0 {
                     HStack {
                         Text(bean.notes)
                             .lineLimit(nil)
                         Spacer()
                     }
-                    .padding()
-                    .foregroundColor(.black)
-                    .background(Color.white)
-                    .cornerRadius(10)
                 }
-            }
-            //            HStack {
-            //                Button {
-            //                    print("EDIT")
-            //                } label: {
-            //                    Image(systemName: SFSymbols.pencil)
-            //                        .padding(.leading)
-            //                    Text("Edit")
-            //                        .padding(.trailing)
-            //                }.buttonStyle(BorderedButtonStyle())
-            //                    .padding(.bottom)
-            //
-            //                Spacer()
-            //
-            //                Button {
-            //                    print("Delete")
-            //                } label: {
-            //                    Image(systemName: SFSymbols.trash)
-            //                        .padding(.leading)
-            //                    Text("Delete")
-            //                        .padding(.trailing)
-            //                }.buttonStyle(BorderedButtonStyle())
-            //                    .foregroundColor(.red)
-            //                    .padding(.bottom)
-            //            }
-        }.padding(.horizontal)
+            }.padding(.all)
+
+            HStack {
+                /* Commented out for now Not ready to add share and delete
+                 Button(action: {print("Share")}) {
+                    Image(systemName: SFSymbols.share)
+                }
+                Spacer()
+                Button(action: {print("delete")}) {
+                    Image(systemName: SFSymbols.trash)
+                } */
+                Spacer()
+                Button(action: {showEditView.toggle()}) {
+                    Image(systemName: SFSymbols.pencil)
+                }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
+            }.padding()
+                .background(.thickMaterial)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .sheet(isPresented: $showEditView) {
+                    showEditView = false
+                } content: {
+                    NewBeansView(navRouter: navRouter, beans: bean, isEdit: true)
+                }
+        }
     }
 
     func formatDate(_ date: Date) -> String {
@@ -108,7 +72,8 @@ struct BeanDetailView: View {
 
 struct BeanDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BeanDetailView(bean: testRoast)
-            .preferredColorScheme(.dark)
+        NavigationView {
+            BeanDetailView(navRouter: NavigationRouter(), bean: testRoast)
+        }
     }
 }

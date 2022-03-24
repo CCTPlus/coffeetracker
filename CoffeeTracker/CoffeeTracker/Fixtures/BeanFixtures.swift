@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 var lightRoast = BeanModel(name: "Verona Blend",
                             style: "Light",
@@ -13,7 +14,8 @@ var lightRoast = BeanModel(name: "Verona Blend",
                             roaster: "Starbucks",
                             roastedOn: Date.now,
                             boughtOn: Date.now,
-                            notes: "")
+                           notes: "",
+                           image: UIImage(systemName: SFSymbols.photo)!)
 
 var mediumRoast = BeanModel(name: "20th Anniversary Blend",
                              style: "Medium",
@@ -21,7 +23,8 @@ var mediumRoast = BeanModel(name: "20th Anniversary Blend",
                              roaster: "Summermoon",
                              roastedOn: Date.now,
                              boughtOn: Date.now,
-                             notes: "I like it a lot")
+                             notes: "I like it a lot",
+                            image: UIImage(systemName: SFSymbols.photo)!)
 
 var testRoast = BeanModel(name: "Swiftly Brewed",
                            style: "Light",
@@ -29,6 +32,7 @@ var testRoast = BeanModel(name: "Swiftly Brewed",
                            roaster: "Apple Inc",
                            roastedOn: Date.now,
                            boughtOn: Date.now,
-                           notes: "Sold in Maegan's hopes and dreams")
+                           notes: "Sold in Maegan's hopes and dreams",
+                          image: UIImage(systemName: SFSymbols.photo)!)
 
 let allRoasts = [lightRoast, mediumRoast, testRoast]

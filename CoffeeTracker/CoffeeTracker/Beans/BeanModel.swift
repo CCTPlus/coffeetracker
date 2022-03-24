@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import UIKit
 
 struct BeanModel: Identifiable, Hashable {
     var id: UUID = UUID()
@@ -10,12 +11,14 @@ struct BeanModel: Identifiable, Hashable {
     var roastedOn: Date
     var boughtOn: Date
     var notes: String
+    var objectID: NSManagedObjectID?
+    var image: UIImage
 
     mutating func updateNotes(_ note: String) {
         notes = note
     }
 
-    func addBeansToData(context: NSManagedObjectContext) {
+    mutating func addBeansToData(context: NSManagedObjectContext) {
         let newBean = Bean(context: context)
         newBean.id = id
         newBean.name = name
@@ -25,12 +28,41 @@ struct BeanModel: Identifiable, Hashable {
         newBean.roastedOn = roastedOn
         newBean.boughtOn = boughtOn
         newBean.notes = notes
+        newBean.beanPhoto = image.jpegData(compressionQuality: 1)
+
+        self.objectID = newBean.objectID
 
         do {
             try context.save()
             print("Bean saved correctly")
         } catch {
             print("Failed: \(error)")
+        }
+    }
+
+    func updateBean(context: NSManagedObjectContext) {
+        
+        let fetchRequest: NSFetchRequest<Bean>
+        fetchRequest = Bean.fetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+
+        do {
+            let objects = try context.fetch(fetchRequest)
+            print(objects.count)
+            for object in objects {
+                object.name = name
+                object.style = style
+                object.buyAgain = buyAgain
+                object.roaster = roaster
+                object.roastedOn = roastedOn
+                object.boughtOn = boughtOn
+                object.notes = notes
+                object.beanPhoto = image.jpegData(compressionQuality: 1)
+                try context.save()
+            }
+        } catch {
+            print("\(error)")
         }
     }
 }

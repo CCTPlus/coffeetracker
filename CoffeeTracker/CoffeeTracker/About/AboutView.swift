@@ -41,6 +41,11 @@ struct AboutView: View {
                     }.sheet(isPresented: $showFeedback) {
                         UserFeedbackView()
                     }
+
+                    HStack {
+                        Spacer()
+                            .frame(height: 120)
+                    }
                 }
             }
             Group {

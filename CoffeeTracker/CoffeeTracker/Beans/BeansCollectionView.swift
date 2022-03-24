@@ -26,6 +26,10 @@ struct BeansCollectionView: View {
                         .padding(.vertical, 5)
                         .padding(.horizontal)
                 }
+                HStack {
+                    Spacer()
+                        .frame(height: 120)
+                }
             }
             Group {
                 GeometryReader { geometry in

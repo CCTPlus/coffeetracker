@@ -21,19 +21,11 @@ struct BeansCollectionView: View {
                     Spacer()
                         .frame(height: 100)
                 }
-#if DEBUG
-                ForEach([testRoast, lightRoast, mediumRoast], id: \.self) { bean in
-                    BeanRowView(bean: bean)
-                        .padding(.vertical, 5)
-                        .padding(.horizontal)
-                }
-#else
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
                         .padding(.vertical, 5)
                         .padding(.horizontal)
                 }
-#endif
             }
             Group {
                 GeometryReader { geometry in
@@ -51,7 +43,7 @@ struct BeansCollectionView: View {
                     .cornerRadius(10, corners: .bottomRight)
                     .edgesIgnoringSafeArea(.top)
                 }
-            }.shadow(radius: 2)
+            }.shadow(radius: 20)
         }
     }
 }

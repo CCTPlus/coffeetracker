@@ -18,4 +18,6 @@ enum SFSymbols {
     static let photo = "photo"
     static let coffee = "cup.and.saucer.fill"
     static let plane = "paperplane"
+    static let list = "list.dash.header.rectangle"
+    static let info = "info.circle"
 }

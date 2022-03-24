@@ -13,12 +13,12 @@
 import SwiftUI
 import RevenueCat
 
-
-
 @main
 struct CoffeeTrackerApp: App {
     let persistenceController = PersistenceController.shared
+
     @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
+    @StateObject var navRouter = NavigationRouter()
 
     init() {
         Purchases.configure(withAPIKey: APIKeys.revenueCat)
@@ -27,7 +27,7 @@ struct CoffeeTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CoffeeTrackerMain()
+            CoffeeTrackerMain(navRouter: navRouter)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(beansVM)
         }

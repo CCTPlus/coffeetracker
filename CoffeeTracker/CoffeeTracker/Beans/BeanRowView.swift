@@ -53,7 +53,7 @@ struct BeanRowView: View {
             }.padding(.horizontal, 10).padding(.top, 10)
                 .padding(.bottom, !showingDetails ? 10 : 0)
             if showingDetails {
-                BeanDetailView(bean: bean)
+                BeanDetailView(navRouter: NavigationRouter(), bean: bean)
             }
 
         }.frame(maxWidth: .infinity)

@@ -17,7 +17,9 @@ struct NewBeansView: View {
     }
 
     @Environment(\.managedObjectContext) private var viewContext
-    @Binding var showForm: Bool
+    @Environment(\.dismiss) private var dismiss
+    
+    @StateObject var navRouter: NavigationRouter
 
     @State var beans = BeanModel(name: "",
                                  style: "",
@@ -121,11 +123,12 @@ struct NewBeansView: View {
                         } else {
                             if isEdit {
                                 beans.updateBean(context: viewContext)
+                                dismiss()
                             } else {
                                 beans.addBeansToData(context: viewContext)
+                                navRouter.currentPage = .coffees
                                 resetBeans()
                             }
-                            showForm = false
                             focusField = nil // dismisses keyboard
                         }
 
@@ -159,6 +162,6 @@ struct NewBeansView: View {
 
 struct NewBeansView_Previews: PreviewProvider {
     static var previews: some View {
-        NewBeansView(showForm: Binding(projectedValue: .constant(true)))
+        NewBeansView(navRouter: NavigationRouter())
     }
 }

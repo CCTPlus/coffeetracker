@@ -27,23 +27,13 @@ struct BuyDevCoffeeSection: View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
                 Image(systemName: SFSymbols.coffee)
-                    .font(.title2)
+                    .font(.largeTitle)
                     .foregroundColor(colorScheme == .light ? .blue : Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0))
-                Text("Coffee fund")
-                    .font(.title2).bold()
-            }
-            HStack {
-                Text("Cups purchased")
-                    .font(.headline)
-                Spacer()
-                Text("\(cupsPurchased)")
-            }
-            HStack {
-                Text("Amount spent")
-                    .font(.headline)
-                Spacer()
-                Text(amount, format: formatter)
-            }
+                Text("Support future development with a cup of coffee")
+                    .font(.title3)
+            }.padding(.trailing)
+            Text("If you're enjoying coffee_ and want to buy a cup of coffee for the developer, then it is definitely appreciated. The app is free to use, so any additional contributions are always welcome. ")
+                .foregroundColor(.secondary)
             Button {
                 Purchases.shared.purchase(package: package!) { transaction, customerInfo, error, cancelled in
                     if transaction != nil {
@@ -57,9 +47,27 @@ struct BuyDevCoffeeSection: View {
                     .background(Color.green)
                     .cornerRadius(10)
             }
-            Text("This just shows support to Maegan and helps the app continue to be developed in the wee hours of the morning and the evening.")
+            Text("Coffee is \(getPackagePrice(package)) a cup")
                 .font(.caption2)
                 .foregroundColor(.secondary)
+
+            HStack {
+                Text("Cups purchased")
+                    .font(.headline)
+                Spacer()
+                Text("\(cupsPurchased)")
+            }
+            HStack {
+                Text("Amount")
+                    .font(.headline)
+                Spacer()
+                Text(amount, format: formatter)
+            }
+
+            Group {
+                Text("The amount should automatically update and keep updated with each launch of the app.")
+                    .font(.caption2)
+            }.foregroundColor(.secondary)
         }.row()
             .onAppear {
                 Purchases.shared.getOfferings { (offerings, error) in
@@ -71,6 +79,14 @@ struct BuyDevCoffeeSection: View {
                     }
                 }
             }
+    }
+
+    func getPackagePrice(_ package: Package?) -> String {
+        guard let package = package else {
+            return "price not available"
+        }
+
+        return package.localizedPriceString
     }
 
     func getAllPurchases() {

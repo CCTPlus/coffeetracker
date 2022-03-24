@@ -22,6 +22,5 @@ struct RowModifier: ViewModifier {
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(.black.opacity(0.5), lineWidth: 0.5))
             .shadow(radius: 20)
-            .padding()
     }
 }

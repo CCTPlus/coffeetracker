@@ -17,7 +17,8 @@ struct CoffeeTrackerMain: View {
             Image("Background")
                 .resizable()
                 .ignoresSafeArea()
-            BeansCollectionView()
+//            BeansCollectionView()
+            AboutView()
             if showButtons {
                 NewBeansView(showForm: $showButtons)
                     .opacity(showButtons ? 1 : 0)

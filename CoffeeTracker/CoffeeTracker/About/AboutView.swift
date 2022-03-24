@@ -11,6 +11,7 @@ struct AboutView: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @State private var showingSheet = false
+    @State private var showFeedback = false
 
     var body: some View {
         ZStack {
@@ -23,8 +24,23 @@ struct AboutView: View {
                         .frame(height: 70)
                 }
                 ScrollView {
-                    BuyDevCoffeeSection()
-                    ShareApp()
+                    BuyDevCoffeeSection().padding()
+                    ShareApp().padding()
+                    Button {
+                        showFeedback = true
+                    } label: {
+                        HStack(spacing: 15) {
+                            Image(systemName: SFSymbols.plane)
+                                .foregroundColor(.pink)
+                                .font(.system(size: 36))
+                            Text("Send feedback")
+                                .foregroundColor(.primary)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                            .row().padding()
+
+                    }.sheet(isPresented: $showFeedback) {
+                        UserFeedbackView()
+                    }
                 }
             }
             Group {

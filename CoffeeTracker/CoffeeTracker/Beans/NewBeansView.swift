@@ -112,6 +112,18 @@ struct NewBeansView: View {
                     }
                 }
                 HStack{
+                    if isEdit {
+                        Spacer()
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Cancel")
+                                .frame(width: 100, height: 20, alignment: .center)
+                        }.buttonStyle(BorderedButtonStyle())
+                            .background(Color.red)
+                            .cornerRadius(5)
+                            .tint(.white)
+                    }
                     Spacer()
                     Button {
                         if beans.name.isEmpty {
@@ -133,7 +145,8 @@ struct NewBeansView: View {
                         }
 
                     } label: {
-                        Text("Save").padding(.horizontal, 30)
+                        Text("Save")
+                            .frame(width: 100, height: 20, alignment: .center)
                     }.buttonStyle(BorderedButtonStyle())
                         .background(Color.green)
                         .cornerRadius(5)
@@ -162,6 +175,6 @@ struct NewBeansView: View {
 
 struct NewBeansView_Previews: PreviewProvider {
     static var previews: some View {
-        NewBeansView(navRouter: NavigationRouter())
+        NewBeansView(navRouter: NavigationRouter(), isEdit: true)
     }
 }

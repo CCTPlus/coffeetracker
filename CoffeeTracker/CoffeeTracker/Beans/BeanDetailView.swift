@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BeanDetailView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.colorScheme) private var colorScheme
 
     @StateObject var navRouter: NavigationRouter
@@ -44,9 +45,10 @@ struct BeanDetailView: View {
                     Image(systemName: SFSymbols.share)
                 }
                 Spacer()
-                Button(action: {print("delete")}) {
+                 */
+                Button(action: { bean.deleteBean(context: viewContext) }) {
                     Image(systemName: SFSymbols.trash)
-                } */
+                }
                 Spacer()
                 Button(action: {showEditView.toggle()}) {
                     Image(systemName: SFSymbols.pencil)

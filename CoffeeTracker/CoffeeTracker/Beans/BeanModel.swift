@@ -65,4 +65,23 @@ struct BeanModel: Identifiable, Hashable {
             print("\(error)")
         }
     }
+
+    func deleteBean(context: NSManagedObjectContext) {
+
+        let fetchRequest: NSFetchRequest<Bean>
+        fetchRequest = Bean.fetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", id as CVarArg)
+
+        do {
+            let objects = try context.fetch(fetchRequest)
+            print(objects.count)
+            for object in objects {
+                context.delete(object)
+            }
+        } catch {
+            print("\(error)")
+        }
+
+    }
 }

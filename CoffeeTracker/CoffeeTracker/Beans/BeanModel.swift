@@ -28,7 +28,7 @@ struct BeanModel: Identifiable, Hashable {
         newBean.roastedOn = roastedOn
         newBean.boughtOn = boughtOn
         newBean.notes = notes
-        newBean.beanPhoto = image.pngData()
+        newBean.beanPhoto = image.jpegData(compressionQuality: 1)
 
         self.objectID = newBean.objectID
 
@@ -58,7 +58,7 @@ struct BeanModel: Identifiable, Hashable {
                 object.roastedOn = roastedOn
                 object.boughtOn = boughtOn
                 object.notes = notes
-                object.beanPhoto = image.pngData()
+                object.beanPhoto = image.jpegData(compressionQuality: 1)
                 try context.save()
             }
         } catch {

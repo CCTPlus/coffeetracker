@@ -123,16 +123,12 @@ struct NewBeansView: View {
                         } else {
                             if isEdit {
                                 beans.updateBean(context: viewContext)
-                            } else {
-                                beans.addBeansToData(context: viewContext)
-                                resetBeans()
-                            }
-                            if isEdit {
                                 dismiss()
                             } else {
+                                beans.addBeansToData(context: viewContext)
                                 navRouter.currentPage = .coffees
+                                resetBeans()
                             }
-
                             focusField = nil // dismisses keyboard
                         }
 

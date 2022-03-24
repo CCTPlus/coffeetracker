@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TabBarIcon: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     @StateObject var navRouter: NavigationRouter
 
     let assignedPage: Page
@@ -25,7 +27,7 @@ struct TabBarIcon: View {
             Text(tabName)
                 .font(.footnote)
             Spacer()
-        }.foregroundColor(assignedPage == navRouter.currentPage ? Color.blue : Color.primary)
+        }.foregroundColor(colorScheme == .light ? assignedPage == navRouter.currentPage ? Color.indigo : Color.secondary : assignedPage == navRouter.currentPage ? Color.cyan : Color.secondary)
             .onTapGesture {
             navRouter.currentPage = assignedPage
         }

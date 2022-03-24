@@ -18,6 +18,7 @@ struct CoffeeTrackerMain: View {
                 .resizable()
                 .ignoresSafeArea()
             BeansCollectionView()
+//            AboutView()
             if showButtons {
                 NewBeansView(showForm: $showButtons)
                     .opacity(showButtons ? 1 : 0)

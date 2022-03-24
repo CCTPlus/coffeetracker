@@ -51,7 +51,7 @@ struct BeansCollectionView: View {
                     .cornerRadius(10, corners: .bottomRight)
                     .edgesIgnoringSafeArea(.top)
                 }
-            }.shadow(radius: 2)
+            }.shadow(radius: 20)
         }
     }
 }

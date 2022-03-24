@@ -10,6 +10,7 @@ import SwiftUI
 struct BeanDetailView: View {
     @Environment(\.colorScheme) private var colorScheme
 
+    @StateObject var navRouter: NavigationRouter
     @State private var showEditView = false
 
     var bean: BeanModel
@@ -56,7 +57,7 @@ struct BeanDetailView: View {
                 .sheet(isPresented: $showEditView) {
                     showEditView = false
                 } content: {
-                    NewBeansView(showForm: $showEditView, beans: bean, isEdit: true)
+                    NewBeansView(navRouter: navRouter, beans: bean, isEdit: true)
                 }
         }
     }
@@ -72,7 +73,7 @@ struct BeanDetailView: View {
 struct BeanDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BeanDetailView(bean: testRoast)
+            BeanDetailView(navRouter: NavigationRouter(), bean: testRoast)
         }
     }
 }

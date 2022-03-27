@@ -19,7 +19,7 @@ struct BeansCollectionView: View {
             ScrollView {
                 HStack {
                     Spacer()
-                        .frame(height: 100)
+                        .frame(height: Design.base*10)
                 }
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
@@ -28,7 +28,7 @@ struct BeansCollectionView: View {
                 }
                 HStack {
                     Spacer()
-                        .frame(height: 120)
+                        .frame(height: Design.base*12)
                 }
             }
             Group {

@@ -23,12 +23,24 @@ struct BeanDetailView: View {
                 HStack {
                     Text("Bought on")
                     Spacer()
-                    Text(formatDate(bean.boughtOn))
+                    Text(bean.boughtOn.formatted(
+                        .iso8601
+                            .month()
+                            .day()
+                            .year()
+                            .dateSeparator(.dash))
+                    )
                 }
                 HStack {
                     Text("Roasted on")
                     Spacer()
-                    Text(formatDate(bean.roastedOn))
+                    Text(bean.roastedOn.formatted(
+                        .iso8601
+                            .month()
+                            .day()
+                            .year()
+                            .dateSeparator(.dash))
+                    )
                 }
                 if bean.notes.count > 0 {
                     HStack {
@@ -42,9 +54,9 @@ struct BeanDetailView: View {
             HStack {
                 /* Commented out for now Not ready to add share and delete
                  Button(action: {print("Share")}) {
-                    Image(systemName: SFSymbols.share)
-                }
-                Spacer()
+                 Image(systemName: SFSymbols.share)
+                 }
+                 Spacer()
                  */
                 Button(action: { bean.deleteBean(context: viewContext) }) {
                     Image(systemName: SFSymbols.trash)
@@ -55,20 +67,14 @@ struct BeanDetailView: View {
                 }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
             }.padding()
                 .background(.thickMaterial)
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .cornerRadius(Design.base,
+                              corners: [.bottomLeft, .bottomRight])
                 .sheet(isPresented: $showEditView) {
                     showEditView = false
                 } content: {
                     NewBeansView(navRouter: navRouter, beans: bean, isEdit: true)
                 }
         }
-    }
-
-    func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, YYYY"
-
-        return formatter.string(from: date)
     }
 }
 

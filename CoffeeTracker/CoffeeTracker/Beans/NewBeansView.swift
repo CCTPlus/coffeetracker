@@ -10,7 +10,7 @@ import Photos
 
 struct NewBeansView: View {
 
-    enum Field {
+    private enum Field {
         case name
         case style
         case roaster
@@ -40,7 +40,7 @@ struct NewBeansView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: Design.base*2) {
                 Section("Bean Information") {
                     HStack(spacing: 10) {
                         Button {
@@ -64,7 +64,7 @@ struct NewBeansView: View {
                                 Image(uiImage: beans.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100, height: 100, alignment: .center)
+                                    .frame(width: Design.base*10, height: Design.base*10, alignment: .center)
                             } else {
                                 Image(systemName: SFSymbols.photo)
                                     .font(.system(size: 75))
@@ -118,7 +118,7 @@ struct NewBeansView: View {
                             dismiss()
                         } label: {
                             Text("Cancel")
-                                .frame(width: 100, height: 20, alignment: .center)
+                                .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
                         }.buttonStyle(BorderedButtonStyle())
                             .background(Color.red)
                             .cornerRadius(5)
@@ -146,7 +146,7 @@ struct NewBeansView: View {
 
                     } label: {
                         Text("Save")
-                            .frame(width: 100, height: 20, alignment: .center)
+                            .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
                     }.buttonStyle(BorderedButtonStyle())
                         .background(Color.green)
                         .cornerRadius(5)

@@ -23,7 +23,7 @@ struct BeansCollectionView: View {
                 }
                 ForEach(beansOO.beans, id: \.self) { bean in
                     BeanRowView(bean: bean)
-                        .padding(.vertical, 5)
+                        .padding(.vertical, Design.base/2)
                         .padding(.horizontal)
                 }
                 HStack {
@@ -37,17 +37,17 @@ struct BeansCollectionView: View {
                         Text("Beans")
                             .font(.largeTitle)
                             .bold()
-                            .padding(.top, 10)
+                            .padding(.top, Design.base)
                             .padding(.leading)
                         Spacer()
                     }
-                    .frame(height: geometry.safeAreaInsets.top+80)
+                    .frame(height: geometry.safeAreaInsets.top+Design.base*8)
                     .background(.ultraThinMaterial)
-                    .cornerRadius(10, corners: .bottomLeft)
-                    .cornerRadius(10, corners: .bottomRight)
+                    .cornerRadius(Design.base, corners: .bottomLeft)
+                    .cornerRadius(Design.base, corners: .bottomRight)
                     .edgesIgnoringSafeArea(.top)
                 }
-            }.shadow(radius: 20)
+            }.shadow(radius: Design.base*2)
         }
     }
 }

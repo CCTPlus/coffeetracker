@@ -26,7 +26,7 @@ struct ShareApp: View {
                 .row()
         }
         .sheet(isPresented: $showingSheet) {
-            ActivityView(activityItems: [NSURL(string: "https://cctplus.dev")!] as [Any], applicationActivities: nil)
+            ActivityView(activityItems: [NSURL(string: "https://apps.apple.com/us/app/coffee/id1611166034")!] as [Any], applicationActivities: nil)
         }
 
     }

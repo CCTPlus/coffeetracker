@@ -107,22 +107,22 @@
 		371E294D27C40D2100C8ACBF /* CoffeeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				377D725027F1E15D00DA9320 /* ObservableObjects */,
+				377D724F27F1DE3A00DA9320 /* Models */,
+				377D724D27F1DD1000DA9320 /* Views */,
 				3760712D27EC0A7C007395C8 /* Navigation */,
 				37DD41C927EA788100BEF00A /* Components */,
-				37F18B2627E4C08500F609DF /* About */,
-				376A5E5127D844BF0038BDA0 /* PhotoPicker */,
+				377D724E27F1DD4200DA9320 /* Styles */,
+				371E296A27C40F5400C8ACBF /* Helpers */,
 				37B776A727C67A7800EFD566 /* Info.plist */,
 				37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */,
 				371E296F27C40FA600C8ACBF /* Fixtures */,
-				371E296A27C40F5400C8ACBF /* Helpers */,
-				371E296327C40EA500C8ACBF /* Beans */,
-				371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */,
 				371E295027C40D2100C8ACBF /* ContentView.swift */,
+				371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */,
 				371E295227C40D2200C8ACBF /* Assets.xcassets */,
 				371E295727C40D2200C8ACBF /* Persistence.swift */,
 				371E295927C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld */,
 				371E295427C40D2200C8ACBF /* Preview Content */,
-				371E296127C40E8800C8ACBF /* CoffeeTrackerMain.swift */,
 			);
 			path = CoffeeTracker;
 			sourceTree = "<group>";
@@ -135,27 +135,10 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		371E296327C40EA500C8ACBF /* Beans */ = {
-			isa = PBXGroup;
-			children = (
-				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
-				371E296427C40EC900C8ACBF /* BeanModel.swift */,
-				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
-				371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */,
-				3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */,
-				371E297427C4100900C8ACBF /* NewBeansView.swift */,
-			);
-			path = Beans;
-			sourceTree = "<group>";
-		};
 		371E296A27C40F5400C8ACBF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */,
-				3797E1C327D6A52F000FE457 /* View+Extensions.swift */,
-				3797E1C527D6A6F3000FE457 /* Color+Extension.swift */,
-				37C9838327E4E4D4007C85E3 /* Constants.swift */,
-				37431AA127EBC57400242F39 /* RowModifier.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -171,18 +154,50 @@
 		3760712D27EC0A7C007395C8 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				371E296127C40E8800C8ACBF /* CoffeeTrackerMain.swift */,
 				3760713027EC0B6F007395C8 /* NavigationRouter.swift */,
 				3760713427EC10D2007395C8 /* TabBarIcon.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		376A5E5127D844BF0038BDA0 /* PhotoPicker */ = {
+		377D724D27F1DD1000DA9320 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */,
+				37F18B2627E4C08500F609DF /* About */,
+				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
+				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
+				371E297227C40FEF00C8ACBF /* BeansCollectionView.swift */,
+				371E297427C4100900C8ACBF /* NewBeansView.swift */,
 			);
-			path = PhotoPicker;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		377D724E27F1DD4200DA9320 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				3797E1C327D6A52F000FE457 /* View+Extensions.swift */,
+				3797E1C527D6A6F3000FE457 /* Color+Extension.swift */,
+				37C9838327E4E4D4007C85E3 /* Constants.swift */,
+				37431AA127EBC57400242F39 /* RowModifier.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		377D724F27F1DE3A00DA9320 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				371E296427C40EC900C8ACBF /* BeanModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		377D725027F1E15D00DA9320 /* ObservableObjects */ = {
+			isa = PBXGroup;
+			children = (
+				3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */,
+			);
+			path = ObservableObjects;
 			sourceTree = "<group>";
 		};
 		37B776A427C67A6F00EFD566 /* Frameworks */ = {
@@ -196,6 +211,7 @@
 		37DD41C927EA788100BEF00A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */,
 				37DD41CA27EA789300BEF00A /* ActivityView.swift */,
 			);
 			path = Components;

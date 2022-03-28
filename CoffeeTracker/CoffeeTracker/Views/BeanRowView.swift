@@ -26,20 +26,20 @@ struct BeanRowView: View {
 
     var body: some View {
         VStack{
-            HStack(alignment: .top, spacing: 20) {
+            HStack(alignment: .top, spacing: Design.base*2) {
                 Image(uiImage: bean.image)
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(10)
-                    .frame(maxWidth: 100)
-                VStack(alignment: .leading, spacing: 5) {
+                    .cornerRadius(Design.base)
+                    .frame(maxWidth: Design.base*10)
+                VStack(alignment: .leading, spacing: Design.base/2) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
                             Text(bean.name)
                                 .font(.headline)
                             Text(bean.roaster)
                                 .font(.subheadline)
-                                .padding(.bottom, 10)
+                                .padding(.bottom, Design.base)
                         }
                         Spacer()
                         if bean.buyAgain {
@@ -50,8 +50,8 @@ struct BeanRowView: View {
                     Text(bean.style)
                         .font(.footnote)
                 }
-            }.padding(.horizontal, 10).padding(.top, 10)
-                .padding(.bottom, !showingDetails ? 10 : 0)
+            }.padding(.horizontal, Design.base).padding(.top, Design.base)
+                .padding(.bottom, !showingDetails ? Design.base : 0)
             if showingDetails {
                 BeanDetailView(navRouter: NavigationRouter(), bean: bean)
             }
@@ -71,10 +71,10 @@ struct BeanRowView_Previews: PreviewProvider {
                 .ignoresSafeArea()
             ScrollView {
                 BeanRowView(bean: mediumRoast)
-                    .padding(.vertical, 5)
+                    .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
                 BeanRowView(bean: testRoast)
-                    .padding(.vertical, 5)
+                    .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
             }
         }
@@ -85,10 +85,10 @@ struct BeanRowView_Previews: PreviewProvider {
                 .ignoresSafeArea()
             ScrollView {
                 BeanRowView(bean: testRoast)
-                    .padding(.vertical, 5)
+                    .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
                 BeanRowView(bean: testRoast)
-                    .padding(.vertical, 5)
+                    .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
             }
         }

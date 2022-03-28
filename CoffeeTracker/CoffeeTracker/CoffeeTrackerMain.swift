@@ -70,34 +70,6 @@ struct CoffeeTrackerMain: View {
             .edgesIgnoringSafeArea(.bottom)
             .padding(.horizontal, -4)
         }
-//        ZStack(alignment: .bottom) {
-//            Image("Background")
-//                .resizable()
-//                .ignoresSafeArea()
-//            switch navRouter.currentPage {
-//            case .coffees:
-//                BeansCollectionView()
-//            case .info:
-//                AboutView()
-//            }
-//            TabBarView()
-//            if showButtons {
-//                NewBeansView(showForm: $showButtons)
-//                    .opacity(showButtons ? 1 : 0)
-//            }
-//            Button(action: {showButtons.toggle()}) {
-//                Image(systemName: SFSymbols.plus)
-//                    .font(.largeTitle)
-//                    .background(Circle()
-//                        .fill(showButtons ? Color.red : Color.sage)
-//                        .frame(width: 60, height: 60))
-//                    .padding(12)
-//                    .shadow(radius: 8, x: 4, y: 4)
-//                    .rotationEffect(Angle.degrees(showButtons ? 45 : 0))
-//            }.padding(20)
-//            .tint(.white)
-//        }
-//        .animation(.default, value: showButtons)
     }
 }
 

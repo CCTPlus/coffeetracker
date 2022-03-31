@@ -11,6 +11,7 @@ struct BeanModel: Identifiable, Hashable {
     var roastedOn: Date
     var boughtOn: Date
     var notes: String
+    var beanType: String
     var objectID: NSManagedObjectID?
     var image: UIImage
 

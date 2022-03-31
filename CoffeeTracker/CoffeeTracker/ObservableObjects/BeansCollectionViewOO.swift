@@ -43,6 +43,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                      roastedOn: foundBean.roastedOn ?? Date.distantPast,
                                      boughtOn: foundBean.boughtOn ?? Date.now,
                                      notes: foundBean.notes ?? "",
+                                     beanType: foundBean.beanType ?? "",
                                      objectID: foundBean.objectID,
                                      image: UIImage(systemName: SFSymbols.photo)!)
                 }
@@ -57,6 +58,7 @@ class BeansCollectionViewOO: NSObject, ObservableObject {
                                  roastedOn: foundBean.roastedOn ?? Date.distantPast,
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
+                                 beanType: foundBean.beanType ?? "",
                                  objectID: foundBean.objectID,
                                  image: image!)
             })
@@ -79,6 +81,7 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                                  roastedOn: foundBean.roastedOn ?? Date.distantPast,
                                  boughtOn: foundBean.boughtOn ?? Date.now,
                                  notes: foundBean.notes ?? "",
+                                 beanType: foundBean.beanType ?? "",
                                  objectID: foundBean.objectID,
                                  image: UIImage(systemName: SFSymbols.photo)!)
             }
@@ -93,6 +96,7 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                              roastedOn: foundBean.roastedOn ?? Date.distantPast,
                              boughtOn: foundBean.boughtOn ?? Date.now,
                              notes: foundBean.notes ?? "",
+                             beanType: foundBean.beanType ?? "",
                              objectID: foundBean.objectID,
                              image: image!)
         })

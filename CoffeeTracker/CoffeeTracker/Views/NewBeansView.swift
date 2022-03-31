@@ -28,6 +28,7 @@ struct NewBeansView: View {
                                  roastedOn: Date(),
                                  boughtOn: Date(),
                                  notes: "",
+                                 beanType: "",
                                  image: UIImage())
 
     @State private var isImageSelected = false
@@ -169,6 +170,7 @@ struct NewBeansView: View {
                           roastedOn: Date(),
                           boughtOn: Date(),
                           notes: "",
+                          beanType: "",
                           image: UIImage())
     }
 }

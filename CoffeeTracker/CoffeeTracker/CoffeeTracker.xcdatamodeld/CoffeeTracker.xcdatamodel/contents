@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E230" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Bean" representedClassName="Bean" syncable="YES" codeGenerationType="class">
         <attribute name="beanPhoto" optional="YES" attributeType="Binary"/>
+        <attribute name="beanType" optional="YES" attributeType="String"/>
         <attribute name="boughtAt" optional="YES" attributeType="String"/>
         <attribute name="boughtOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="buyAgain" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -16,7 +17,7 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Bean" positionX="-63" positionY="0" width="128" height="179"/>
+        <element name="Bean" positionX="-63" positionY="0" width="128" height="194"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
     </elements>
 </model>

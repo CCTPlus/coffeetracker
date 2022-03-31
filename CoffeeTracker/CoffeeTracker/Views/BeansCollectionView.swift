@@ -34,7 +34,7 @@ struct BeansCollectionView: View {
             Group {
                 GeometryReader { geometry in
                     HStack(alignment: .bottom) {
-                        Text("Beans")
+                        Text("Coffee")
                             .font(.largeTitle)
                             .bold()
                             .padding(.top, Design.base)

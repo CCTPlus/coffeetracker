@@ -28,6 +28,7 @@ struct NewBeansView: View {
                                  roastedOn: Date(),
                                  boughtOn: Date(),
                                  notes: "",
+                                 beanType: "beans",
                                  image: UIImage())
 
     @State private var isImageSelected = false
@@ -37,9 +38,11 @@ struct NewBeansView: View {
     @FocusState private var focusField: Field?
 
     var isEdit = false
+
+    let beanTypes = ["pods", "beans", "grounds"]
     
     var body: some View {
-        VStack {
+        ScrollView {
             VStack(alignment: .leading, spacing: Design.base*2) {
                 Section("Bean Information") {
                     HStack(spacing: 10) {
@@ -79,6 +82,15 @@ struct NewBeansView: View {
                                 .focused($focusField, equals: .style)
                         }
                     }
+                    VStack(alignment: .leading) {
+                        Text("Bean Type")
+                        Picker("Bean Type", selection: $beans.beanType) {
+                            ForEach(beanTypes, id: \.self) { type in
+                                Text(type.capitalized)
+                            }
+                        }.pickerStyle(.segmented)
+                            .padding(.bottom, Design.base*2)
+                    }
                 }
                 Section("Roaster Information") {
                     DatePicker("Roasted On",
@@ -87,6 +99,7 @@ struct NewBeansView: View {
                     TextField("Roaster", text: $beans.roaster)
                         .textFieldStyle(.roundedBorder)
                         .focused($focusField, equals: .roaster)
+                        .padding(.bottom, Design.base*2)
                 }
                 Section("Purchase Information") {
                     DatePicker("Purchased on",
@@ -155,7 +168,12 @@ struct NewBeansView: View {
                 }
 
             }.padding()
-            Spacer()
+
+            HStack {
+                Spacer()
+                    .frame(height: Design.base*13)
+            }
+            
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
             ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
         }
@@ -169,6 +187,7 @@ struct NewBeansView: View {
                           roastedOn: Date(),
                           boughtOn: Date(),
                           notes: "",
+                          beanType: "",
                           image: UIImage())
     }
 }

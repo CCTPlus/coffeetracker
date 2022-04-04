@@ -23,7 +23,7 @@ struct CoffeeTrackerMain: View {
                 VStack {
                     switch navRouter.currentPage {
                     case .coffees:
-                        BeansCollectionView()
+                        CoffeeListView()
                     case .info:
                         AboutView()
                     case .newBeans:

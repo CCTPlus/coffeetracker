@@ -11,6 +11,7 @@ struct BeanModel: Identifiable, Hashable {
     var roastedOn: Date
     var boughtOn: Date
     var notes: String
+    var beanType: String
     var objectID: NSManagedObjectID?
     var image: UIImage
 
@@ -19,6 +20,7 @@ struct BeanModel: Identifiable, Hashable {
     }
 
     mutating func addBeansToData(context: NSManagedObjectContext) {
+        print(beanType)
         let newBean = Bean(context: context)
         newBean.id = id
         newBean.name = name
@@ -28,6 +30,7 @@ struct BeanModel: Identifiable, Hashable {
         newBean.roastedOn = roastedOn
         newBean.boughtOn = boughtOn
         newBean.notes = notes
+        newBean.beanType = beanType
         newBean.beanPhoto = image.jpegData(compressionQuality: 1)
 
         self.objectID = newBean.objectID
@@ -41,6 +44,7 @@ struct BeanModel: Identifiable, Hashable {
     }
 
     func updateBean(context: NSManagedObjectContext) {
+        print(beanType)
         
         let fetchRequest: NSFetchRequest<Bean>
         fetchRequest = Bean.fetchRequest()
@@ -58,6 +62,7 @@ struct BeanModel: Identifiable, Hashable {
                 object.roastedOn = roastedOn
                 object.boughtOn = boughtOn
                 object.notes = notes
+                object.beanType = beanType
                 object.beanPhoto = image.jpegData(compressionQuality: 1)
                 try context.save()
             }

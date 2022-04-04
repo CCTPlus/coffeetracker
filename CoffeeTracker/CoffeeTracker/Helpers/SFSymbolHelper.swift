@@ -20,4 +20,5 @@ enum SFSymbols {
     static let plane = "paperplane"
     static let list = "list.dash.header.rectangle"
     static let info = "info.circle"
+    static let rectRoundedBottom = "rectangle.roundedbottom"
 }

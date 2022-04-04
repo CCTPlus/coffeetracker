@@ -47,8 +47,31 @@ struct BeanRowView: View {
                                 .opacity(0.60)
                         }
                     }
-                    Text(bean.style)
-                        .font(.footnote)
+                    HStack(alignment: .bottom) {
+                        Text(bean.style)
+                            .font(.footnote)
+                        Spacer()
+                        switch bean.beanType {
+                        case "pods":
+                            Image(systemName: SFSymbols.rectRoundedBottom)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20, alignment: .center)
+                                .opacity(0.5)
+                        case "grounds":
+                            Image("CoffeeBag")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20, alignment: .center)
+                                .opacity(0.5)
+                        default:
+                            Image("CoffeeBean")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20, alignment: .center)
+                                .opacity(0.5)
+                        }
+                    }
                 }
             }.padding(.horizontal, Design.base).padding(.top, Design.base)
                 .padding(.bottom, !showingDetails ? Design.base : 0)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BeansCollectionView: View {
+struct CoffeeListView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var beansOO: BeansCollectionViewOO
@@ -58,7 +58,7 @@ struct BeansCollectionView_Previews: PreviewProvider {
             Image("Background")
                 .resizable()
                 .ignoresSafeArea()
-            BeansCollectionView()
+            CoffeeListView()
         }.preferredColorScheme(.dark)
     }
 }

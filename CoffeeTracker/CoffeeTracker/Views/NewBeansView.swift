@@ -127,6 +127,12 @@ struct NewBeansView: View {
                     }
                 }
 
+                Section("Notes") {
+                    TextEditor(text: $beans.notes)
+                        .frame(height: 100.0)
+                        .cornerRadius(10)
+                }
+
                 HStack{
                     if isEdit {
                         Spacer()

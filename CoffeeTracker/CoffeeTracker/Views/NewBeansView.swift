@@ -105,25 +105,34 @@ struct NewBeansView: View {
                     DatePicker("Purchased on",
                                selection: $beans.boughtOn,
                                displayedComponents: .date)
-                    HStack {
-                        Text("Would buy again?")
-                        Spacer()
+                    if isEdit {
                         HStack {
-                            Button("Yes") {
-                                beans.buyAgain = true
-                            }.padding()
-                                .foregroundColor(beans.buyAgain == false ? Color.accentColor : Color.primary)
-                                .background(beans.buyAgain == true ? Color.accentColor : Color.clear)
-                                .cornerRadius(5)
-                            Button("No") {
-                                beans.buyAgain = false
-                            }.padding()
-                                .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
-                                .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
-                                .cornerRadius(5)
+                            Text("Would buy again?")
+                            Spacer()
+                            HStack {
+                                Button("Yes") {
+                                    beans.buyAgain = true
+                                }.padding()
+                                    .foregroundColor(beans.buyAgain == false ? Color.accentColor : Color.primary)
+                                    .background(beans.buyAgain == true ? Color.accentColor : Color.clear)
+                                    .cornerRadius(5)
+                                Button("No") {
+                                    beans.buyAgain = false
+                                }.padding()
+                                    .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
+                                    .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
+                                    .cornerRadius(5)
+                            }
                         }
                     }
                 }
+
+                Section("Notes") {
+                    TextEditor(text: $beans.notes)
+                        .frame(height: 100.0)
+                        .cornerRadius(10)
+                }
+
                 HStack{
                     if isEdit {
                         Spacer()

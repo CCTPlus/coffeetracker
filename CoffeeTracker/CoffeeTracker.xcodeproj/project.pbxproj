@@ -34,6 +34,7 @@
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
 		37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C9838327E4E4D4007C85E3 /* Constants.swift */; };
 		37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 37C9838627E4E5B8007C85E3 /* RevenueCat */; };
+		37CC7B0427FE7BEE008BE09D /* BeanRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC7B0327FE7BEE008BE09D /* BeanRowViewModel.swift */; };
 		37DD41CB27EA789300BEF00A /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD41CA27EA789300BEF00A /* ActivityView.swift */; };
 		37F18B2827E4C09500F609DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2727E4C09500F609DF /* AboutView.swift */; };
 		37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */; };
@@ -68,6 +69,7 @@
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37C9838327E4E4D4007C85E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		37CC7B0327FE7BEE008BE09D /* BeanRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRowViewModel.swift; sourceTree = "<group>"; };
 		37DD41CA27EA789300BEF00A /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		37F18B2727E4C09500F609DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyDevCoffeeSection.swift; sourceTree = "<group>"; };
@@ -164,9 +166,9 @@
 		377D724D27F1DD1000DA9320 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37CC7B0227FE7BBB008BE09D /* BeanRow */,
 				37F18B2627E4C08500F609DF /* About */,
 				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
-				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
 				371E297227C40FEF00C8ACBF /* CoffeeListView.swift */,
 				371E297427C4100900C8ACBF /* NewBeansView.swift */,
 			);
@@ -206,6 +208,15 @@
 				37B776A527C67A6F00EFD566 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37CC7B0227FE7BBB008BE09D /* BeanRow */ = {
+			isa = PBXGroup;
+			children = (
+				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
+				37CC7B0327FE7BEE008BE09D /* BeanRowViewModel.swift */,
+			);
+			path = BeanRow;
 			sourceTree = "<group>";
 		};
 		37DD41C927EA788100BEF00A /* Components */ = {
@@ -344,6 +355,7 @@
 				371E295B27C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld in Sources */,
 				3760713127EC0B6F007395C8 /* NavigationRouter.swift in Sources */,
 				3760713527EC10D2007395C8 /* TabBarIcon.swift in Sources */,
+				37CC7B0427FE7BEE008BE09D /* BeanRowViewModel.swift in Sources */,
 				371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */,
 				3776B9E127E8B3450042C494 /* UserFeedback.swift in Sources */,
 				371E297327C40FEF00C8ACBF /* CoffeeListView.swift in Sources */,

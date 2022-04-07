@@ -46,8 +46,7 @@ class CoffeeTrackerTests: XCTestCase {
         guard let sut = sut else {
             return
         }
-
-        XCTAssertTrue(sut.coffeeTypeIcon == Image(systemName: SFSymbols.rectRoundedBottom))
+        XCTAssertEqual(sut.coffeeTypeIcon, Image(systemName: SFSymbols.rectRoundedBottom))
     }
 
 }

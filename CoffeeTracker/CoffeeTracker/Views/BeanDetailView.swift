@@ -58,11 +58,11 @@ struct BeanDetailView: View {
                  }
                  Spacer()
                  */
-                Button(action: { bean.deleteBean(context: viewContext) }) {
+                Button { bean.deleteBean(context: viewContext) } label: {
                     Image(systemName: SFSymbols.trash)
                 }
                 Spacer()
-                Button(action: {showEditView.toggle()}) {
+                Button { showEditView.toggle() } label: {
                     Image(systemName: SFSymbols.pencil)
                 }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
             }.padding()

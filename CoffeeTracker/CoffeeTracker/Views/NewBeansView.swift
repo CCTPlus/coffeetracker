@@ -18,7 +18,7 @@ struct NewBeansView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
-    
+
     @StateObject var navRouter: NavigationRouter
 
     @State var beans = BeanModel(name: "",
@@ -40,7 +40,7 @@ struct NewBeansView: View {
     var isEdit = false
 
     let beanTypes = ["pods", "beans", "grounds"]
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Design.base*2) {
@@ -124,7 +124,7 @@ struct NewBeansView: View {
                         }
                     }
                 }
-                HStack{
+                HStack {
                     if isEdit {
                         Spacer()
                         Button {
@@ -173,7 +173,7 @@ struct NewBeansView: View {
                 Spacer()
                     .frame(height: Design.base*13)
             }
-            
+
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
             ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
         }

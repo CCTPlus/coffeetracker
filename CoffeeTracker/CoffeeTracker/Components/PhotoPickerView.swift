@@ -14,7 +14,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
     @Binding var selectedImage: UIImage
     @Binding var isImageSelected: Bool
-    
+
     var itemProviders: [NSItemProvider] = []
 
     @Environment(\.presentationMode) private var presentationMode

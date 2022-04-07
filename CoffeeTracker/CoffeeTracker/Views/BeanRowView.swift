@@ -25,7 +25,7 @@ struct BeanRowView: View {
     }
 
     var body: some View {
-        VStack{
+        VStack {
             HStack(alignment: .top, spacing: Design.base*2) {
                 Image(uiImage: bean.image)
                     .resizable()

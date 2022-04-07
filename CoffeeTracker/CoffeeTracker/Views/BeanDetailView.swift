@@ -43,10 +43,13 @@ struct BeanDetailView: View {
                     )
                 }
                 if bean.notes.count > 0 {
-                    HStack {
+                    VStack(alignment: .leading) {
+                        Text("Notes")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .padding(.bottom, Design.base/4)
                         Text(bean.notes)
                             .lineLimit(nil)
-                        Spacer()
                     }
                 }
             }.padding(.all)

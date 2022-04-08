@@ -26,13 +26,13 @@ struct CoffeeListView: View {
                 }
                 if beanTypeFilter == "all" {
                     ForEach(beansOO.beans, id: \.self) { bean in
-                        BeanRowView(viewModel: BeanRowViewModel(bean: bean))
+                        BeanRowView(oo: BeanRowViewOO(bean: bean))
                             .padding(.vertical, Design.base/2)
                             .padding(.horizontal)
                     }
                 } else {
                     ForEach(beansOO.beans.filter { $0.beanType == beanTypeFilter }, id: \.self) { bean in
-                        BeanRowView(viewModel: BeanRowViewModel(bean: bean))
+                        BeanRowView(oo: BeanRowViewOO(bean: bean))
                             .padding(.vertical, Design.base/2)
                             .padding(.horizontal)
                     }

@@ -11,12 +11,12 @@ import SwiftUI
 
 class CoffeeTrackerTests: XCTestCase {
 
-    var sut: BeanRowViewModel?
+    var sut: BeanRowViewOO?
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         try super.setUpWithError()
-        sut = BeanRowViewModel(bean: testRoast)
+        sut = BeanRowViewOO(bean: testRoast)
     }
 
     override func tearDownWithError() throws {

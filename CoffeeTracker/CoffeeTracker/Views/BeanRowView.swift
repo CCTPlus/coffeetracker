@@ -11,13 +11,13 @@ import SwiftUI
 struct BeanRowView: View {
     @Environment(\.colorScheme) private var colorScheme
 
-    @StateObject var viewModel: BeanRowViewModel
+    @StateObject var oo: BeanRowViewOO
 
     var tap: some Gesture {
         TapGesture(count: 1)
             .onEnded { _ in
                 withAnimation {
-                    viewModel.toggleDetails()
+                    oo.toggleDetails()
                 }
             }
     }
@@ -25,7 +25,7 @@ struct BeanRowView: View {
     var body: some View {
         VStack {
             HStack(alignment: .top, spacing: Design.base*2) {
-                Image(uiImage: viewModel.image)
+                Image(uiImage: oo.image)
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(Design.base)
@@ -33,23 +33,23 @@ struct BeanRowView: View {
                 VStack(alignment: .leading, spacing: Design.base/2) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
-                            Text(viewModel.name)
+                            Text(oo.name)
                                 .font(.headline)
-                            Text(viewModel.roaster)
+                            Text(oo.roaster)
                                 .font(.subheadline)
                                 .padding(.bottom, Design.base)
                         }
                         Spacer()
-                        if viewModel.buyAgain {
+                        if oo.buyAgain {
                             Image(systemName: SFSymbols.thumbsup)
                                 .opacity(0.60)
                         }
                     }
                     HStack(alignment: .bottom) {
-                        Text(viewModel.style)
+                        Text(oo.style)
                             .font(.footnote)
                         Spacer()
-                        viewModel.coffeeTypeIcon
+                        oo.coffeeTypeIcon
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20, alignment: .center)
@@ -57,10 +57,10 @@ struct BeanRowView: View {
                     }
                 }
             }.padding(.horizontal, Design.base).padding(.top, Design.base)
-                .padding(.bottom, viewModel.bottomPadding)
+                .padding(.bottom, oo.bottomPadding)
 
-            if viewModel.showDetails {
-                BeanDetailView(navRouter: NavigationRouter(), bean: viewModel.bean)
+            if oo.showDetails {
+                BeanDetailView(navRouter: NavigationRouter(), bean: oo.bean)
             }
 
         }.frame(maxWidth: .infinity)
@@ -76,10 +76,10 @@ struct BeanRowView_Previews: PreviewProvider {
                 .resizable()
                 .ignoresSafeArea()
             ScrollView {
-                BeanRowView(viewModel: BeanRowViewModel(bean: testRoast))
+                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
                     .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
-                BeanRowView(viewModel: BeanRowViewModel(bean: testRoast))
+                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
                     .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
             }
@@ -90,10 +90,10 @@ struct BeanRowView_Previews: PreviewProvider {
                 .resizable()
                 .ignoresSafeArea()
             ScrollView {
-                BeanRowView(viewModel: BeanRowViewModel(bean: testRoast))
+                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
                     .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
-                BeanRowView(viewModel: BeanRowViewModel(bean: testRoast))
+                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
                     .padding(.vertical, Design.base/2)
                     .padding(.horizontal)
             }

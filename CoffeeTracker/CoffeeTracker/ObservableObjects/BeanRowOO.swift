@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class BeanRowViewModel: ObservableObject {
+final class BeanRowViewOO: ObservableObject {
     @Published var showDetails = false
 
     let bean: BeanModel

@@ -12,9 +12,8 @@ struct BeanDetailView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     @StateObject var navRouter: NavigationRouter
+    @StateObject var beanOO: NewBeanOO
     @State private var showEditView = false
-
-    var bean: BeanModel
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -23,7 +22,7 @@ struct BeanDetailView: View {
                 HStack {
                     Text("Bought on")
                     Spacer()
-                    Text(bean.boughtOn.formatted(
+                    Text(beanOO.coffee.boughtOn.formatted(
                         .iso8601
                             .month()
                             .day()
@@ -34,7 +33,7 @@ struct BeanDetailView: View {
                 HStack {
                     Text("Roasted on")
                     Spacer()
-                    Text(bean.roastedOn.formatted(
+                    Text(beanOO.coffee.roastedOn.formatted(
                         .iso8601
                             .month()
                             .day()
@@ -42,13 +41,13 @@ struct BeanDetailView: View {
                             .dateSeparator(.dash))
                     )
                 }
-                if bean.notes.count > 0 {
+                if beanOO.coffee.notes.count > 0 {
                     VStack(alignment: .leading) {
                         Text("Notes")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .padding(.bottom, Design.base/4)
-                        Text(bean.notes)
+                        Text(beanOO.coffee.notes)
                             .lineLimit(nil)
                     }
                 }
@@ -61,11 +60,11 @@ struct BeanDetailView: View {
                  }
                  Spacer()
                  */
-                Button(action: { bean.deleteBean(context: viewContext) }) {
+                Button { beanOO.coffee.deleteBean(context: viewContext) } label: {
                     Image(systemName: SFSymbols.trash)
                 }
                 Spacer()
-                Button(action: {showEditView.toggle()}) {
+                Button { showEditView.toggle() } label: {
                     Image(systemName: SFSymbols.pencil)
                 }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
             }.padding()
@@ -75,7 +74,8 @@ struct BeanDetailView: View {
                 .sheet(isPresented: $showEditView) {
                     showEditView = false
                 } content: {
-                    NewBeansView(navRouter: navRouter, beans: bean, isEdit: true)
+                    NewBeansView(navRouter: navRouter, beans: beanOO.coffee, isEdit: true)
+                        .environmentObject(beanOO)
                 }
         }
     }
@@ -84,7 +84,7 @@ struct BeanDetailView: View {
 struct BeanDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BeanDetailView(navRouter: NavigationRouter(), bean: testRoast)
+            BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: testRoast))
         }
     }
 }

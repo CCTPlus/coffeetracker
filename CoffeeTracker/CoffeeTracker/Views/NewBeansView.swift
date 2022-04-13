@@ -18,7 +18,8 @@ struct NewBeansView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
-    
+    @EnvironmentObject var beanOO: NewBeanOO
+
     @StateObject var navRouter: NavigationRouter
 
     @State var beans = BeanModel(name: "",
@@ -40,7 +41,7 @@ struct NewBeansView: View {
     var isEdit = false
 
     let beanTypes = ["pods", "beans", "grounds"]
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Design.base*2) {
@@ -64,7 +65,7 @@ struct NewBeansView: View {
                             }
                         } label: {
                             if isImageSelected {
-                                Image(uiImage: beans.image)
+                                Image(uiImage: beanOO.coffee.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: Design.base*10, height: Design.base*10, alignment: .center)
@@ -74,17 +75,17 @@ struct NewBeansView: View {
                             }
                         }
                         VStack {
-                            TextField("Name", text: $beans.name)
+                            TextField("Name", text: $beanOO.coffee.name)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusField, equals: .name)
-                            TextField("Style", text: $beans.style)
+                            TextField("Style", text: $beanOO.coffee.style)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusField, equals: .style)
                         }
                     }
                     VStack(alignment: .leading) {
                         Text("Bean Type")
-                        Picker("Bean Type", selection: $beans.beanType) {
+                        Picker("Bean Type", selection: $beanOO.coffee.beanType) {
                             ForEach(beanTypes, id: \.self) { type in
                                 Text(type.capitalized)
                             }
@@ -94,16 +95,16 @@ struct NewBeansView: View {
                 }
                 Section("Roaster Information") {
                     DatePicker("Roasted On",
-                               selection: $beans.roastedOn,
+                               selection: $beanOO.coffee.roastedOn,
                                displayedComponents: .date)
-                    TextField("Roaster", text: $beans.roaster)
+                    TextField("Roaster", text: $beanOO.coffee.roaster)
                         .textFieldStyle(.roundedBorder)
                         .focused($focusField, equals: .roaster)
                         .padding(.bottom, Design.base*2)
                 }
                 Section("Purchase Information") {
                     DatePicker("Purchased on",
-                               selection: $beans.boughtOn,
+                               selection: $beanOO.coffee.boughtOn,
                                displayedComponents: .date)
                     if isEdit {
                         HStack {
@@ -111,29 +112,27 @@ struct NewBeansView: View {
                             Spacer()
                             HStack {
                                 Button("Yes") {
-                                    beans.buyAgain = true
+                                    beanOO.coffee.buyAgain = true
                                 }.padding()
-                                    .foregroundColor(beans.buyAgain == false ? Color.accentColor : Color.primary)
-                                    .background(beans.buyAgain == true ? Color.accentColor : Color.clear)
+                                    .foregroundColor(beanOO.yesButtonFGColor)
+                                    .background(beanOO.yesButtonBGColor)
                                     .cornerRadius(5)
                                 Button("No") {
-                                    beans.buyAgain = false
+                                    beanOO.coffee.buyAgain = false
                                 }.padding()
-                                    .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
-                                    .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
+                                    .foregroundColor(beanOO.noButtonFGColor)
+                                    .background(beanOO.noButtonBGColor)
                                     .cornerRadius(5)
                             }
                         }
                     }
                 }
-
                 Section("Notes") {
-                    TextEditor(text: $beans.notes)
+                    TextEditor(text: $beanOO.coffee.notes)
                         .frame(height: 100.0)
                         .cornerRadius(10)
                 }
-
-                HStack{
+                HStack {
                     if isEdit {
                         Spacer()
                         Button {
@@ -148,18 +147,18 @@ struct NewBeansView: View {
                     }
                     Spacer()
                     Button {
-                        if beans.name.isEmpty {
+                        if beanOO.coffee.name.isEmpty {
                             focusField = .name
-                        } else if beans.style.isEmpty {
+                        } else if beanOO.coffee.style.isEmpty {
                             focusField = .style
-                        } else if beans.roaster.isEmpty {
+                        } else if beanOO.coffee.roaster.isEmpty {
                             focusField = .roaster
                         } else {
                             if isEdit {
-                                beans.updateBean(context: viewContext)
+                                beanOO.coffee.updateBean(context: viewContext)
                                 dismiss()
                             } else {
-                                beans.addBeansToData(context: viewContext)
+                                beanOO.coffee.addBeansToData(context: viewContext)
                                 navRouter.currentPage = .coffees
                                 resetBeans()
                             }
@@ -182,14 +181,14 @@ struct NewBeansView: View {
                 Spacer()
                     .frame(height: Design.base*13)
             }
-            
+
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
-            ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
+            ImagePicker(selectedImage: $beanOO.coffee.image, isImageSelected: $isImageSelected)
         }
     }
 
     func resetBeans() {
-        beans = BeanModel(name: "",
+        beanOO.coffee = BeanModel(name: "",
                           style: "",
                           buyAgain: false,
                           roaster: "",

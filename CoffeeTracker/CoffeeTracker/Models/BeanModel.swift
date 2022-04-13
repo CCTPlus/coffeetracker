@@ -45,7 +45,7 @@ struct BeanModel: Identifiable, Hashable {
 
     func updateBean(context: NSManagedObjectContext) {
         print(beanType)
-        
+
         let fetchRequest: NSFetchRequest<Bean>
         fetchRequest = Bean.fetchRequest()
 

@@ -11,7 +11,7 @@ import RevenueCat
 struct BuyDevCoffeeSection: View {
     @Environment(\.colorScheme) private var colorScheme
 
-    @State private var package: Package? = nil
+    @State private var package: Package?
     @State private var cupsPurchased = 0
 
     var amount: Double {
@@ -21,21 +21,26 @@ struct BuyDevCoffeeSection: View {
         return Double(cupsPurchased) * Double(truncating: package.storeProduct.priceDecimalNumber)
     }
 
+    let darkBlue = Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0)
     let formatter = FloatingPointFormatStyle<Double>.Currency.currency(code: Locale.current.currencyCode ?? "USD")
+
+    let purchaseText = "If you're enjoying coffee_ and want to buy a cup of coffee for the developer, "
+    let purchaseText2 = "then it is definitely appreciated. The app is free to use, so any additional "
+    let purchaseText3 = "contributions are always welcome."
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
             HStack {
                 Image(systemName: SFSymbols.coffee)
                     .font(.largeTitle)
-                    .foregroundColor(colorScheme == .light ? .blue : Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0))
+                    .foregroundColor(colorScheme == .light ? .blue : darkBlue)
                 Text("Support future development with a cup of coffee")
                     .font(.title3)
             }.padding(.trailing)
-            Text("If you're enjoying coffee_ and want to buy a cup of coffee for the developer, then it is definitely appreciated. The app is free to use, so any additional contributions are always welcome. ")
+            Text(purchaseText + purchaseText2 + purchaseText3)
                 .foregroundColor(.secondary)
             Button {
-                Purchases.shared.purchase(package: package!) { transaction, customerInfo, error, cancelled in
+                Purchases.shared.purchase(package: package!) { transaction, _, _, _ in
                     if transaction != nil {
                         cupsPurchased += 1
                     }
@@ -70,7 +75,7 @@ struct BuyDevCoffeeSection: View {
             }.foregroundColor(.secondary)
         }.row()
             .onAppear {
-                Purchases.shared.getOfferings { (offerings, error) in
+                Purchases.shared.getOfferings { (offerings, _) in
                     if let packages = offerings?.current?.availablePackages {
                         for package in packages {
                             self.package = package
@@ -90,7 +95,7 @@ struct BuyDevCoffeeSection: View {
     }
 
     func getAllPurchases() {
-        Purchases.shared.getCustomerInfo { customerInfo, error in
+        Purchases.shared.getCustomerInfo { customerInfo, _ in
             guard let customerInfo = customerInfo else {
                 return
             }

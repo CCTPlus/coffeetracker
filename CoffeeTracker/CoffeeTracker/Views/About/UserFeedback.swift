@@ -43,7 +43,7 @@ struct UserFeedbackView: View {
                 Text("Feedback Details")
             }
 
-            /// MARK: Submit Button
+            // MARK: Submit Button
             VStack {
                 Button(action: addIssueToGithub) {
                     switch buttonState {
@@ -98,13 +98,13 @@ struct UserFeedbackView: View {
 
     private func addIssueToGithub() {
         buttonState = .sending
-        let device = UIDevice()
+
         var issueBody = "| Auto Gen | Information |\n"
         issueBody += "|---|---|\n"
         issueBody += "| Date | \(Date.now) |\n"
         issueBody += "|App Version| \(appVersion) \(appBuild)|\n"
-        issueBody += "|OS Version| \(device.systemVersion)|\n"
-        issueBody += "|Device Model| \(device.model)|\n"
+        issueBody += "|OS Version| \(UIDevice.current.systemVersion)|\n"
+        issueBody += "|Device Model| \(UIDevice.current.model)|\n"
         issueBody += "\n" + details + "\n"
 
         Octokit(config).postIssue(owner: "CCTPlus",

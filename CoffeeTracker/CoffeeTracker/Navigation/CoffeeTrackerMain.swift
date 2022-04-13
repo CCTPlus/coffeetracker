@@ -13,6 +13,11 @@ struct CoffeeTrackerMain: View {
     @StateObject var navRouter: NavigationRouter
 
     @State private var showButtons = false
+    @StateObject var beanOO = NewBeanOO(bean: nil)
+
+    var plusRotation: Double {
+        return navRouter.currentPage == .newBeans ? 45 : 0
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -28,6 +33,7 @@ struct CoffeeTrackerMain: View {
                         AboutView()
                     case .newBeans:
                         NewBeansView(navRouter: navRouter)
+                            .environmentObject(beanOO)
                     }
                 }
                 HStack(alignment: .bottom) {
@@ -52,7 +58,7 @@ struct CoffeeTrackerMain: View {
                                                     .frame(width: geometry.size.width/7, height: geometry.size.width/7))
                                                 .padding(12)
                                                 .shadow(radius: 8, x: 4, y: 4)
-                                                .rotationEffect(Angle.degrees(navRouter.currentPage == .newBeans ? 45 : 0))
+                                                .rotationEffect(Angle.degrees(plusRotation))
                                         }.padding(20)
                                         .tint(.white)
                     }

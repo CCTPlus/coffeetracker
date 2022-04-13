@@ -100,6 +100,6 @@ extension BeansCollectionViewOO: NSFetchedResultsControllerDelegate {
                              objectID: foundBean.objectID,
                              image: image!)
         })
-        beans.sort{$0.boughtOn > $1.boughtOn}
+        beans.sort { $0.boughtOn > $1.boughtOn }
     }
 }

@@ -13,7 +13,7 @@ struct RowModifier: ViewModifier {
     @Environment(\.colorScheme) private var colorScheme
 
     var padding = true
-    
+
     func body(content: Content) -> some View {
         content
             .padding(.all, padding ? 10 : 0)

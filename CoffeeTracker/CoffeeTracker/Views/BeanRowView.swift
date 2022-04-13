@@ -60,7 +60,7 @@ struct BeanRowView: View {
                 .padding(.bottom, oo.bottomPadding)
 
             if oo.showDetails {
-                BeanDetailView(navRouter: NavigationRouter(), bean: oo.bean)
+                BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: oo.bean))
             }
 
         }.frame(maxWidth: .infinity)

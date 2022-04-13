@@ -37,6 +37,7 @@
 		37CC7B0427FE7BEE008BE09D /* BeanRowOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC7B0327FE7BEE008BE09D /* BeanRowOO.swift */; };
 		37CC7B0C27FE9224008BE09D /* BeanRowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC7B0B27FE9224008BE09D /* BeanRowViewModelTests.swift */; };
 		37DD41CB27EA789300BEF00A /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DD41CA27EA789300BEF00A /* ActivityView.swift */; };
+		37EFDD9D2800C5AD0090955E /* NewBeanOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFDD9C2800C5AD0090955E /* NewBeanOO.swift */; };
 		37F18B2827E4C09500F609DF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2727E4C09500F609DF /* AboutView.swift */; };
 		37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		37CC7B0927FE9224008BE09D /* CoffeeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoffeeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37CC7B0B27FE9224008BE09D /* BeanRowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRowViewModelTests.swift; sourceTree = "<group>"; };
 		37DD41CA27EA789300BEF00A /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		37EFDD9C2800C5AD0090955E /* NewBeanOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBeanOO.swift; sourceTree = "<group>"; };
 		37F18B2727E4C09500F609DF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyDevCoffeeSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -221,6 +223,7 @@
 			children = (
 				37CC7B0327FE7BEE008BE09D /* BeanRowOO.swift */,
 				3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */,
+				37EFDD9C2800C5AD0090955E /* NewBeanOO.swift */,
 			);
 			path = ObservableObjects;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */,
 				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
 				37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */,
+				37EFDD9D2800C5AD0090955E /* NewBeanOO.swift in Sources */,
 				37F18B2827E4C09500F609DF /* AboutView.swift in Sources */,
 				37431AA227EBC57400242F39 /* RowModifier.swift in Sources */,
 				371E295827C40D2200C8ACBF /* Persistence.swift in Sources */,

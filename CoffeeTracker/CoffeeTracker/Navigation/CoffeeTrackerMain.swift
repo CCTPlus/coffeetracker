@@ -13,6 +13,7 @@ struct CoffeeTrackerMain: View {
     @StateObject var navRouter: NavigationRouter
 
     @State private var showButtons = false
+    @StateObject var beanOO = NewBeanOO(bean: nil)
 
     var plusRotation: Double {
         return navRouter.currentPage == .newBeans ? 45 : 0
@@ -32,6 +33,7 @@ struct CoffeeTrackerMain: View {
                         AboutView()
                     case .newBeans:
                         NewBeansView(navRouter: navRouter)
+                            .environmentObject(beanOO)
                     }
                 }
                 HStack(alignment: .bottom) {

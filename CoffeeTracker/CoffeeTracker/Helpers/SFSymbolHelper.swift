@@ -21,4 +21,6 @@ enum SFSymbols {
     static let list = "list.dash.header.rectangle"
     static let info = "info.circle"
     static let rectRoundedBottom = "rectangle.roundedbottom"
+    static let star = "star.fill"
+    static let ladybug = "ladybug.fill"
 }

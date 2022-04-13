@@ -25,6 +25,7 @@
 		3760713127EC0B6F007395C8 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760713027EC0B6F007395C8 /* NavigationRouter.swift */; };
 		3760713527EC10D2007395C8 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760713427EC10D2007395C8 /* TabBarIcon.swift */; };
 		376A5E5327D844D60038BDA0 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */; };
+		37766A3428067736006489CE /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37766A3328067736006489CE /* WhatsNewView.swift */; };
 		3776B9DE27E8B32D0042C494 /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3776B9DD27E8B32D0042C494 /* OctoKit */; };
 		3776B9E127E8B3450042C494 /* UserFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3776B9E027E8B3450042C494 /* UserFeedback.swift */; };
 		3782E03527C4AA81000F0404 /* BeansCollectionViewOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */; };
@@ -72,6 +73,7 @@
 		3760713027EC0B6F007395C8 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		3760713427EC10D2007395C8 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
 		376A5E5227D844D60038BDA0 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		37766A3328067736006489CE /* WhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
 		3776B9E027E8B3450042C494 /* UserFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedback.swift; sourceTree = "<group>"; };
 		3782E03427C4AA81000F0404 /* BeansCollectionViewOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeansCollectionViewOO.swift; sourceTree = "<group>"; };
 		3797E1C327D6A52F000FE457 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				37F18B2927E4C15200F609DF /* BuyDevCoffeeSection.swift */,
 				3776B9E027E8B3450042C494 /* UserFeedback.swift */,
 				379E1CBE27E8BF7C004101E0 /* ShareApp.swift */,
+				37766A3328067736006489CE /* WhatsNewView.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				371E296527C40EC900C8ACBF /* BeanModel.swift in Sources */,
 				371E295B27C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld in Sources */,
 				3760713127EC0B6F007395C8 /* NavigationRouter.swift in Sources */,
+				37766A3428067736006489CE /* WhatsNewView.swift in Sources */,
 				3760713527EC10D2007395C8 /* TabBarIcon.swift in Sources */,
 				37CC7B0427FE7BEE008BE09D /* BeanRowOO.swift in Sources */,
 				371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */,

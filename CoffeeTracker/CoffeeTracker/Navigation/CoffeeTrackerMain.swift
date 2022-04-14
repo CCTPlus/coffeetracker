@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CoffeeTrackerMain: View {
+    @AppStorage("showNewView") var showNewView: Bool = true
+    @AppStorage("lastSeenVersion") var version: String = "1.0"
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @StateObject var navRouter: NavigationRouter
@@ -29,11 +32,29 @@ struct CoffeeTrackerMain: View {
                     switch navRouter.currentPage {
                     case .coffees:
                         CoffeeListView()
+                            .popover(isPresented: $showNewView) {
+                                WhatsNewView()
+                                    .onDisappear {
+                                        showNewView = false
+                                    }
+                            }
                     case .info:
                         AboutView()
                     case .newBeans:
                         NewBeansView(navRouter: navRouter)
                             .environmentObject(beanOO)
+                    }
+                }.onAppear {
+                    let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                    guard let currentVersion = currentVersion else {
+                        return
+                    }
+                    if currentVersion != version {
+                        showNewView = true
+                        version = currentVersion
+                    } else {
+                        showNewView = false
+                        version = currentVersion
                     }
                 }
                 HStack(alignment: .bottom) {

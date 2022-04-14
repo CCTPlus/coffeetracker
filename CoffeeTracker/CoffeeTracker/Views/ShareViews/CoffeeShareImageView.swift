@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct CoffeeShareImageView: View {
+    @Binding var showBoughtDate: Bool
+    @Binding var showRoastedDate: Bool
+    @Binding var showNotes: Bool
+
     var coffee: BeanModel
     var body: some View {
         VStack(spacing: 10) {
@@ -27,10 +31,6 @@ struct CoffeeShareImageView: View {
                                 .padding(.bottom, Design.base)
                         }
                         Spacer()
-                        if coffee.buyAgain {
-                            Image(systemName: SFSymbols.thumbsup)
-                                .opacity(0.60)
-                        }
                     }
                     HStack(alignment: .bottom) {
                         Text(coffee.style)
@@ -61,48 +61,59 @@ struct CoffeeShareImageView: View {
             }.padding(.horizontal, Design.base).padding(.top, Design.base)
                 .padding(.bottom, Design.base)
             Group {
-                HStack {
-                    Text("Bought on")
-                    Spacer()
-                    Text(coffee.boughtOn.formatted(
-                        .iso8601
-                            .month()
-                            .day()
-                            .year()
-                            .dateSeparator(.dash))
-                    )
-                }
-                HStack {
-                    Text("Roasted on")
-                    Spacer()
-                    Text(coffee.roastedOn.formatted(
-                        .iso8601
-                            .month()
-                            .day()
-                            .year()
-                            .dateSeparator(.dash))
-                    )
-                }
-                if coffee.notes.count > 0 {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Notes")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .padding(.bottom, Design.base/4)
-                            Spacer()
-                        }
-                        Text(coffee.notes)
-                            .lineLimit(nil)
+                if showBoughtDate {
+                    HStack {
+                        Text("Bought on")
+                        Spacer()
+                        Text(coffee.boughtOn.formatted(
+                            .iso8601
+                                .month()
+                                .day()
+                                .year()
+                                .dateSeparator(.dash))
+                        )
                     }
                 }
-            }.padding(.all)
-        }.row()
+                if showRoastedDate {
+                    HStack {
+                        Text("Roasted on")
+                        Spacer()
+                        Text(coffee.roastedOn.formatted(
+                            .iso8601
+                                .month()
+                                .day()
+                                .year()
+                                .dateSeparator(.dash))
+                        )
+                    }
+                }
+                if showNotes {
+                    if coffee.notes.count > 0 {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("Notes")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .padding(.bottom, Design.base/4)
+                                Spacer()
+                            }
+                            Text(coffee.notes)
+                                .lineLimit(nil)
+                        }
+                    }
+                }
+            }.padding(.all, Design.base/2)
+        }.padding(.bottom)
+        .row()
     }
 }
 
 struct CoffeeShareImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CoffeeShareImageView(coffee: testRoast)
+        CoffeeShareImageView(showBoughtDate: .constant(true),
+                             showRoastedDate: .constant(true),
+                             showNotes: .constant(true),
+                             coffee: testRoast)
+            .padding()
     }
 }

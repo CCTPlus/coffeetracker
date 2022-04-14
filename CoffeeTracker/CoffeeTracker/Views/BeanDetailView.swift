@@ -55,7 +55,7 @@ struct BeanDetailView: View {
             }.padding(.all)
 
             HStack {
-                Button{ showShareView.toggle() }  label: {
+                Button { showShareView.toggle() }  label: {
                     Image(systemName: SFSymbols.share)
                 }.sheet(isPresented: $showShareView) {
                     CoffeeShareView(coffee: beanOO.coffee)

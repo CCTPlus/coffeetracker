@@ -10,7 +10,10 @@ import SwiftUI
 struct CoffeeShareView: View {
 
     @State private var showingShare = false
-    @State private var      shareImage: [Any] = []
+    @State private var shareImage: [Any] = []
+    @State private var showBoughtDate: Bool = true
+    @State private var showRoastedDate: Bool = true
+    @State private var showNotes: Bool = true
 
     var coffee: BeanModel
     var body: some View {
@@ -20,14 +23,20 @@ struct CoffeeShareView: View {
                 .bold()
 
         // View to share
-            CoffeeShareImageView(coffee: coffee)
+            CoffeeShareImageView(showBoughtDate: $showBoughtDate,
+                                 showRoastedDate: $showRoastedDate,
+                                 showNotes: $showNotes,
+                                 coffee: coffee)
             .padding()
             Spacer()
             Group {
                 Text("The options to adjust view will go here")
             }
             Button {
-                let image = CoffeeShareImageView(coffee: coffee).snapshot()
+                let image = CoffeeShareImageView(showBoughtDate: $showBoughtDate,
+                                                 showRoastedDate: $showRoastedDate,
+                                                 showNotes: $showNotes,
+                                                 coffee: coffee).snapshot()
                 shareImage.append(image)
                 showingShare.toggle()
             } label: {

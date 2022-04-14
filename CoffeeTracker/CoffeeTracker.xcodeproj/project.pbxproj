@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371A06BC28084C120035F16B /* CoffeeShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A06BB28084C120035F16B /* CoffeeShareView.swift */; };
+		371A06BF2808539A0035F16B /* CoffeeShareImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A06BE2808539A0035F16B /* CoffeeShareImageView.swift */; };
 		371E294F27C40D2100C8ACBF /* CoffeeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */; };
 		371E295127C40D2100C8ACBF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E295027C40D2100C8ACBF /* ContentView.swift */; };
 		371E295327C40D2200C8ACBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371E295227C40D2200C8ACBF /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		371A06BB28084C120035F16B /* CoffeeShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShareView.swift; sourceTree = "<group>"; };
+		371A06BE2808539A0035F16B /* CoffeeShareImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShareImageView.swift; sourceTree = "<group>"; };
 		371E294B27C40D2100C8ACBF /* Coffee_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coffee_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeTrackerApp.swift; sourceTree = "<group>"; };
 		371E295027C40D2100C8ACBF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		371A06BD280853440035F16B /* ShareViews */ = {
+			isa = PBXGroup;
+			children = (
+				371A06BB28084C120035F16B /* CoffeeShareView.swift */,
+				371A06BE2808539A0035F16B /* CoffeeShareImageView.swift */,
+			);
+			path = ShareViews;
+			sourceTree = "<group>";
+		};
 		371E294227C40D2100C8ACBF = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +205,7 @@
 		377D724D27F1DD1000DA9320 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				371A06BD280853440035F16B /* ShareViews */,
 				371E296627C40EF100C8ACBF /* BeanRowView.swift */,
 				37F18B2627E4C08500F609DF /* About */,
 				371E296D27C40F9A00C8ACBF /* BeanDetailView.swift */,
@@ -397,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371E296727C40EF100C8ACBF /* BeanRowView.swift in Sources */,
+				371A06BC28084C120035F16B /* CoffeeShareView.swift in Sources */,
 				37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */,
 				3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */,
 				37F18B2A27E4C15200F609DF /* BuyDevCoffeeSection.swift in Sources */,
@@ -419,6 +434,7 @@
 				371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */,
 				3776B9E127E8B3450042C494 /* UserFeedback.swift in Sources */,
 				371E297327C40FEF00C8ACBF /* CoffeeListView.swift in Sources */,
+				371A06BF2808539A0035F16B /* CoffeeShareImageView.swift in Sources */,
 				371E296C27C40F5E00C8ACBF /* SFSymbolHelper.swift in Sources */,
 				3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */,
 				371E294F27C40D2100C8ACBF /* CoffeeTrackerApp.swift in Sources */,

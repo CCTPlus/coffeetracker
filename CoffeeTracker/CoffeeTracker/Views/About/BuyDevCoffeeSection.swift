@@ -24,21 +24,15 @@ struct BuyDevCoffeeSection: View {
     let darkBlue = Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0)
     let formatter = FloatingPointFormatStyle<Double>.Currency.currency(code: Locale.current.currencyCode ?? "USD")
 
-    let purchaseText = "If you're enjoying coffee_ and want to buy a cup of coffee for the developer, "
-    let purchaseText2 = "then it is definitely appreciated. The app is free to use, so any additional "
-    let purchaseText3 = "contributions are always welcome."
-
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-            HStack {
+            HStack(alignment: .top) {
                 Image(systemName: SFSymbols.coffee)
                     .font(.largeTitle)
                     .foregroundColor(colorScheme == .light ? .blue : darkBlue)
                 Text("Support future development with a cup of coffee")
-                    .font(.title3)
-            }.padding(.trailing)
-            Text(purchaseText + purchaseText2 + purchaseText3)
-                .foregroundColor(.secondary)
+                    .font(.headline)
+            }
             Button {
                 Purchases.shared.purchase(package: package!) { transaction, _, _, _ in
                     if transaction != nil {
@@ -46,10 +40,12 @@ struct BuyDevCoffeeSection: View {
                     }
                 }
             } label: {
-                Text("Buy the dev a cup of coffee")
-                    .foregroundColor(.black)
+                Text("Buy a cup of coffee")
+                    .font(.body)
+                    .bold()
                     .padding(15)
-                    .background(Color.green)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green.opacity(0.60))
                     .cornerRadius(10)
             }
             Text("Coffee is \(getPackagePrice(package)) a cup")
@@ -68,12 +64,9 @@ struct BuyDevCoffeeSection: View {
                 Spacer()
                 Text(amount, format: formatter)
             }
-
-            Group {
-                Text("The amount should automatically update and keep updated with each launch of the app.")
-                    .font(.caption2)
-            }.foregroundColor(.secondary)
-        }.row()
+        }.background(Color.clear)
+        .padding()
+        .row()
             .onAppear {
                 Purchases.shared.getOfferings { (offerings, _) in
                     if let packages = offerings?.current?.availablePackages {

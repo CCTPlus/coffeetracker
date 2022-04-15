@@ -14,6 +14,7 @@ struct BeanDetailView: View {
     @StateObject var navRouter: NavigationRouter
     @StateObject var beanOO: NewBeanOO
     @State private var showEditView = false
+    @State private var showShareView = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -54,12 +55,12 @@ struct BeanDetailView: View {
             }.padding(.all)
 
             HStack {
-                /* Commented out for now Not ready to add share and delete
-                 Button(action: {print("Share")}) {
-                 Image(systemName: SFSymbols.share)
-                 }
-                 Spacer()
-                 */
+                Button { showShareView.toggle() }  label: {
+                    Image(systemName: SFSymbols.share)
+                }.sheet(isPresented: $showShareView) {
+                    CoffeeShareView(coffee: beanOO.coffee)
+                }
+                Spacer()
                 Button { beanOO.coffee.deleteBean(context: viewContext) } label: {
                     Image(systemName: SFSymbols.trash)
                 }

@@ -10,7 +10,7 @@ import Photos
 
 struct NewBeansView: View {
 
-    enum Field {
+    private enum Field {
         case name
         case style
         case roaster
@@ -18,7 +18,8 @@ struct NewBeansView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
-    
+    @EnvironmentObject var beanOO: NewBeanOO
+
     @StateObject var navRouter: NavigationRouter
 
     @State var beans = BeanModel(name: "",
@@ -28,6 +29,7 @@ struct NewBeansView: View {
                                  roastedOn: Date(),
                                  boughtOn: Date(),
                                  notes: "",
+                                 beanType: "beans",
                                  image: UIImage())
 
     @State private var isImageSelected = false
@@ -37,10 +39,12 @@ struct NewBeansView: View {
     @FocusState private var focusField: Field?
 
     var isEdit = false
-    
+
+    let beanTypes = ["pods", "beans", "grounds"]
+
     var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 20) {
+        ScrollView {
+            VStack(alignment: .leading, spacing: Design.base*2) {
                 Section("Bean Information") {
                     HStack(spacing: 10) {
                         Button {
@@ -61,64 +65,81 @@ struct NewBeansView: View {
                             }
                         } label: {
                             if isImageSelected {
-                                Image(uiImage: beans.image)
+                                Image(uiImage: beanOO.coffee.image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100, height: 100, alignment: .center)
+                                    .frame(width: Design.base*10, height: Design.base*10, alignment: .center)
                             } else {
                                 Image(systemName: SFSymbols.photo)
                                     .font(.system(size: 75))
                             }
                         }
                         VStack {
-                            TextField("Name", text: $beans.name)
+                            TextField("Name", text: $beanOO.coffee.name)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusField, equals: .name)
-                            TextField("Style", text: $beans.style)
+                            TextField("Style", text: $beanOO.coffee.style)
                                 .textFieldStyle(.roundedBorder)
                                 .focused($focusField, equals: .style)
                         }
                     }
+                    VStack(alignment: .leading) {
+                        Text("Bean Type")
+                        Picker("Bean Type", selection: $beanOO.coffee.beanType) {
+                            ForEach(beanTypes, id: \.self) { type in
+                                Text(type.capitalized)
+                            }
+                        }.pickerStyle(.segmented)
+                            .padding(.bottom, Design.base*2)
+                    }
                 }
                 Section("Roaster Information") {
                     DatePicker("Roasted On",
-                               selection: $beans.roastedOn,
+                               selection: $beanOO.coffee.roastedOn,
                                displayedComponents: .date)
-                    TextField("Roaster", text: $beans.roaster)
+                    TextField("Roaster", text: $beanOO.coffee.roaster)
                         .textFieldStyle(.roundedBorder)
                         .focused($focusField, equals: .roaster)
+                        .padding(.bottom, Design.base*2)
                 }
                 Section("Purchase Information") {
                     DatePicker("Purchased on",
-                               selection: $beans.boughtOn,
+                               selection: $beanOO.coffee.boughtOn,
                                displayedComponents: .date)
-                    HStack {
-                        Text("Would buy again?")
-                        Spacer()
+                    if isEdit {
                         HStack {
-                            Button("Yes") {
-                                beans.buyAgain = true
-                            }.padding()
-                                .foregroundColor(beans.buyAgain == false ? Color.accentColor : Color.primary)
-                                .background(beans.buyAgain == true ? Color.accentColor : Color.clear)
-                                .cornerRadius(5)
-                            Button("No") {
-                                beans.buyAgain = false
-                            }.padding()
-                                .foregroundColor(beans.buyAgain == true ? Color.accentColor : Color.primary)
-                                .background(beans.buyAgain == false ? Color.accentColor : Color.clear)
-                                .cornerRadius(5)
+                            Text("Would buy again?")
+                            Spacer()
+                            HStack {
+                                Button("Yes") {
+                                    beanOO.coffee.buyAgain = true
+                                }.padding()
+                                    .foregroundColor(beanOO.yesButtonFGColor)
+                                    .background(beanOO.yesButtonBGColor)
+                                    .cornerRadius(5)
+                                Button("No") {
+                                    beanOO.coffee.buyAgain = false
+                                }.padding()
+                                    .foregroundColor(beanOO.noButtonFGColor)
+                                    .background(beanOO.noButtonBGColor)
+                                    .cornerRadius(5)
+                            }
                         }
                     }
                 }
-                HStack{
+                Section("Notes") {
+                    TextEditor(text: $beanOO.coffee.notes)
+                        .frame(height: 100.0)
+                        .cornerRadius(10)
+                }
+                HStack {
                     if isEdit {
                         Spacer()
                         Button {
                             dismiss()
                         } label: {
                             Text("Cancel")
-                                .frame(width: 100, height: 20, alignment: .center)
+                                .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
                         }.buttonStyle(BorderedButtonStyle())
                             .background(Color.red)
                             .cornerRadius(5)
@@ -126,18 +147,18 @@ struct NewBeansView: View {
                     }
                     Spacer()
                     Button {
-                        if beans.name.isEmpty {
+                        if beanOO.coffee.name.isEmpty {
                             focusField = .name
-                        } else if beans.style.isEmpty {
+                        } else if beanOO.coffee.style.isEmpty {
                             focusField = .style
-                        } else if beans.roaster.isEmpty {
+                        } else if beanOO.coffee.roaster.isEmpty {
                             focusField = .roaster
                         } else {
                             if isEdit {
-                                beans.updateBean(context: viewContext)
+                                beanOO.coffee.updateBean(context: viewContext)
                                 dismiss()
                             } else {
-                                beans.addBeansToData(context: viewContext)
+                                beanOO.coffee.addBeansToData(context: viewContext)
                                 navRouter.currentPage = .coffees
                                 resetBeans()
                             }
@@ -146,7 +167,7 @@ struct NewBeansView: View {
 
                     } label: {
                         Text("Save")
-                            .frame(width: 100, height: 20, alignment: .center)
+                            .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
                     }.buttonStyle(BorderedButtonStyle())
                         .background(Color.green)
                         .cornerRadius(5)
@@ -155,20 +176,26 @@ struct NewBeansView: View {
                 }
 
             }.padding()
-            Spacer()
+
+            HStack {
+                Spacer()
+                    .frame(height: Design.base*13)
+            }
+
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
-            ImagePicker(selectedImage: $beans.image, isImageSelected: $isImageSelected)
+            ImagePicker(selectedImage: $beanOO.coffee.image, isImageSelected: $isImageSelected)
         }
     }
 
     func resetBeans() {
-        beans = BeanModel(name: "",
+        beanOO.coffee = BeanModel(name: "",
                           style: "",
                           buyAgain: false,
                           roaster: "",
                           roastedOn: Date(),
                           boughtOn: Date(),
                           notes: "",
+                          beanType: "",
                           image: UIImage())
     }
 }

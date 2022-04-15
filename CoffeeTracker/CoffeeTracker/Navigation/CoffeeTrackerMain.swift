@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct CoffeeTrackerMain: View {
+    @AppStorage("showNewView") var showNewView: Bool = true
+    @AppStorage("lastSeenVersion") var version: String = "1.0"
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @StateObject var navRouter: NavigationRouter
 
     @State private var showButtons = false
+    @StateObject var beanOO = NewBeanOO(bean: nil)
+
+    var plusRotation: Double {
+        return navRouter.currentPage == .newBeans ? 45 : 0
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -23,11 +31,30 @@ struct CoffeeTrackerMain: View {
                 VStack {
                     switch navRouter.currentPage {
                     case .coffees:
-                        BeansCollectionView()
+                        CoffeeListView()
+                            .popover(isPresented: $showNewView) {
+                                WhatsNewView()
+                                    .onDisappear {
+                                        showNewView = false
+                                    }
+                            }
                     case .info:
                         AboutView()
                     case .newBeans:
                         NewBeansView(navRouter: navRouter)
+                            .environmentObject(beanOO)
+                    }
+                }.onAppear {
+                    let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                    guard let currentVersion = currentVersion else {
+                        return
+                    }
+                    if currentVersion != version {
+                        showNewView = true
+                        version = currentVersion
+                    } else {
+                        showNewView = false
+                        version = currentVersion
                     }
                 }
                 HStack(alignment: .bottom) {
@@ -52,7 +79,7 @@ struct CoffeeTrackerMain: View {
                                                     .frame(width: geometry.size.width/7, height: geometry.size.width/7))
                                                 .padding(12)
                                                 .shadow(radius: 8, x: 4, y: 4)
-                                                .rotationEffect(Angle.degrees(navRouter.currentPage == .newBeans ? 45 : 0))
+                                                .rotationEffect(Angle.degrees(plusRotation))
                                         }.padding(20)
                                         .tint(.white)
                     }
@@ -70,34 +97,6 @@ struct CoffeeTrackerMain: View {
             .edgesIgnoringSafeArea(.bottom)
             .padding(.horizontal, -4)
         }
-//        ZStack(alignment: .bottom) {
-//            Image("Background")
-//                .resizable()
-//                .ignoresSafeArea()
-//            switch navRouter.currentPage {
-//            case .coffees:
-//                BeansCollectionView()
-//            case .info:
-//                AboutView()
-//            }
-//            TabBarView()
-//            if showButtons {
-//                NewBeansView(showForm: $showButtons)
-//                    .opacity(showButtons ? 1 : 0)
-//            }
-//            Button(action: {showButtons.toggle()}) {
-//                Image(systemName: SFSymbols.plus)
-//                    .font(.largeTitle)
-//                    .background(Circle()
-//                        .fill(showButtons ? Color.red : Color.sage)
-//                        .frame(width: 60, height: 60))
-//                    .padding(12)
-//                    .shadow(radius: 8, x: 4, y: 4)
-//                    .rotationEffect(Angle.degrees(showButtons ? 45 : 0))
-//            }.padding(20)
-//            .tint(.white)
-//        }
-//        .animation(.default, value: showButtons)
     }
 }
 

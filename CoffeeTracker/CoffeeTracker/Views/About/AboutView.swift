@@ -12,6 +12,7 @@ struct AboutView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var showingSheet = false
     @State private var showFeedback = false
+    @State private var showingWhatsNew = false
 
     var body: some View {
         ZStack {
@@ -41,6 +42,21 @@ struct AboutView: View {
                     }.sheet(isPresented: $showFeedback) {
                         UserFeedbackView()
                     }
+                    Button {
+                        showingWhatsNew = true
+                    } label: {
+                        HStack(spacing: 15) {
+                            Image(systemName: SFSymbols.star)
+                                .foregroundColor(.pink)
+                                .font(.system(size: 36))
+                            Text("Release Notes")
+                                .foregroundColor(.primary)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                            .row().padding()
+
+                    }.sheet(isPresented: $showingWhatsNew) {
+                        WhatsNewView()
+                    }
 
                     HStack {
                         Spacer()
@@ -68,7 +84,6 @@ struct AboutView: View {
         }
     }
 }
-
 
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {

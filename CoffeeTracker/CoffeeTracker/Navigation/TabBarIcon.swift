@@ -17,6 +17,24 @@ struct TabBarIcon: View {
     let width, height: CGFloat
     let systemIcon, tabName: String
 
+    /// Foreground color in light mode
+    var lightFGColor: Color {
+        if assignedPage == navRouter.currentPage {
+            return .indigo
+        } else {
+            return .secondary
+        }
+    }
+
+    /// Foreground color in dark mode
+    var darkFGColor: Color {
+        if assignedPage == navRouter.currentPage {
+            return Color.cyan
+        } else {
+            return Color.secondary
+        }
+    }
+
     var body: some View {
         VStack {
             Image(systemName: systemIcon)
@@ -27,7 +45,7 @@ struct TabBarIcon: View {
             Text(tabName)
                 .font(.footnote)
             Spacer()
-        }.foregroundColor(colorScheme == .light ? assignedPage == navRouter.currentPage ? Color.indigo : Color.secondary : assignedPage == navRouter.currentPage ? Color.cyan : Color.secondary)
+        }.foregroundColor(colorScheme == .light ? lightFGColor : darkFGColor)
             .onTapGesture {
             navRouter.currentPage = assignedPage
         }
@@ -36,6 +54,11 @@ struct TabBarIcon: View {
 
 struct TabBarIcon_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarIcon(navRouter: NavigationRouter(), assignedPage: .coffees, width: 100, height: 100, systemIcon: SFSymbols.list, tabName: "Coffee")
+        TabBarIcon(navRouter: NavigationRouter(),
+                   assignedPage: .coffees,
+                   width: 100,
+                   height: 100,
+                   systemIcon: SFSymbols.list,
+                   tabName: "Coffee")
     }
 }

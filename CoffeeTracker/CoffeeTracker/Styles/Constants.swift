@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import CoreGraphics
 
 enum APIKeys {
     static let revenueCat = "appl_hDVVtfzcSvbjYhGHLdgrltgZTIX"
+}
+
+enum Design {
+    static let base: CGFloat = 10
 }

@@ -70,10 +70,12 @@ struct CoffeeTrackerMain: View {
                                tabName: "Coffee")
                     ZStack {
                         Button {
-                            if navRouter.currentPage == .newBeans {
-                                navRouter.currentPage = .coffees
-                            } else {
-                                navRouter.currentPage = .newBeans
+                            withAnimation {
+                                if navRouter.currentPage == .newBeans {
+                                    navRouter.currentPage = .coffees
+                                } else {
+                                    navRouter.currentPage = .newBeans
+                                }
                             }
                         } label: {
                             Image(systemName: SFSymbols.plus)

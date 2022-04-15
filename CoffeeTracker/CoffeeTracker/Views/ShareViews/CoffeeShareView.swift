@@ -17,37 +17,37 @@ struct CoffeeShareView: View {
 
     var coffee: BeanModel
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text("Share \(coffee.name)")
-                .font(.largeTitle)
-                .bold()
-
-        // View to share
-            CoffeeShareImageView(showBoughtDate: $showBoughtDate,
-                                 showRoastedDate: $showRoastedDate,
-                                 showNotes: $showNotes,
-                                 coffee: coffee)
-            .padding()
-            Spacer()
-            Group {
-                Text("The options to adjust view will go here")
-            }
-            Button {
-                let image = CoffeeShareImageView(showBoughtDate: $showBoughtDate,
-                                                 showRoastedDate: $showRoastedDate,
-                                                 showNotes: $showNotes,
-                                                 coffee: coffee).snapshot()
-                shareImage.append(image)
-                showingShare.toggle()
-            } label: {
-                Image(systemName: SFSymbols.share)
-                Text("Share")
-            }
-        }.sheet(isPresented: $showingShare) {
-            ActivityView(activityItems: shareImage, applicationActivities: nil)
-                .onDisappear {
-                    shareImage = []
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                // View to share
+                    CoffeeShareImageView(showBoughtDate: $showBoughtDate,
+                                         showRoastedDate: $showRoastedDate,
+                                         showNotes: $showNotes,
+                                         coffee: coffee)
+                    .padding()
+                    Group {
+                        Text("The options to adjust view will go here")
+                    }
+                    Button {
+                        let image = CoffeeShareImageView(showBoughtDate: $showBoughtDate,
+                                                         showRoastedDate: $showRoastedDate,
+                                                         showNotes: $showNotes,
+                                                         coffee: coffee).snapshot()
+                        shareImage.append(image)
+                        showingShare.toggle()
+                    } label: {
+                        Image(systemName: SFSymbols.share)
+                        Text("Share")
+                    }
                 }
+            }.navigationTitle(Text("Share \(coffee.name)"))
+                .sheet(isPresented: $showingShare) {
+                ActivityView(activityItems: shareImage, applicationActivities: nil)
+                    .onDisappear {
+                        shareImage = []
+                    }
+            }
         }
     }
 }

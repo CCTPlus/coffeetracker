@@ -22,6 +22,10 @@ struct CoffeeTrackerMain: View {
         return navRouter.currentPage == .newBeans ? 45 : 0
     }
 
+    var addButtonColor: Color {
+        return navRouter.currentPage == .newBeans ? Color.red : Color.accentColor
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
@@ -72,18 +76,19 @@ struct CoffeeTrackerMain: View {
                                 navRouter.currentPage = .newBeans
                             }
                         } label: {
-                                            Image(systemName: SFSymbols.plus)
-                                                .font(.largeTitle)
-                                                .background(Circle()
-                                                    .fill(navRouter.currentPage == .newBeans ? Color.red : Color.sage)
-                                                    .frame(width: geometry.size.width/7, height: geometry.size.width/7))
-                                                .padding(12)
-                                                .shadow(radius: 8, x: 4, y: 4)
-                                                .rotationEffect(Angle.degrees(plusRotation))
-                                        }.padding(20)
-                                        .tint(.white)
+                            Image(systemName: SFSymbols.plus)
+                                .font(.largeTitle)
+                                .foregroundColor(.bone)
+                                .background(Circle()
+                                    .fill(addButtonColor)
+                                    .frame(width: geometry.size.width/7, height: geometry.size.width/7))
+                                .padding(12)
+                                .shadow(radius: 8, x: 4, y: 4)
+                                .rotationEffect(Angle.degrees(plusRotation))
+                        }.padding(20)
+                            .tint(.white)
                     }
-                                    .offset(y: -geometry.size.height/8/2)
+                    .offset(y: -geometry.size.height/8/2)
                     TabBarIcon(navRouter: navRouter,
                                assignedPage: .info,
                                width: geometry.size.width/5,

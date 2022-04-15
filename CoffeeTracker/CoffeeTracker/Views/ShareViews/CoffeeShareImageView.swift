@@ -112,7 +112,7 @@ struct CoffeeShareImageView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20, height: 20, alignment: .center)
-                    }.foregroundColor(.gray)
+                    }.opacity(0.5)
                 }
             }.padding(.all, Design.base/2)
         }

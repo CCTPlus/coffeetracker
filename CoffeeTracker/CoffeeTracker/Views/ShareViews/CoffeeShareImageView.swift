@@ -11,10 +11,11 @@ struct CoffeeShareImageView: View {
     @Binding var showBoughtDate: Bool
     @Binding var showRoastedDate: Bool
     @Binding var showNotes: Bool
+    @Binding var showWatermark: Bool
 
     var coffee: BeanModel
     var body: some View {
-        VStack(spacing: 10) {
+        VStack {
             HStack(alignment: .top, spacing: Design.base*2) {
                 Image(uiImage: coffee.image)
                     .resizable()
@@ -102,9 +103,26 @@ struct CoffeeShareImageView: View {
                         }
                     }
                 }
+                if showWatermark {
+                    HStack {
+                        Spacer()
+                        Text("Made with coffee_")
+                            .font(.footnote)
+                        Image("Launch")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20, alignment: .center)
+                    }.foregroundColor(.gray)
+                }
             }.padding(.all, Design.base/2)
-        }.padding(.bottom)
+        }
+            .frame(maxWidth: .infinity, alignment: .center)
         .row()
+        .background(Image("Background")
+                .resizable()
+                .ignoresSafeArea()
+                .cornerRadius(10))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -113,6 +131,7 @@ struct CoffeeShareImageView_Previews: PreviewProvider {
         CoffeeShareImageView(showBoughtDate: .constant(true),
                              showRoastedDate: .constant(true),
                              showNotes: .constant(true),
+                             showWatermark: .constant(true),
                              coffee: testRoast)
             .padding()
     }

@@ -45,6 +45,9 @@ struct CoffeeShareView: View {
             }
         }.sheet(isPresented: $showingShare) {
             ActivityView(activityItems: shareImage, applicationActivities: nil)
+                .onDisappear {
+                    shareImage = []
+                }
         }
     }
 }

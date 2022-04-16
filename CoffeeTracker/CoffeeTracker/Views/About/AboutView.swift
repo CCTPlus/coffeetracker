@@ -74,7 +74,6 @@ struct AboutView: View {
                             .padding(.leading)
                         Spacer()
                     }
-                    .frame(height: geometry.safeAreaInsets.top+80)
                     .background(.ultraThinMaterial)
                     .cornerRadius(10, corners: .bottomLeft)
                     .cornerRadius(10, corners: .bottomRight)

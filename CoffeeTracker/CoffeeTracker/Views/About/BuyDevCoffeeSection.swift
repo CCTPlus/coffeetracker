@@ -34,8 +34,8 @@ struct BuyDevCoffeeSection: View {
                     .font(.headline)
             }
             Button {
-                Purchases.shared.purchase(package: package!) { transaction, _, _, _ in
-                    if transaction != nil {
+                Purchases.shared.purchase(package: package!) { _, _, error, userCancelled in
+                    if error == nil && userCancelled == false {
                         cupsPurchased += 1
                     }
                 }

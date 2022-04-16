@@ -18,12 +18,7 @@ struct CoffeeListView: View {
     let beanTypes = ["all", "pods", "beans", "grounds"]
 
     var body: some View {
-        ZStack(alignment: .top) {
             ScrollView {
-                HStack {
-                    Spacer()
-                        .frame(height: Design.base*10)
-                }
                 if beanTypeFilter == "all" {
                     ForEach(beansOO.beans, id: \.self) { bean in
                         BeanRowView(oo: BeanRowViewOO(bean: bean))
@@ -37,46 +32,38 @@ struct CoffeeListView: View {
                             .padding(.horizontal)
                     }
                 }
-                HStack {
-                    Spacer()
-                        .frame(height: Design.base*12)
-                }
-            }
-            Group {
-                GeometryReader { geometry in
-                    VStack(spacing: 0) {
-                        HStack(alignment: .bottom) {
-                            Text("Coffee")
-                                .font(.largeTitle)
-                                .bold()
-                                .padding(.leading)
-                            Spacer().padding(.top, Design.base*8)
-                        }
-                        Picker("Bean Type", selection: $beanTypeFilter) {
-                            ForEach(beanTypes, id: \.self) { type in
-                                Text(type.capitalized)
-                            }
-                        }.pickerStyle(.segmented)
-                            .padding(.all, Design.base*2)
+            } .safeAreaInset(edge: .top) {
+                VStack(alignment: .center, spacing: 8) {
+                    HStack {
+                        Text("Coffee")
+                            .font(.largeTitle.weight(.bold))
+                        Spacer()
                     }
-                    .frame(height: geometry.safeAreaInsets.top+Design.base*10)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(Design.base, corners: .bottomLeft)
-                    .cornerRadius(Design.base, corners: .bottomRight)
-                    .edgesIgnoringSafeArea(.top)
+                    Picker("Bean Type", selection: $beanTypeFilter) {
+                        ForEach(beanTypes, id: \.self) { type in
+                            Text(type.capitalized)
+                        }
+                    }.pickerStyle(.segmented)
                 }
-            }.shadow(radius: Design.base*2)
-        }
+                .padding()
+                .background(.ultraThinMaterial)
+            }
+            .navigationBarHidden(true)
     }
 }
 
 struct BeansCollectionView_Previews: PreviewProvider {
+
     static var previews: some View {
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
-            CoffeeListView()
-        }.preferredColorScheme(.dark)
+        let context = PersistenceController.shared.container.viewContext
+        NavigationView {
+            ZStack {
+                Image("Background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                CoffeeListView()
+                    .environmentObject(BeansCollectionViewOO(context: context))
+            }
+        }
     }
 }

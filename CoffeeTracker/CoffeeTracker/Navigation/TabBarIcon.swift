@@ -29,7 +29,9 @@ struct TabBarIcon: View {
             Spacer()
         }.foregroundColor(assignedPage == navRouter.currentPage ? .accentColor : .secondary)
             .onTapGesture {
-            navRouter.currentPage = assignedPage
+                withAnimation {
+                    navRouter.currentPage = assignedPage
+                }
         }
     }
 }

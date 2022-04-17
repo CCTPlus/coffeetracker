@@ -20,7 +20,7 @@ struct CoffeeShareView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading) {
                     // View to share
                     CoffeeShareImageView(showBoughtDate: $showBoughtDate,
                                          showRoastedDate: $showRoastedDate,
@@ -28,7 +28,6 @@ struct CoffeeShareView: View {
                                          showWatermark: $showWatermark,
                                          coffee: coffee)
                     .padding()
-
                     Button {
                         let image = CoffeeShareImageView(showBoughtDate: $showBoughtDate,
                                                          showRoastedDate: $showRoastedDate,

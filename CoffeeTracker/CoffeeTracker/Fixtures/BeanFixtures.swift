@@ -34,7 +34,7 @@ var testRoast = BeanModel(name: "Swiftly Brewed",
                           roaster: "Apple Inc",
                           roastedOn: Date.now,
                           boughtOn: Date.now,
-                          notes: "Sold in Maegan's hopes and dreams",
+                          notes: "Sold in Maegan's hopes and dreams. Single origin \n- Costa Rica",
                           beanType: "pods",
                           image: UIImage(systemName: SFSymbols.photo)!)
 

@@ -21,7 +21,9 @@ struct CoffeeShareImageView: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(Design.base)
-                    .frame(maxWidth: Design.base*10, maxHeight: Design.base*10, alignment: .top)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(.black.opacity(0.5), lineWidth: 0.5))
+                    .frame(maxWidth: Design.base*10, maxHeight: Design.base*10, alignment: .topLeading)
                 VStack(alignment: .leading, spacing: Design.base/2) {
                     HStack(alignment: .top) {
                         VStack(alignment: .leading) {
@@ -59,8 +61,7 @@ struct CoffeeShareImageView: View {
                         }
                     }
                 }
-            }.padding(.horizontal, Design.base).padding(.top, Design.base)
-                .padding(.bottom, Design.base)
+            }
             Group {
                 if showBoughtDate {
                     HStack {
@@ -100,6 +101,7 @@ struct CoffeeShareImageView: View {
                             }
                             Text(coffee.notes)
                                 .lineLimit(nil)
+                                .multilineTextAlignment(.leading)
                         }
                     }
                 }
@@ -116,13 +118,10 @@ struct CoffeeShareImageView: View {
                 }
             }.padding(.all, Design.base/2)
         }
-            .frame(maxWidth: .infinity, alignment: .center)
-        .row()
+            .padding(.all)
+            .border(Color.black.opacity(0.5), width: 0.5)
         .background(Image("Background")
-                .resizable()
-                .ignoresSafeArea()
-                .cornerRadius(10))
-        .edgesIgnoringSafeArea(.all)
+                .resizable())
     }
 }
 

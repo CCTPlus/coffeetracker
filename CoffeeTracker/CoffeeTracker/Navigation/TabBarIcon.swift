@@ -45,9 +45,11 @@ struct TabBarIcon: View {
             Text(tabName)
                 .font(.footnote)
             Spacer()
-        }.foregroundColor(colorScheme == .light ? lightFGColor : darkFGColor)
+        }.foregroundColor(assignedPage == navRouter.currentPage ? .accentColor : .secondary)
             .onTapGesture {
-            navRouter.currentPage = assignedPage
+                withAnimation {
+                    navRouter.currentPage = assignedPage
+                }
         }
     }
 }

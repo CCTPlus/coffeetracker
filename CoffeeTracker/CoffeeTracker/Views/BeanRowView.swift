@@ -29,6 +29,8 @@ struct BeanRowView: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(Design.base)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(.black.opacity(0.5), lineWidth: 0.5))
                     .frame(maxWidth: Design.base*10)
                 VStack(alignment: .leading, spacing: Design.base/2) {
                     HStack(alignment: .top) {

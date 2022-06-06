@@ -53,7 +53,6 @@ struct CoffeeListView: View {
 }
 
 struct BeansCollectionView_Previews: PreviewProvider {
-
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
         NavigationView {

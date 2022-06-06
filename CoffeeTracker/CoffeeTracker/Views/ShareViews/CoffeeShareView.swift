@@ -28,6 +28,7 @@ struct CoffeeShareView: View {
                                          showWatermark: $showWatermark,
                                          coffee: coffee)
                     .padding()
+
                     Button {
                         let image = CoffeeShareImageView(showBoughtDate: $showBoughtDate,
                                                          showRoastedDate: $showRoastedDate,

@@ -17,6 +17,24 @@ struct TabBarIcon: View {
     let width, height: CGFloat
     let systemIcon, tabName: String
 
+    /// Foreground color in light mode
+    var lightFGColor: Color {
+        if assignedPage == navRouter.currentPage {
+            return .indigo
+        } else {
+            return .secondary
+        }
+    }
+
+    /// Foreground color in dark mode
+    var darkFGColor: Color {
+        if assignedPage == navRouter.currentPage {
+            return Color.cyan
+        } else {
+            return Color.secondary
+        }
+    }
+
     var body: some View {
         VStack {
             Image(systemName: systemIcon)

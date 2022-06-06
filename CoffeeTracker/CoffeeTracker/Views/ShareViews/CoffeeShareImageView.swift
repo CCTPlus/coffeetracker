@@ -102,6 +102,7 @@ struct CoffeeShareImageView: View {
                             Text(coffee.notes)
                                 .lineLimit(nil)
                                 .multilineTextAlignment(.leading)
+
                         }
                     }
                 }

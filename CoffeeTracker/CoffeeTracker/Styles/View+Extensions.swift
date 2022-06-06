@@ -33,7 +33,7 @@ extension View {
     }
 
     func asImage() -> UIImage {
-        let controller = UIHostingController(rootView: self)
+        let controller = UIHostingController(rootView: self.edgesIgnoringSafeArea(.all))
         // locate far out of screen
         controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
         UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)

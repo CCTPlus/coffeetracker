@@ -15,3 +15,7 @@ enum APIKeys {
 enum Design {
     static let base: CGFloat = 10
 }
+
+enum ASKeys {
+    static let timesLaunched = "timesLaunched"
+}

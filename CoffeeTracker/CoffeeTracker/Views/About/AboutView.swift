@@ -19,6 +19,20 @@ struct AboutView: View {
             BuyDevCoffeeSection().padding()
             ShareApp().padding()
             Button {
+                guard let writeReviewURL = URL(string: "https://apps.apple.com/us/app/coffee/id1611166034?action=write-review")
+                        else { fatalError("Expected a valid URL") }
+                UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+            } label: {
+                HStack(spacing: 15) {
+                    Image(systemName: SFSymbols.starLeadingHalfFilled)
+                        .foregroundColor(.pink)
+                        .font(.system(size: 36))
+                    Text("Leave Review")
+                        .foregroundColor(.primary)
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .row().padding()
+            }
+            Button {
                 showFeedback = true
             } label: {
                 HStack(spacing: 15) {

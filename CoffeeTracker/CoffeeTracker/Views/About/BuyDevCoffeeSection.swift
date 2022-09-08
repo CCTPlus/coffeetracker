@@ -22,7 +22,9 @@ struct BuyDevCoffeeSection: View {
     }
 
     let darkBlue = Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0)
-    let formatter = FloatingPointFormatStyle<Double>.Currency.currency(code: Locale.current.currencyCode ?? "USD")
+    let formatter = FloatingPointFormatStyle<Double>
+        .Currency
+        .currency(code: Locale.current.currency?.identifier ?? "USD")
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -93,7 +95,7 @@ struct BuyDevCoffeeSection: View {
                 return
             }
 
-            for transaction in customerInfo.nonSubscriptionTransactions {
+            for transaction in customerInfo.nonSubscriptions {
                 print(transaction.productIdentifier)
                 if package?.storeProduct.productIdentifier == transaction.productIdentifier {
                     cupsPurchased += 1

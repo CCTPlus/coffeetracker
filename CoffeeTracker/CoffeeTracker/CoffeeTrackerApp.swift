@@ -22,7 +22,11 @@ struct CoffeeTrackerApp: App {
 
     init() {
         Purchases.configure(withAPIKey: APIKeys.revenueCat)
+        #if DEBUG
         Purchases.logLevel = .debug
+        #else
+        Purchases.logLevel = .info
+        #endif
     }
 
     var body: some Scene {

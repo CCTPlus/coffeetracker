@@ -1,6 +1,6 @@
 # Main workflow to build project
 name: Danger
-on: [pull_request, workflow_dispatch]
+on: [workflow_dispatch, pull_request]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"

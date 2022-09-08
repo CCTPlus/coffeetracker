@@ -17,7 +17,7 @@ jobs:
         with:
           xcode-version: latest-stable
       - name: Run tests
-        run: xcodebuild test -scheme CoffeeTracker -project CoffeeTracker/CoffeeTracker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 13,OS=15.5'
+        run: xcodebuild test -scheme CoffeeTracker -project CoffeeTracker/CoffeeTracker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.0'
       - name: Danger
         run: danger-swift ci
         env:

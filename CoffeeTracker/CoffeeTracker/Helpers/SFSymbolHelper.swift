@@ -22,5 +22,6 @@ enum SFSymbols {
     static let info = "info.circle"
     static let rectRoundedBottom = "rectangle.roundedbottom"
     static let star = "star"
+    static let starLeadingHalfFilled = "star.leadinghalf.filled"
     static let ladybug = "ladybug"
 }

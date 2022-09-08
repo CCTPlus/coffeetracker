@@ -21,7 +21,7 @@ struct CoffeeTrackerMain: View {
     var plusRotation: Double {
         return navRouter.currentPage == .newBeans ? 45 : 0
     }
-  
+
     var addButtonColor: Color {
         return navRouter.currentPage == .newBeans ? Color.red : Color.accentColor
     }

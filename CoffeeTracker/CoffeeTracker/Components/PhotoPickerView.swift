@@ -58,15 +58,13 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
 
         private func loadImage() {
-            for itemProvider in parent.itemProviders {
-                if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                        if let image = image as? UIImage {
-                            self.parent.selectedImage = image
-                            self.parent.isImageSelected = true
-                        } else {
-                            print("Could not load image", error?.localizedDescription ?? "")
-                        }
+            for itemProvider in parent.itemProviders.filter({ $0.canLoadObject(ofClass: UIImage.self)}) {
+                itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                    if let image = image as? UIImage {
+                        self.parent.selectedImage = image
+                        self.parent.isImageSelected = true
+                    } else {
+                        print("Could not load image", error?.localizedDescription ?? "")
                     }
                 }
             }

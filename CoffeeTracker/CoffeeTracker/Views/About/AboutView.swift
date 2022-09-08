@@ -19,7 +19,7 @@ struct AboutView: View {
             BuyDevCoffeeSection().padding()
             ShareApp().padding()
             Button {
-                guard let writeReviewURL = URL(string: "https://apps.apple.com/us/app/coffee/id1611166034?action=write-review")
+                guard let writeReviewURL = URL(string: Urls.review)
                         else { fatalError("Expected a valid URL") }
                 UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
             } label: {

@@ -19,3 +19,7 @@ enum Design {
 enum ASKeys {
     static let timesLaunched = "timesLaunched"
 }
+
+enum Urls {
+    static let review = "https://apps.apple.com/us/app/coffee/id1611166034?action=write-review"
+}

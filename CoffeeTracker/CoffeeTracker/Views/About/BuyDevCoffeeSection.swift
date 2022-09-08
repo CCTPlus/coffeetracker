@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RevenueCat
+import StoreKit
 
 struct BuyDevCoffeeSection: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -14,15 +15,25 @@ struct BuyDevCoffeeSection: View {
     @State private var package: Package?
     @State private var cupsPurchased = 0
 
-    var amount: Double {
+    var price: String {
         guard let package = package else {
-            return 0.0
+            return "not available"
         }
-        return Double(cupsPurchased) * Double(truncating: package.storeProduct.priceDecimalNumber)
+        return package.storeProduct.localizedPriceString
+    }
+
+    var amount: String {
+        guard let package = package else {
+            return "0.0"
+        }
+        let total = Double(cupsPurchased) * Double(truncating: package.storeProduct.priceDecimalNumber)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        return formatter.string(from: total as NSNumber)!
     }
 
     let darkBlue = Color(red: 97.0/255.0, green: 176.0/255.0, blue: 1.0)
-    let formatter = FloatingPointFormatStyle<Double>.Currency.currency(code: Locale.current.currency?.identifier ?? "USD")
 
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
@@ -48,7 +59,7 @@ struct BuyDevCoffeeSection: View {
                     .background(Color.green.opacity(0.60))
                     .cornerRadius(10)
             }
-            Text("Coffee is \(getPackagePrice(package)) a cup")
+            Text("Coffee is \(price) a cup")
                 .font(.caption2)
                 .foregroundColor(.secondary)
 
@@ -62,7 +73,7 @@ struct BuyDevCoffeeSection: View {
                 Text("Amount")
                     .font(.headline)
                 Spacer()
-                Text(amount, format: formatter)
+                Text(amount)
             }
         }.background(Color.clear)
         .padding()

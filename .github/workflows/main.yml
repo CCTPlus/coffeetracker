@@ -6,13 +6,17 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: macos-12
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - name: Install Danger
         run: brew install danger/tap/danger-swift
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_13.0.app && /usr/bin/xcodebuild -version
+      - name: Run tests
+        run: xcodebuild test -scheme CoffeeTracker -project CoffeeTracker/CoffeeTracker.xcodeproj
       - name: Danger
         run: danger-swift ci
         env:

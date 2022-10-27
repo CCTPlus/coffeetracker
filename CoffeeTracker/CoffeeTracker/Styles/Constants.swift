@@ -11,6 +11,7 @@ import CoreGraphics
 enum APIKeys {
     static let revenueCat = ProcessInfo.processInfo.environment["RevenueCatKey"] ?? ""
     static let gitHubKey = ProcessInfo.processInfo.environment["GitHubAPI"] ?? ""
+    static let posthogKey = ProcessInfo.processInfo.environment["PostHogKey"] ?? ""
 }
 
 enum Design {

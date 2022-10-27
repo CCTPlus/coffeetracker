@@ -15,4 +15,4 @@ jobs:
         with:
           xcode-version: latest-stable
       - name: Run tests
-        run: xcodebuild test -scheme CoffeeTracker -project CoffeeTracker/CoffeeTracker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 13,OS=16.0'
+        run: xcodebuild test -scheme CoffeeTracker -project CoffeeTracker/CoffeeTracker.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.1' RevenueCatKey=${{secrets.RevenueCatAPI}} GitHubAPI=${{secrets.GitHubAPI}}

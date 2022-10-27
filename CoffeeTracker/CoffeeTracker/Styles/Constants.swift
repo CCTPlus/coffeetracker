@@ -9,7 +9,8 @@ import Foundation
 import CoreGraphics
 
 enum APIKeys {
-    static let revenueCat = "appl_hDVVtfzcSvbjYhGHLdgrltgZTIX"
+    static let revenueCat = ProcessInfo.processInfo.environment["RevenueCatKey"] ?? ""
+    static let gitHubKey = ProcessInfo.processInfo.environment["GitHubAPI"] ?? ""
 }
 
 enum Design {

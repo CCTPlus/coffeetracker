@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PostHog
 
 struct CoffeeTrackerMain: View {
     @AppStorage("showNewView") var showNewView: Bool = true
@@ -40,6 +41,9 @@ struct CoffeeTrackerMain: View {
                             CoffeeListView()
                                 .popover(isPresented: $showNewView) {
                                     WhatsNewView()
+                                        .onAppear {
+                                            Analytics.shared.captureWhatsNewView()
+                                        }
                                         .onDisappear {
                                             showNewView = false
                                         }
@@ -74,6 +78,7 @@ struct CoffeeTrackerMain: View {
                             Button {
                                 withAnimation {
                                     if navRouter.currentPage == .newBeans {
+                                        Analytics.shared.captureFormOpen()
                                         navRouter.currentPage = .coffees
                                     } else {
                                         navRouter.currentPage = .newBeans

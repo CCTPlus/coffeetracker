@@ -38,6 +38,7 @@ struct BeanModel: Identifiable, Hashable {
         do {
             try context.save()
             print("Bean saved correctly")
+            Analytics.shared.captureCoffeeSaved()
         } catch {
             print("Failed: \(error)")
         }

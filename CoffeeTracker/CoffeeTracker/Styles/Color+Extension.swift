@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
+    static let accentColor = Color("AccentColor")
     static let bone = Color("Bone")
     static let sage = Color("Sage")
 }

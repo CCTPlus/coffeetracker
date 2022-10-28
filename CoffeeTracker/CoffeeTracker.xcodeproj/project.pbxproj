@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3718A748290C2BE00069889F /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3718A747290C2BE00069889F /* UIDevice+Extensions.swift */; };
 		371A06BC28084C120035F16B /* CoffeeShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A06BB28084C120035F16B /* CoffeeShareView.swift */; };
 		371A06BF2808539A0035F16B /* CoffeeShareImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A06BE2808539A0035F16B /* CoffeeShareImageView.swift */; };
 		371E294F27C40D2100C8ACBF /* CoffeeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E294E27C40D2100C8ACBF /* CoffeeTrackerApp.swift */; };
@@ -36,6 +37,7 @@
 		379E1CBF27E8BF7C004101E0 /* ShareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1CBE27E8BF7C004101E0 /* ShareApp.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
 		37C0070F290AB55A00B09628 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 37C0070E290AB55A00B09628 /* PostHog */; };
+		37C00711290ABB5900B09628 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C00710290ABB5900B09628 /* Analytics.swift */; };
 		37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C9838327E4E4D4007C85E3 /* Constants.swift */; };
 		37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 37C9838627E4E5B8007C85E3 /* RevenueCat */; };
 		37CC7B0427FE7BEE008BE09D /* BeanRowOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC7B0327FE7BEE008BE09D /* BeanRowOO.swift */; };
@@ -57,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3718A747290C2BE00069889F /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		371A06BB28084C120035F16B /* CoffeeShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShareView.swift; sourceTree = "<group>"; };
 		371A06BE2808539A0035F16B /* CoffeeShareImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeShareImageView.swift; sourceTree = "<group>"; };
 		371E294B27C40D2100C8ACBF /* Coffee_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coffee_.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +90,7 @@
 		37B776A327C67A6B00EFD566 /* CoffeeTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoffeeTracker.entitlements; sourceTree = "<group>"; };
 		37B776A527C67A6F00EFD566 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		37B776A727C67A7800EFD566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		37C00710290ABB5900B09628 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		37C9838327E4E4D4007C85E3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		37CC7B0327FE7BEE008BE09D /* BeanRowOO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeanRowOO.swift; sourceTree = "<group>"; };
 		37CC7B0927FE9224008BE09D /* CoffeeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoffeeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +123,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3718A746290C2BCA0069889F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3718A747290C2BE00069889F /* UIDevice+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		371A06BD280853440035F16B /* ShareViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +162,7 @@
 		371E294D27C40D2100C8ACBF /* CoffeeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				3718A746290C2BCA0069889F /* Extensions */,
 				377D725027F1E15D00DA9320 /* ObservableObjects */,
 				377D724F27F1DE3A00DA9320 /* Models */,
 				377D724D27F1DD1000DA9320 /* Views */,
@@ -182,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				371E296B27C40F5E00C8ACBF /* SFSymbolHelper.swift */,
+				37C00710290ABB5900B09628 /* Analytics.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -433,6 +447,7 @@
 				371E295B27C40D2200C8ACBF /* CoffeeTracker.xcdatamodeld in Sources */,
 				3760713127EC0B6F007395C8 /* NavigationRouter.swift in Sources */,
 				37766A3428067736006489CE /* WhatsNewView.swift in Sources */,
+				37C00711290ABB5900B09628 /* Analytics.swift in Sources */,
 				3760713527EC10D2007395C8 /* TabBarIcon.swift in Sources */,
 				37CC7B0427FE7BEE008BE09D /* BeanRowOO.swift in Sources */,
 				371E296E27C40F9A00C8ACBF /* BeanDetailView.swift in Sources */,
@@ -442,6 +457,7 @@
 				371E296C27C40F5E00C8ACBF /* SFSymbolHelper.swift in Sources */,
 				3797E1C427D6A52F000FE457 /* View+Extensions.swift in Sources */,
 				371E294F27C40D2100C8ACBF /* CoffeeTrackerApp.swift in Sources */,
+				3718A748290C2BE00069889F /* UIDevice+Extensions.swift in Sources */,
 				371E297127C40FB300C8ACBF /* BeanFixtures.swift in Sources */,
 				371E297527C4100900C8ACBF /* NewBeansView.swift in Sources */,
 			);
@@ -470,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -531,6 +548,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

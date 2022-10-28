@@ -7,11 +7,19 @@
 
 import Foundation
 import CoreGraphics
+import UIKit
 
 enum APIKeys {
     static let revenueCat = ProcessInfo.processInfo.environment["RevenueCatKey"] ?? ""
     static let gitHubKey = ProcessInfo.processInfo.environment["GitHubAPI"] ?? ""
     static let posthogKey = ProcessInfo.processInfo.environment["PostHogKey"] ?? ""
+}
+
+enum AppInfo {
+    static let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "2022"
+    static let appBuild: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+    static let iosversion = UIDevice.current.systemVersion
+    static let device = UIDevice.current.localizedModel
 }
 
 enum Design {

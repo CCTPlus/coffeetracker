@@ -13,6 +13,7 @@
 import SwiftUI
 import RevenueCat
 import StoreKit
+import PostHog
 
 extension UIApplication {
     var foregroundActiveScene: UIWindowScene? {
@@ -30,6 +31,8 @@ struct CoffeeTrackerApp: App {
     @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
     @StateObject var navRouter = NavigationRouter()
 
+    let postHog: PHGPostHog
+
     init() {
         Purchases.configure(withAPIKey: APIKeys.revenueCat)
         #if DEBUG
@@ -37,11 +40,21 @@ struct CoffeeTrackerApp: App {
         #else
         Purchases.logLevel = .info
         #endif
+
+        let configuration = PHGPostHogConfiguration(apiKey: APIKeys.posthogKey)
+        configuration.captureInAppPurchases = true
+        configuration.recordScreenViews = false
+        configuration.captureApplicationLifecycleEvents = true
+        PHGPostHog.setup(with: configuration)
+
+        postHog = PHGPostHog.shared()!
+        postHog.identify(Purchases.shared.appUserID)
+
     }
 
     var body: some Scene {
         WindowGroup {
-            CoffeeTrackerMain(navRouter: navRouter)
+            CoffeeTrackerMain(navRouter: navRouter).tint(.accentColor)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(beansVM)
                 .task {

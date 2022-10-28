@@ -11,7 +11,7 @@ struct WhatsNewView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("What's new in v1.1")
+                Text("What's new in v1.3")
                     .font(.largeTitle)
                     .bold()
                 // Features
@@ -49,7 +49,7 @@ struct WhatsNewView: View {
                     }
                     HStack(alignment: .top) {
                         Text("\u{2022}")
-                        Text("Dev coffee cup counter now counts correctly")
+                        Text("Accent Color is now respected.")
                     }.padding(.bottom)
                 }.padding()
                 .row()

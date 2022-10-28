@@ -35,6 +35,7 @@
 		3797E1C627D6A6F3000FE457 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797E1C527D6A6F3000FE457 /* Color+Extension.swift */; };
 		379E1CBF27E8BF7C004101E0 /* ShareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E1CBE27E8BF7C004101E0 /* ShareApp.swift */; };
 		37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B776A527C67A6F00EFD566 /* CloudKit.framework */; };
+		37C0070F290AB55A00B09628 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = 37C0070E290AB55A00B09628 /* PostHog */; };
 		37C9838427E4E4D4007C85E3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C9838327E4E4D4007C85E3 /* Constants.swift */; };
 		37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 37C9838627E4E5B8007C85E3 /* RevenueCat */; };
 		37CC7B0427FE7BEE008BE09D /* BeanRowOO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC7B0327FE7BEE008BE09D /* BeanRowOO.swift */; };
@@ -104,6 +105,7 @@
 				3776B9DE27E8B32D0042C494 /* OctoKit in Frameworks */,
 				37C9838727E4E5B8007C85E3 /* RevenueCat in Frameworks */,
 				37B776A627C67A6F00EFD566 /* CloudKit.framework in Frameworks */,
+				37C0070F290AB55A00B09628 /* PostHog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +303,7 @@
 			packageProductDependencies = (
 				37C9838627E4E5B8007C85E3 /* RevenueCat */,
 				3776B9DD27E8B32D0042C494 /* OctoKit */,
+				37C0070E290AB55A00B09628 /* PostHog */,
 			);
 			productName = CoffeeTracker;
 			productReference = 371E294B27C40D2100C8ACBF /* Coffee_.app */;
@@ -355,6 +358,7 @@
 			packageReferences = (
 				37C9838527E4E5B8007C85E3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				3776B9DC27E8B32D0042C494 /* XCRemoteSwiftPackageReference "octokit" */,
+				37C0070D290AB55A00B09628 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 			);
 			productRefGroup = 371E294C27C40D2100C8ACBF /* Products */;
 			projectDirPath = "";
@@ -605,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.cctplus.CoffeeTracker;
 				PRODUCT_NAME = Coffee_;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -641,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.cctplus.CoffeeTracker;
 				PRODUCT_NAME = Coffee_;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -729,6 +733,14 @@
 				minimumVersion = 0.9.0;
 			};
 		};
+		37C0070D290AB55A00B09628 /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		37C9838527E4E5B8007C85E3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -744,6 +756,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3776B9DC27E8B32D0042C494 /* XCRemoteSwiftPackageReference "octokit" */;
 			productName = OctoKit;
+		};
+		37C0070E290AB55A00B09628 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37C0070D290AB55A00B09628 /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
 		};
 		37C9838627E4E5B8007C85E3 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;

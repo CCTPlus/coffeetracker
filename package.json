@@ -1,0 +1,20 @@
+{
+  "name": "coffeetracker",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "commitlint": ". ./scripts/commitlint.sh",
+    "format-changes": ". ./scripts/format-changed-files.sh",
+    "format": "swift-format format . -r --configuration .swift-format.json -i",
+    "prepare": "husky install",
+    "test": ""
+  },
+  "author": "CCT Plus  LLC",
+  "license": "Apache-2.0"
+}

@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.2.1
+- Adds the Apache 2.0 license
+
 ## v1.2
 
 Improvements:

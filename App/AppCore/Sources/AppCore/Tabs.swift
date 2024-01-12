@@ -5,6 +5,7 @@
 //  Created by Jay on 1/12/24.
 //
 
+import Beans
 import Foundation
 import SwiftUI
 
@@ -40,7 +41,7 @@ enum Tab: Int, Identifiable, CaseIterable {
   var view: some View {
     switch self {
       case .coffee:
-        Text(self.label)
+        BeansListView()
       case .settings:
         Text(self.label)
     }

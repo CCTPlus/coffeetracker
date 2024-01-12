@@ -53,5 +53,9 @@ public struct Bean: Equatable {
 }
 
 extension Bean {
-    public static let mock = Bean(name: "Holler Mountain", website: "https://www.stumptowncoffee.com/products/holler-mountain", roastStyle: .medium)
+  public static let mock = Bean(
+    name: "Holler Mountain",
+    website: "https://www.stumptowncoffee.com/products/holler-mountain",
+    roastStyle: .medium
+  )
 }

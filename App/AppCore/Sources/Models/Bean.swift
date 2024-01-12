@@ -37,7 +37,7 @@ public enum RoastStyle: Int, Identifiable, CaseIterable {
   }
 }
 
-public struct Bean: Equatable {
+public struct Bean: Equatable, Identifiable {
   public let id: UUID
 
   public var name: String

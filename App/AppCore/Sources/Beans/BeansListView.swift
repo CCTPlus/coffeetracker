@@ -16,36 +16,54 @@ public struct BeansListView: View {
 
   public init() {}
 
+  @State private var isNewBeanSheetPresented = false
+  @State private var beans: [Bean] = [.mock]
+
   public var body: some View {
     ScrollView {
-      LazyVGrid(columns: columns) {
-        ForEach(0..<3) { _ in
-          BeanCard(bean: Bean.mock)
+      LazyVGrid(columns: columns, spacing: 20) {
+        ForEach(beans) { bean in
+          BeanCard(bean: bean)
+            .frame(minHeight: 150, maxHeight: 200)
+            .clipShape(
+              RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
+            )
             .shadow(radius: 4)
-            .frame(height: 200)
         }
-        // TODO: Add a new bean button
-        HStack(alignment: .center) {
-          Button {
-            print("Add new bean")
-          } label: {
-            Image(systemName: "plus")
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 50)
+        newBeanButton
+          .sheet(isPresented: $isNewBeanSheetPresented) {
+            NavigationStack {
+              NewBeanView { bean in
+                beans.append(bean)
+                isNewBeanSheetPresented.toggle()
+              }
+            }
+            .presentationDetents([.medium])
           }
-          .frame(maxWidth: .infinity)
-          .frame(height: 100)
-          .padding(.vertical)
-          .background(.thinMaterial)
-          .clipShape(
-            RoundedRectangle(cornerSize: CGSize(width: 10, height: 20), style: .continuous)
-          )
-        }
-        .shadow(radius: 4)
       }
     }
     .contentMargins(20.0)
+  }
+
+  @ViewBuilder
+  var newBeanButton: some View {
+    HStack(alignment: .center) {
+      Button {
+        isNewBeanSheetPresented.toggle()
+      } label: {
+        Image(systemName: "plus")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 50)
+      }
+      .frame(maxWidth: .infinity)
+      .padding(.vertical)
+      .background(.thinMaterial)
+      .clipShape(
+        RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
+      )
+    }
+    .shadow(radius: 4)
   }
 }
 

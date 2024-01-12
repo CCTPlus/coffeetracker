@@ -9,8 +9,8 @@ import Models
 import SwiftUI
 
 struct NewBeanView: View {
-  var save: () -> Void
-  var cancel: () -> Void
+  @Environment(\.dismiss) var dismiss
+  var save: (Bean) -> Void
 
   @State private var newBean = Bean(
     name: "",
@@ -34,12 +34,12 @@ struct NewBeanView: View {
     .toolbar {
       ToolbarItem {
         Button("Save") {
-          save()
+          save(newBean)
         }
       }
       ToolbarItem(placement: .topBarLeading) {
         Button("Cancel") {
-          cancel()
+          dismiss()
         }
         .tint(.red)
       }
@@ -49,6 +49,6 @@ struct NewBeanView: View {
 
 #Preview {
   NavigationStack {
-    NewBeanView(save: { print("save") }, cancel: { print("cancel") })
+    NewBeanView(save: { _ in print("save") })
   }
 }

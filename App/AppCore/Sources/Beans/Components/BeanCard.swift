@@ -13,10 +13,13 @@ struct BeanCard: View {
   var body: some View {
     VStack {
       Spacer()
-      label
+      HStack {
+        label
+        Spacer()
+      }
+      .background(.thinMaterial)
     }
     .background(image)
-    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 20), style: .continuous))
   }
 
   @ViewBuilder
@@ -30,16 +33,21 @@ struct BeanCard: View {
     VStack(alignment: .leading) {
       Text(bean.name)
         .font(.headline)
-      Text(bean.roastStyle.abbreviated)
+      Text(bean.roastStyle.abbreviated.capitalized(with: .current))
         .font(.subheadline)
     }
-    .frame(maxWidth: .infinity)
     .padding(.vertical, 8)
-    .background(.thickMaterial)
+    .padding(.leading)
+    .padding(.trailing, 4)
   }
 }
 
 #Preview {
-  BeanCard(bean: .mock)
-    .frame(width: 200, height: 200)
+  HStack(spacing: 20) {
+    BeanCard(bean: .mock)
+      .frame(width: 150, height: 200)
+
+    BeanCard(bean: Bean(name: "Test", website: "", roastStyle: .light))
+      .frame(width: 150, height: 200)
+  }
 }

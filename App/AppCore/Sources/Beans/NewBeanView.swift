@@ -24,7 +24,7 @@ struct NewBeanView: View {
       TextField("Website", text: $newBean.website)
       Picker("Roast Style", selection: $newBean.roastStyle) {
         ForEach(RoastStyle.allCases) { roastStyle in
-          Text(roastStyle.label)
+          Text(roastStyle.long)
             .tag(roastStyle)
         }
       }

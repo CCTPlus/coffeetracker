@@ -14,7 +14,7 @@ public enum RoastStyle: Int, Identifiable, CaseIterable {
 
   case light, medium, dark
 
-  public var label: String {
+  public var long: String {
     switch self {
       case .light:
         "Light roast"
@@ -22,6 +22,17 @@ public enum RoastStyle: Int, Identifiable, CaseIterable {
         "Medium roast"
       case .dark:
         "Dark roast"
+    }
+  }
+
+  public var abbreviated: String {
+    switch self {
+      case .light:
+        "light"
+      case .medium:
+        "medium"
+      case .dark:
+        "dark"
     }
   }
 }
@@ -39,4 +50,8 @@ public struct Bean: Equatable {
     self.website = website
     self.roastStyle = roastStyle
   }
+}
+
+extension Bean {
+    public static let mock = Bean(name: "Holler Mountain", website: "https://www.stumptowncoffee.com/products/holler-mountain", roastStyle: .medium)
 }

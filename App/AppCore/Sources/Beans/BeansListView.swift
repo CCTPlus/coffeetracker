@@ -37,18 +37,24 @@ public struct BeansListView: View {
         }
       }
       .contentMargins(20.0)
+      .navigationTitle("Coffee")
     }
   }
 
   @ViewBuilder
   var existingBeans: some View {
     ForEach(beans) { bean in
-      BeanCard(bean: bean)
-        .frame(minHeight: 150, maxHeight: 200)
-        .clipShape(
-          RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
-        )
-        .shadow(radius: 4)
+      NavigationLink {
+        BeansDetailView(bean: bean)
+      } label: {
+        BeanCard(bean: bean)
+          .frame(minHeight: 150, maxHeight: 200)
+          .clipShape(
+            RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
+          )
+          .shadow(radius: 4)
+      }
+      .tint(.primary)
     }
   }
 

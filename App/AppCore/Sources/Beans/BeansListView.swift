@@ -20,29 +20,36 @@ public struct BeansListView: View {
   @State private var beans: [Bean] = [.mock]
 
   public var body: some View {
-    ScrollView {
-      LazyVGrid(columns: columns, spacing: 20) {
-        ForEach(beans) { bean in
-          BeanCard(bean: bean)
-            .frame(minHeight: 150, maxHeight: 200)
-            .clipShape(
-              RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
-            )
-            .shadow(radius: 4)
-        }
-        newBeanButton
-          .sheet(isPresented: $isNewBeanSheetPresented) {
-            NavigationStack {
-              NewBeanView { bean in
-                beans.append(bean)
-                isNewBeanSheetPresented.toggle()
+    NavigationStack {
+      ScrollView {
+        LazyVGrid(columns: columns, spacing: 20) {
+          existingBeans
+          newBeanButton
+            .sheet(isPresented: $isNewBeanSheetPresented) {
+              NavigationStack {
+                NewBeanView { bean in
+                  beans.append(bean)
+                  isNewBeanSheetPresented.toggle()
+                }
               }
+              .presentationDetents([.medium])
             }
-            .presentationDetents([.medium])
-          }
+        }
       }
+      .contentMargins(20.0)
     }
-    .contentMargins(20.0)
+  }
+
+  @ViewBuilder
+  var existingBeans: some View {
+    ForEach(beans) { bean in
+      BeanCard(bean: bean)
+        .frame(minHeight: 150, maxHeight: 200)
+        .clipShape(
+          RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .continuous)
+        )
+        .shadow(radius: 4)
+    }
   }
 
   @ViewBuilder

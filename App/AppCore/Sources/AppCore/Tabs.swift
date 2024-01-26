@@ -7,7 +7,6 @@
 
 import Beans
 import Foundation
-import Roasters
 import SwiftUI
 
 enum Tab: Int, Identifiable, CaseIterable {
@@ -15,7 +14,7 @@ enum Tab: Int, Identifiable, CaseIterable {
     self.rawValue
   }
 
-  case coffee, roaster, settings
+  case coffee, settings
 
   var label: String {
     switch self {
@@ -23,8 +22,6 @@ enum Tab: Int, Identifiable, CaseIterable {
         "Coffee"
       case .settings:
         "Settings"
-      case .roaster:
-        "Roasters"
     }
   }
 
@@ -35,8 +32,6 @@ enum Tab: Int, Identifiable, CaseIterable {
         "bag"
       case .settings:
         "gear"
-      case .roaster:
-        "flame"
     }
   }
 
@@ -46,8 +41,6 @@ enum Tab: Int, Identifiable, CaseIterable {
     switch self {
       case .coffee:
         BeansListView()
-      case .roaster:
-        NewRoasterView()
       case .settings:
         Text(self.label)
     }

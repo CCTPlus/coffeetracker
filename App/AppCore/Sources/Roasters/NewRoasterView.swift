@@ -9,10 +9,15 @@ import Models
 import SwiftUI
 
 public struct NewRoasterView: View {
+  @Environment(\.dismiss) var dismiss
   @State private var newRoaster = Roaster()
   @State private var website = ""
 
-  public init() {}
+  var save: (Roaster) -> Void
+
+  public init(save: @escaping (Roaster) -> Void) {
+    self.save = save
+  }
 
   public var body: some View {
     Form {
@@ -25,17 +30,30 @@ public struct NewRoasterView: View {
             newRoaster.website = nil
           }
         }
-
-      #if DEBUG
-        Section {
-          Text("Roaster's website: \(newRoaster.website ?? "no website input")")
-        }
-      #endif
     }
     .navigationTitle("New Roaster")
+    .toolbar {
+      ToolbarItem(placement: .topBarLeading) {
+        Button {
+          dismiss()
+        } label: {
+          Text("Cancel")
+        }
+        .tint(.red)
+      }
+      ToolbarItem {
+        Button {
+          save(newRoaster)
+        } label: {
+          Text("Save")
+        }
+      }
+    }
   }
 }
 
 #Preview {
-  NewRoasterView()
+  NavigationStack {
+    NewRoasterView(save: { _ in print("Run") })
+  }
 }

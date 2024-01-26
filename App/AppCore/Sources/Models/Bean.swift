@@ -44,6 +44,8 @@ public struct Bean: Equatable, Identifiable {
   public var website: String
   public var roastStyle: RoastStyle
 
+  public var roaster: Roaster?
+
   public var url: URL? {
     var isValidURL: Bool {
       let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
@@ -72,11 +74,18 @@ public struct Bean: Equatable, Identifiable {
     return nil
   }
 
-  public init(id: UUID = UUID(), name: String, website: String, roastStyle: RoastStyle) {
+  public init(
+    id: UUID = UUID(),
+    name: String,
+    website: String,
+    roastStyle: RoastStyle,
+    roaster: Roaster? = nil
+  ) {
     self.id = id
     self.name = name
     self.website = website
     self.roastStyle = roastStyle
+    self.roaster = roaster
   }
 }
 
@@ -84,6 +93,7 @@ extension Bean {
   public static let mock = Bean(
     name: "Holler Mountain",
     website: "https://www.stumptowncoffee.com/products/holler-mountain",
-    roastStyle: .medium
+    roastStyle: .medium,
+    roaster: .mock
   )
 }

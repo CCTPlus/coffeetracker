@@ -38,7 +38,7 @@ let package = Package(
     ),
     .target(
       name: "Beans",
-      dependencies: ["Models"]
+      dependencies: ["Models", "Roasters"]
     ),
     .target(
       name: "Roasters",

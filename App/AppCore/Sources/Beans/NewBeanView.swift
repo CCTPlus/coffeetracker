@@ -49,6 +49,8 @@ struct NewBeanView: View {
         .onChange(of: selectedRoaster) { oldValue, newValue in
           if newValue == roasters.count {
             showNewRoaster = true
+          } else if newValue != -1 {
+            newBean.roaster = roasters[newValue]
           }
         }
         .sheet(

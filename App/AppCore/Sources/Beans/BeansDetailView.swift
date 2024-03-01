@@ -50,8 +50,9 @@ struct BeansDetailView: View {
     BeansDetailView(bean: .mock)
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
-          Text("< Back")
-            .tint(Color.accentColor)
+          Button("Back") {
+            print("Go back")
+          }
         }
       }
   }

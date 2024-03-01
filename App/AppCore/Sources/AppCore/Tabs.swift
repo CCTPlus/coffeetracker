@@ -8,14 +8,32 @@
 import Beans
 import Foundation
 import SwiftUI
-import Beans
 
 enum Tab: Int, Identifiable, CaseIterable {
-    var id: Int {
-        self.rawValue
-    }
+  var id: Int {
+    self.rawValue
+  }
 
-    case coffee, settings
+  case coffee, settings
+
+  var label: String {
+    switch self {
+      case .coffee:
+        "Coffee"
+      case .settings:
+        "Settings"
+    }
+  }
+
+  /// SF Symbol for tab icon
+  var icon: String {
+    switch self {
+      case .coffee:
+        "bag"
+      case .settings:
+        "gear"
+    }
+  }
 
   /// Root view of the selected tab
   @ViewBuilder
@@ -26,4 +44,5 @@ enum Tab: Int, Identifiable, CaseIterable {
       case .settings:
         Text(self.label)
     }
+  }
 }

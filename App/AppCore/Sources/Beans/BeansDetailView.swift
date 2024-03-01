@@ -12,13 +12,20 @@ struct BeansDetailView: View {
   var bean: Bean
 
   var body: some View {
-    List {
-      HStack {
-        Text("Roast Style")
-        Spacer()
-        Text(bean.roastStyle.abbreviated)
+    ScrollView {
+      VStack(alignment: .leading, spacing: 20) {
+        if let roaster = bean.roaster {
+          // TODO: Link to a detail view of the roaster
+          Text(roaster.name)
+        }
+        HStack {
+          Text("Roast Style")
+          Spacer()
+          Text(bean.roastStyle.abbreviated)
+        }
       }
-      Section {
+      .padding(.bottom)
+      VStack(alignment: .leading) {
         if let url = bean.url {
           Link(destination: url) {
             Label("Visit website", systemImage: "safari")
@@ -33,6 +40,7 @@ struct BeansDetailView: View {
         }
       }
     }
+    .contentMargins(20)
     .navigationTitle(bean.name)
   }
 }
@@ -42,8 +50,9 @@ struct BeansDetailView: View {
     BeansDetailView(bean: .mock)
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
-          Text("< Back")
-            .tint(Color.accentColor)
+          Button("Back") {
+            print("Go back")
+          }
         }
       }
   }

@@ -20,13 +20,14 @@ let package = Package(
       name: "Beans",
       targets: ["Beans"]
     ),
+    .library(name: "Roasters", targets: ["Roasters"]),
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
       name: "AppCore",
-      dependencies: ["Beans"]
+      dependencies: ["Beans", "Roasters"]
     ),
     .target(
       name: "Models"
@@ -37,6 +38,10 @@ let package = Package(
     ),
     .target(
       name: "Beans",
+      dependencies: ["Models", "Roasters"]
+    ),
+    .target(
+      name: "Roasters",
       dependencies: ["Models"]
     ),
     .testTarget(

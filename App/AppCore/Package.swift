@@ -21,6 +21,10 @@ let package = Package(
       targets: ["Beans"]
     ),
     .library(name: "Roasters", targets: ["Roasters"]),
+    .library(name: "FirebaseClient", targets: ["FirebaseClient"]),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.21.0")
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -47,6 +51,12 @@ let package = Package(
     .testTarget(
       name: "AppCoreTests",
       dependencies: ["AppCore"]
+    ),
+    .target(
+      name: "FirebaseClient",
+      dependencies: [
+        .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+      ]
     ),
   ]
 )

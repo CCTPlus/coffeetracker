@@ -28,6 +28,7 @@ public struct AppView: View {
     .task {
       do {
         try await fbClient.signInAnonymously()
+        try await fbClient.updateUserLastSignedIn()
       } catch {
         Logger.fbClient.error("🚨: Could not sign in \(error)")
       }

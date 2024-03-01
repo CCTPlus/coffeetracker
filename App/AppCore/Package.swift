@@ -57,6 +57,7 @@ let package = Package(
       name: "FirebaseClient",
       dependencies: [
         .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
+        .product(name: "FirebaseFirestoreSwift", package: "firebase-ios-sdk"),
         "Utilities",
       ]
     ),

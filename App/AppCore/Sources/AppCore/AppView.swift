@@ -5,9 +5,13 @@
 //  Created by Jay on 1/12/24.
 //
 
+import FirebaseClient
+import OSLog
 import SwiftUI
+import Utilities
 
 public struct AppView: View {
+  @State private var fbClient = FirebaseClient()
   public init() {}
   public var body: some View {
     TabView {
@@ -19,6 +23,13 @@ public struct AppView: View {
               icon: { Image(systemName: tab.icon) }
             )
           }
+      }
+    }
+    .task {
+      do {
+        try await fbClient.signInAnonymously()
+      } catch {
+        Logger.fbClient.error("🚨: Could not sign in \(error)")
       }
     }
   }

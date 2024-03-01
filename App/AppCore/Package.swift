@@ -22,6 +22,7 @@ let package = Package(
     ),
     .library(name: "Roasters", targets: ["Roasters"]),
     .library(name: "FirebaseClient", targets: ["FirebaseClient"]),
+    .library(name: "Utilities", targets: ["Utilities"]),
   ],
   dependencies: [
     .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.21.0")
@@ -31,7 +32,11 @@ let package = Package(
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
       name: "AppCore",
-      dependencies: ["Beans", "Roasters"]
+      dependencies: ["Beans", "Roasters", "FirebaseClient"]
+    ),
+    .testTarget(
+      name: "AppCoreTests",
+      dependencies: ["AppCore"]
     ),
     .target(
       name: "Models"
@@ -48,15 +53,13 @@ let package = Package(
       name: "Roasters",
       dependencies: ["Models"]
     ),
-    .testTarget(
-      name: "AppCoreTests",
-      dependencies: ["AppCore"]
-    ),
     .target(
       name: "FirebaseClient",
       dependencies: [
-        .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+        .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
+        "Utilities",
       ]
     ),
+    .target(name: "Utilities"),
   ]
 )

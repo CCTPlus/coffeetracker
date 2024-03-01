@@ -30,4 +30,3 @@ public class FirebaseClient {
 
     Logger.fbClient.debug("Sign in attempt \(self.user?.uid ?? "")")
   }
-}

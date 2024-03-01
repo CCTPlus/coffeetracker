@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Roaster: Identifiable, Equatable {
+public struct Roaster: Identifiable, Equatable, Codable {
   public let id: UUID
   public var name: String
   public var website: String?

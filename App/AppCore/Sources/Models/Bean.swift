@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RoastStyle: Int, Identifiable, CaseIterable {
+public enum RoastStyle: Int, Identifiable, CaseIterable, Codable {
   public var id: Int {
     self.rawValue
   }
@@ -37,7 +37,7 @@ public enum RoastStyle: Int, Identifiable, CaseIterable {
   }
 }
 
-public struct Bean: Equatable, Identifiable {
+public struct Bean: Equatable, Identifiable, Codable {
   public let id: UUID
 
   public var name: String

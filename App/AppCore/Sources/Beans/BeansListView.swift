@@ -8,6 +8,8 @@
 import Models
 import SwiftUI
 
+//import FirebaseClient
+
 public struct BeansListView: View {
   let columns = [
     GridItem(.flexible(), spacing: 20),
@@ -82,4 +84,5 @@ public struct BeansListView: View {
 
 #Preview {
   BeansListView()
+  //    .environment(FBClient())
 }

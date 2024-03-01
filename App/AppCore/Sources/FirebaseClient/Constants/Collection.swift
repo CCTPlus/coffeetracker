@@ -9,4 +9,7 @@ import Foundation
 
 enum Collection: String {
   case users
+  case beans
+  case roasters
+  case coffeeProperties = "coffee_properties"
 }

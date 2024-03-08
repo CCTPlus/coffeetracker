@@ -13,6 +13,8 @@ import Utilities
 public struct AppView: View {
   @Environment(FirebaseClient.self) var fb
 
+  public init() {}
+
   public var body: some View {
     TabView {
       ForEach(Tab.allCases) { tab in

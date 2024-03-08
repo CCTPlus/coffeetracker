@@ -4,9 +4,10 @@
 //
 //  Created by Jay on 1/12/24.
 //
+//  Supporters:
+//  @mikaelacaron on Mar 8 2024
+//
 
-import AppCore
-import FirebaseClient
 import FirebaseCore
 import SwiftUI
 
@@ -25,12 +26,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct CoffeeTrackerApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @State private var firebaseClient = FirebaseClient()
 
   var body: some Scene {
     WindowGroup {
-      AppView()
-        .environment(firebaseClient)
+      ContentView()
     }
   }
 }

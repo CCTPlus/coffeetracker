@@ -5,17 +5,15 @@
 //  Created by Jay on 1/12/24.
 //
 
+import AppCore
+import FirebaseClient
 import SwiftUI
 
 struct ContentView: View {
+  @State private var firebaseClient = FirebaseClient()
   var body: some View {
-    VStack {
-      Image(systemName: "globe")
-        .imageScale(.large)
-        .foregroundStyle(.tint)
-      Text("Hello, world!")
-    }
-    .padding()
+    AppView()
+      .environment(firebaseClient)
   }
 }
 

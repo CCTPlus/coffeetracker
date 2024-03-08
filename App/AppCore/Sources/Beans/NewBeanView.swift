@@ -5,14 +5,16 @@
 //  Created by Jay on 1/12/24.
 //
 
+import FirebaseClient
 import Models
+import OSLog
 import Roasters
 import SwiftUI
+import Utilities
 
 struct NewBeanView: View {
   @Environment(\.dismiss) var dismiss
-
-  var save: (Bean) -> Void
+  @Environment(FirebaseClient.self) var fb
 
   @State private var roasters: [Roaster] = [.mock]
   @State private var selectedRoaster = -1
@@ -74,7 +76,9 @@ struct NewBeanView: View {
     .toolbar {
       ToolbarItem {
         Button("Save") {
-          save(newBean)
+          Task {
+            await save()
+          }
         }
       }
       ToolbarItem(placement: .topBarLeading) {
@@ -85,10 +89,20 @@ struct NewBeanView: View {
       }
     }
   }
+
+  func save() async {
+    newBean.fbRoastKey = newBean.roastStyle.fbKey
+    do {
+      try await fb.client.createBeanInUser(newBean)
+    } catch {
+      Logger.fbClient.error("\(#function) \(error)")
+    }
+  }
 }
 
 #Preview {
   NavigationStack {
-    NewBeanView(save: { _ in print("save") })
+    NewBeanView()
   }
+  .environment(FirebaseClient(isLive: false))
 }

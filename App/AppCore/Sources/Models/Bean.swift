@@ -7,42 +7,15 @@
 
 import Foundation
 
-public enum RoastStyle: Int, Identifiable, CaseIterable, Codable {
-  public var id: Int {
-    self.rawValue
-  }
-
-  case light, medium, dark
-
-  public var long: String {
-    switch self {
-      case .light:
-        "Light roast"
-      case .medium:
-        "Medium roast"
-      case .dark:
-        "Dark roast"
-    }
-  }
-
-  public var abbreviated: String {
-    switch self {
-      case .light:
-        "light"
-      case .medium:
-        "medium"
-      case .dark:
-        "dark"
-    }
-  }
-}
-
 public struct Bean: Equatable, Identifiable, Codable {
   public let id: UUID
 
   public var name: String
   public var website: String
   public var roastStyle: RoastStyle
+
+  /// Only used to write the roastkey to the fb doc
+  public var fbRoastKey: String
 
   public var roaster: Roaster?
 
@@ -86,6 +59,18 @@ public struct Bean: Equatable, Identifiable, Codable {
     self.website = website
     self.roastStyle = roastStyle
     self.roaster = roaster
+    self.fbRoastKey = roastStyle.fbKey
+  }
+
+  /// Properties of the data in Firestore
+  enum CodingKeys: String, CodingKey {
+    case id
+    case name
+    case website
+    // TODO: Think about renaming the key in firestore
+    case roastStyle
+    case fbRoastKey = "roast_style"
+    case roaster
   }
 }
 

@@ -47,7 +47,7 @@ let package = Package(
     ),
     .target(
       name: "Beans",
-      dependencies: ["Models", "Roasters"]
+      dependencies: ["Models", "Roasters", "FirebaseClient"]
     ),
     .target(
       name: "Roasters",

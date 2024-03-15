@@ -16,5 +16,8 @@ extension FirebaseClientLive {
     self.user = result.user
     self.userID = user?.uid
     Logger.fbClient.debug("Sign in attempt \(self.user?.uid ?? "")")
+
+    // INITIALIZE SNAPSHOTS
+    setupBeansSnapshotListener()
   }
 }

@@ -12,6 +12,8 @@ import Utilities
 
 @Observable
 public class FirebaseClientPreview: FBClient {
+  public var beans: [Bean] = [Bean.mock]
+
   public func signInAnonymously() async throws {
     Logger.fbClient.debug("Preview login was successful")
   }

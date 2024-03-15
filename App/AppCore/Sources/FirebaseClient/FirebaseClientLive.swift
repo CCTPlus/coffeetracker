@@ -9,6 +9,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 import Foundation
+import Models
 import OSLog
 import Utilities
 
@@ -21,6 +22,8 @@ public class FirebaseClientLive: FBClient {
 
   // MARK: Collection Variables
   var db: Firestore
+
+  public var beans: [Bean] = []
 
   public init() {
     self.userID = nil

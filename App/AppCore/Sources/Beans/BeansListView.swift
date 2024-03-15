@@ -19,7 +19,6 @@ public struct BeansListView: View {
   public init() {}
 
   @State private var isNewBeanSheetPresented = false
-  @State private var beans: [Bean] = [.mock]
 
   public var body: some View {
     NavigationStack {
@@ -43,7 +42,7 @@ public struct BeansListView: View {
 
   @ViewBuilder
   var existingBeans: some View {
-    ForEach(beans) { bean in
+    ForEach(fb.client.beans) { bean in
       NavigationLink {
         BeansDetailView(bean: bean)
       } label: {

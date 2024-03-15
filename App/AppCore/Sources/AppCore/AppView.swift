@@ -11,12 +11,15 @@ import SwiftUI
 import Utilities
 
 public struct AppView: View {
-  @State private var fbClient = FirebaseClient()
+  @Environment(FirebaseClient.self) var fb
+
   public init() {}
+
   public var body: some View {
     TabView {
       ForEach(Tab.allCases) { tab in
         tab.view
+          .environment(fb)
           .tabItem {
             Label(
               title: { Text(tab.label) },
@@ -27,7 +30,8 @@ public struct AppView: View {
     }
     .task {
       do {
-        try await fbClient.signInAnonymously()
+        try await fb.client.signInAnonymously()
+        try await fb.client.updateUserLastSignedIn()
       } catch {
         Logger.fbClient.error("🚨: Could not sign in \(error)")
       }
@@ -37,4 +41,5 @@ public struct AppView: View {
 
 #Preview {
   AppView()
+    .environment(FirebaseClient(isLive: false))
 }

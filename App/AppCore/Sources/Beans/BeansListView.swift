@@ -5,10 +5,12 @@
 //  Created by Jay on 1/12/24.
 //
 
+import FirebaseClient
 import Models
 import SwiftUI
 
 public struct BeansListView: View {
+  @Environment(FirebaseClient.self) var fb
   let columns = [
     GridItem(.flexible(), spacing: 20),
     GridItem(.flexible(), spacing: 20),
@@ -17,7 +19,6 @@ public struct BeansListView: View {
   public init() {}
 
   @State private var isNewBeanSheetPresented = false
-  @State private var beans: [Bean] = [.mock]
 
   public var body: some View {
     NavigationStack {
@@ -27,10 +28,8 @@ public struct BeansListView: View {
           newBeanButton
             .sheet(isPresented: $isNewBeanSheetPresented) {
               NavigationStack {
-                NewBeanView { bean in
-                  beans.append(bean)
-                  isNewBeanSheetPresented.toggle()
-                }
+                NewBeanView()
+                  .environment(fb)
               }
               .presentationDetents([.medium])
             }
@@ -43,7 +42,7 @@ public struct BeansListView: View {
 
   @ViewBuilder
   var existingBeans: some View {
-    ForEach(beans) { bean in
+    ForEach(fb.client.beans) { bean in
       NavigationLink {
         BeansDetailView(bean: bean)
       } label: {
@@ -82,4 +81,5 @@ public struct BeansListView: View {
 
 #Preview {
   BeansListView()
+    .environment(FirebaseClient(isLive: false))
 }

@@ -47,7 +47,7 @@ let package = Package(
     ),
     .target(
       name: "Beans",
-      dependencies: ["Models", "Roasters"]
+      dependencies: ["Models", "Roasters", "FirebaseClient"]
     ),
     .target(
       name: "Roasters",
@@ -57,7 +57,8 @@ let package = Package(
       name: "FirebaseClient",
       dependencies: [
         .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
-        "Utilities",
+        .product(name: "FirebaseFirestoreSwift", package: "firebase-ios-sdk"),
+        "Utilities", "Models",
       ]
     ),
     .target(name: "Utilities"),

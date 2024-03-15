@@ -4,8 +4,10 @@
 //
 //  Created by Jay on 1/12/24.
 //
+//  Supporters:
+//  @mikaelacaron on Mar 8 2024
+//
 
-import AppCore
 import FirebaseCore
 import SwiftUI
 
@@ -27,7 +29,7 @@ struct CoffeeTrackerApp: App {
 
   var body: some Scene {
     WindowGroup {
-      AppView()
+      ContentView()
     }
   }
 }

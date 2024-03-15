@@ -94,6 +94,7 @@ struct NewBeanView: View {
     newBean.fbRoastKey = newBean.roastStyle.fbKey
     do {
       try await fb.client.createBeanInUser(newBean)
+      dismiss()
     } catch {
       Logger.fbClient.error("\(#function) \(error)")
     }

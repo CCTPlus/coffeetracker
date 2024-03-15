@@ -30,7 +30,14 @@ extension FirebaseClientLive {
     let docRef = try userDoc()
     let beansCollectionRef = docRef.collection(Collection.beans.rawValue)
 
-    try beansCollectionRef.document().setData(from: bean)
+    let newBeanRef = beansCollectionRef.document()
+    try newBeanRef.setData(from: bean)
+    try await newBeanRef.updateData(
+      [
+        "dateAdded": FieldValue.serverTimestamp(),
+        "dateModified": FieldValue.serverTimestamp(),
+      ]
+    )
   }
 
   func setupBeansSnapshotListener() {

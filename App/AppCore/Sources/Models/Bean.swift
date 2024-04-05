@@ -18,6 +18,8 @@ public struct Bean: Equatable, Identifiable, Codable {
   public var fbRoastKey: String
 
   public var roaster: Roaster?
+  public var dateAdded: Date
+  public var dateModified: Date
 
   public var url: URL? {
     var isValidURL: Bool {
@@ -52,7 +54,9 @@ public struct Bean: Equatable, Identifiable, Codable {
     name: String,
     website: String,
     roastStyle: RoastStyle,
-    roaster: Roaster? = nil
+    roaster: Roaster? = nil,
+    dateAdded: Date = Date(),
+    dateModified: Date = Date()
   ) {
     self.id = id
     self.name = name
@@ -60,6 +64,8 @@ public struct Bean: Equatable, Identifiable, Codable {
     self.roastStyle = roastStyle
     self.roaster = roaster
     self.fbRoastKey = roastStyle.fbKey
+    self.dateAdded = dateAdded
+    self.dateModified = dateModified
   }
 
   /// Properties of the data in Firestore
@@ -71,6 +77,8 @@ public struct Bean: Equatable, Identifiable, Codable {
     case roastStyle
     case fbRoastKey = "roast_style"
     case roaster
+    case dateAdded
+    case dateModified
   }
 }
 

@@ -1,8 +1,8 @@
 //
-//  Firestore.swift
+//  File.swift
 //
 //
-//  Created by Jay on 3/1/24.
+//  Created by Jay on 4/5/24.
 //
 
 import FirebaseFirestore
@@ -13,24 +13,12 @@ import OSLog
 import Utilities
 
 extension FirebaseClientLive {
-  private func userDoc() throws -> DocumentReference {
-    guard let userID else {
-      throw FirebaseClientError.noUserSignedIn
-    }
-    return db.collection(Collection.users.rawValue).document(userID)
-  }
-
-  public func updateUserLastSignedIn() async throws {
-    let docRef = try userDoc()
-    try await docRef.setData(["dateLastSignedIn": FieldValue.serverTimestamp()])
-  }
-
   /// Adds a bean to the user's collection
   public func createBeanInUser(_ bean: Bean) async throws {
     let docRef = try userDoc()
     let beansCollectionRef = docRef.collection(Collection.beans.rawValue)
 
-    let newBeanRef = beansCollectionRef.document()
+    let newBeanRef = beansCollectionRef.document(bean.id.uuidString)
     try newBeanRef.setData(from: bean)
     try await newBeanRef.updateData(
       [

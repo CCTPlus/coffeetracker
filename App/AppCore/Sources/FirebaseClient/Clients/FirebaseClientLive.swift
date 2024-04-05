@@ -24,6 +24,7 @@ public class FirebaseClientLive: FBClient {
   var db: Firestore
 
   public var beans: [Bean] = []
+  public var roasters: [Roaster] = []
 
   public init() {
     self.userID = nil

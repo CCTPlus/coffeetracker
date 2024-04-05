@@ -12,7 +12,8 @@ import Utilities
 
 @Observable
 public class FirebaseClientPreview: FBClient {
-  public var beans: [Bean] = [Bean.mock]
+  public var roasters = [Roaster.mock]
+  public var beans = [Bean.mock]
 
   public func signInAnonymously() async throws {
     Logger.fbClient.debug("Preview login was successful")
@@ -24,5 +25,13 @@ public class FirebaseClientPreview: FBClient {
 
   public func createBeanInUser(_ bean: Models.Bean) async throws {
     Logger.fbClient.debug("Preview createBeanInUser was successful")
+  }
+
+  public func createRoasterInUser(_ roaster: Models.Roaster) async throws {
+    Logger.fbClient.debug("Writing a roaster was successful")
+  }
+
+  public func addBeanToRoaster(_ roaster: Models.Roaster, bean: Models.Bean) async throws {
+    Logger.fbClient.debug("Preview addBeanToRoaster works")
   }
 }

@@ -81,12 +81,3 @@ public struct Bean: Equatable, Identifiable, Codable {
     case dateModified
   }
 }
-
-extension Bean {
-  public static let mock = Bean(
-    name: "Holler Mountain",
-    website: "https://www.stumptowncoffee.com/products/holler-mountain",
-    roastStyle: .medium,
-    roaster: .mock
-  )
-}

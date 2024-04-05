@@ -16,15 +16,24 @@ struct NewBeanView: View {
   @Environment(\.dismiss) var dismiss
   @Environment(FirebaseClient.self) var fb
 
-  @State private var roasters: [Roaster] = [.mock]
-  @State private var selectedRoaster = -1
+  /// Determines the selected roaster
+  ///
+  /// - Roaster selected = hash value of `Roaster.id`
+  /// - New Roaster selected = 0
+  /// - No roaster selected = -1
+  @State private var selectedRoasterValue = -1
   @State private var showNewRoaster = false
+  @State private var newlySavedRoaster: Roaster? = nil
 
   @State private var newBean = Bean(
     name: "",
     website: "",
     roastStyle: .medium
   )
+
+  var selectedRoaster: Roaster? {
+    fb.client.roasters.first(where: { $0.tagValue == selectedRoasterValue })
+  }
 
   var body: some View {
     Form {
@@ -38,33 +47,45 @@ struct NewBeanView: View {
       }
 
       Section {
-        Picker("Roaster", selection: $selectedRoaster) {
+        Picker("Roaster", selection: $selectedRoasterValue) {
           Text("Select roaster")
             .tag(-1)
-          ForEach(Array(roasters.enumerated()), id: \.offset) { offset, roaster in
+          ForEach(fb.client.roasters) { roaster in
             Text(roaster.name)
-              .tag(offset)
+              .tag(roaster.tagValue)
           }
           Text("New roaster")
-            .tag(roasters.count)
+            .tag(0)
         }
-        .onChange(of: selectedRoaster) { oldValue, newValue in
-          if newValue == roasters.count {
-            showNewRoaster = true
-          } else if newValue != -1 {
-            newBean.roaster = roasters[newValue]
+        .onChange(of: selectedRoasterValue) { oldValue, newValue in
+          switch newValue {
+            case 0:
+              showNewRoaster = true
+            case -1:
+              break
+            default:
+              newBean.roaster = selectedRoaster
           }
         }
         .sheet(
           isPresented: $showNewRoaster,
           onDismiss: {
-            selectedRoaster = -1
+            selectedRoasterValue = newlySavedRoaster?.tagValue ?? -1
           }
         ) {
           NavigationStack {
             NewRoasterView { roaster in
-              roasters.append(roaster)
-              showNewRoaster = false
+              Task {
+                do {
+                  try await fb.client.createRoasterInUser(roaster)
+                  await MainActor.run {
+                    newlySavedRoaster = roaster
+                  }
+                  showNewRoaster = false
+                } catch {
+                  Logger.fbClient.error("🚨 Can't create a new roaster. \(error, privacy: .public)")
+                }
+              }
             }
           }
           .presentationDetents([.medium, .large])
@@ -94,6 +115,9 @@ struct NewBeanView: View {
     newBean.fbRoastKey = newBean.roastStyle.fbKey
     do {
       try await fb.client.createBeanInUser(newBean)
+      if let selectedRoaster {
+        try await fb.client.addBeanToRoaster(selectedRoaster, bean: newBean)
+      }
       dismiss()
     } catch {
       Logger.fbClient.error("\(#function) \(error)")

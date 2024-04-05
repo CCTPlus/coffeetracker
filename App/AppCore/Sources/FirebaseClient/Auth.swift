@@ -19,5 +19,6 @@ extension FirebaseClientLive {
 
     // INITIALIZE SNAPSHOTS
     setupBeansSnapshotListener()
+    setupUserRoastersSnapshotListener()
   }
 }

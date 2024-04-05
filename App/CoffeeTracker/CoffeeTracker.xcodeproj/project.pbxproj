@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6927AF8C2BC05544002D9FF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6927AF8B2BC05544002D9FF8 /* GoogleService-Info.plist */; };
 		692AD5552B51A018000F6666 /* CoffeeTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AD5542B51A018000F6666 /* CoffeeTrackerApp.swift */; };
 		692AD5572B51A018000F6666 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692AD5562B51A018000F6666 /* ContentView.swift */; };
 		692AD5592B51A019000F6666 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 692AD5582B51A019000F6666 /* Assets.xcassets */; };
 		692AD55C2B51A019000F6666 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 692AD55B2B51A019000F6666 /* Preview Assets.xcassets */; };
 		692AD5652B51A1F2000F6666 /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = 692AD5642B51A1F2000F6666 /* AppCore */; };
-		69C193892B92391200125C1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69C193882B92391200125C1F /* GoogleService-Info.plist */; };
 		69C1938C2B92399500125C1F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 69C1938B2B92399500125C1F /* FirebaseAnalytics */; };
 		69C1938E2B92399500125C1F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 69C1938D2B92399500125C1F /* FirebaseAnalyticsOnDeviceConversion */; };
 		69C193902B92399500125C1F /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 69C1938F2B92399500125C1F /* FirebaseAnalyticsSwift */; };
@@ -42,13 +42,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6927AF8B2BC05544002D9FF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		692AD5512B51A018000F6666 /* CoffeeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		692AD5542B51A018000F6666 /* CoffeeTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeTrackerApp.swift; sourceTree = "<group>"; };
 		692AD5562B51A018000F6666 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		692AD5582B51A019000F6666 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		692AD55B2B51A019000F6666 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		692AD5622B51A0CD000F6666 /* AppCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppCore; path = ../AppCore; sourceTree = "<group>"; };
-		69C193882B92391200125C1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,7 @@
 		692AD5532B51A018000F6666 /* CoffeeTracker */ = {
 			isa = PBXGroup;
 			children = (
-				69C193882B92391200125C1F /* GoogleService-Info.plist */,
+				6927AF8B2BC05544002D9FF8 /* GoogleService-Info.plist */,
 				692AD5542B51A018000F6666 /* CoffeeTrackerApp.swift */,
 				692AD5562B51A018000F6666 /* ContentView.swift */,
 				692AD5582B51A019000F6666 /* Assets.xcassets */,
@@ -225,8 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				692AD55C2B51A019000F6666 /* Preview Assets.xcassets in Resources */,
+				6927AF8C2BC05544002D9FF8 /* GoogleService-Info.plist in Resources */,
 				692AD5592B51A019000F6666 /* Assets.xcassets in Resources */,
-				69C193892B92391200125C1F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +451,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.21.0;
+				minimumVersion = 10.23.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

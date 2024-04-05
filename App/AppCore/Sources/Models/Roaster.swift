@@ -11,11 +11,26 @@ public struct Roaster: Identifiable, Equatable, Codable {
   public let id: UUID
   public var name: String
   public var website: String?
+  public var dateAdded: Date
+  public var dateModified: Date
 
-  public init(id: UUID = UUID(), name: String = "", website: String? = nil) {
+  /// Used for tag purposes like selecting from a picker
+  public var tagValue: Int {
+    id.hashValue
+  }
+
+  public init(
+    id: UUID = UUID(),
+    name: String = "",
+    website: String? = nil,
+    dateAdded: Date = Date(),
+    dateModified: Date = Date()
+  ) {
     self.id = id
     self.name = name
     self.website = website
+    self.dateAdded = dateAdded
+    self.dateModified = dateModified
   }
 }
 

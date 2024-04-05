@@ -16,7 +16,11 @@ struct NewBeanView: View {
   @Environment(\.dismiss) var dismiss
   @Environment(FirebaseClient.self) var fb
 
-  @State private var roasters: [Roaster] = [.mock]
+  /// Determines the selected roaster
+  ///
+  /// - Roaster selected = hash value of `Roaster.id`
+  /// - New Roaster selected = 0
+  /// - No roaster selected = -1
   @State private var selectedRoaster = -1
   @State private var showNewRoaster = false
 
@@ -41,18 +45,21 @@ struct NewBeanView: View {
         Picker("Roaster", selection: $selectedRoaster) {
           Text("Select roaster")
             .tag(-1)
-          ForEach(Array(roasters.enumerated()), id: \.offset) { offset, roaster in
+          ForEach(fb.client.roasters) { roaster in
             Text(roaster.name)
-              .tag(offset)
+              .tag(roaster.tagValue)
           }
           Text("New roaster")
-            .tag(roasters.count)
+            .tag(0)
         }
         .onChange(of: selectedRoaster) { oldValue, newValue in
-          if newValue == roasters.count {
-            showNewRoaster = true
-          } else if newValue != -1 {
-            newBean.roaster = roasters[newValue]
+          switch newValue {
+            case 0:
+              showNewRoaster = true
+            case -1:
+              break
+            default:
+              newBean.roaster = fb.client.roasters.first(where: { $0.tagValue == newValue })
           }
         }
         .sheet(
@@ -63,8 +70,14 @@ struct NewBeanView: View {
         ) {
           NavigationStack {
             NewRoasterView { roaster in
-              roasters.append(roaster)
-              showNewRoaster = false
+              Task {
+                do {
+                  try await fb.client.createRoasterInUser(roaster)
+                  showNewRoaster = false
+                } catch {
+                  Logger.fbClient.error("🚨 Can't create a new roaster. \(error, privacy: .public)")
+                }
+              }
             }
           }
           .presentationDetents([.medium, .large])

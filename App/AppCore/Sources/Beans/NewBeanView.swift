@@ -23,6 +23,7 @@ struct NewBeanView: View {
   /// - No roaster selected = -1
   @State private var selectedRoasterValue = -1
   @State private var showNewRoaster = false
+  @State private var newlySavedRoaster: Roaster? = nil
 
   @State private var newBean = Bean(
     name: "",
@@ -69,8 +70,7 @@ struct NewBeanView: View {
         .sheet(
           isPresented: $showNewRoaster,
           onDismiss: {
-            //TODO: CHANGE THE SELECTED ROASTER TO MOST RECENTLY ADDED
-            selectedRoasterValue = -1
+            selectedRoasterValue = newlySavedRoaster?.tagValue ?? -1
           }
         ) {
           NavigationStack {
@@ -78,6 +78,9 @@ struct NewBeanView: View {
               Task {
                 do {
                   try await fb.client.createRoasterInUser(roaster)
+                  await MainActor.run {
+                    newlySavedRoaster = roaster
+                  }
                   showNewRoaster = false
                 } catch {
                   Logger.fbClient.error("🚨 Can't create a new roaster. \(error, privacy: .public)")

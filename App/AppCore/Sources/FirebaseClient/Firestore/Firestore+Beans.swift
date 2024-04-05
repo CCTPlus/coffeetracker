@@ -18,7 +18,7 @@ extension FirebaseClientLive {
     let docRef = try userDoc()
     let beansCollectionRef = docRef.collection(Collection.beans.rawValue)
 
-    let newBeanRef = beansCollectionRef.document()
+    let newBeanRef = beansCollectionRef.document(bean.id.uuidString)
     try newBeanRef.setData(from: bean)
     try await newBeanRef.updateData(
       [

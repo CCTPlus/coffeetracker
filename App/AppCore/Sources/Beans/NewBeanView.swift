@@ -21,7 +21,7 @@ struct NewBeanView: View {
   /// - Roaster selected = hash value of `Roaster.id`
   /// - New Roaster selected = 0
   /// - No roaster selected = -1
-  @State private var selectedRoaster = -1
+  @State private var selectedRoasterValue = -1
   @State private var showNewRoaster = false
 
   @State private var newBean = Bean(
@@ -29,6 +29,10 @@ struct NewBeanView: View {
     website: "",
     roastStyle: .medium
   )
+
+  var selectedRoaster: Roaster? {
+    fb.client.roasters.first(where: { $0.tagValue == selectedRoasterValue })
+  }
 
   var body: some View {
     Form {
@@ -42,7 +46,7 @@ struct NewBeanView: View {
       }
 
       Section {
-        Picker("Roaster", selection: $selectedRoaster) {
+        Picker("Roaster", selection: $selectedRoasterValue) {
           Text("Select roaster")
             .tag(-1)
           ForEach(fb.client.roasters) { roaster in
@@ -52,20 +56,21 @@ struct NewBeanView: View {
           Text("New roaster")
             .tag(0)
         }
-        .onChange(of: selectedRoaster) { oldValue, newValue in
+        .onChange(of: selectedRoasterValue) { oldValue, newValue in
           switch newValue {
             case 0:
               showNewRoaster = true
             case -1:
               break
             default:
-              newBean.roaster = fb.client.roasters.first(where: { $0.tagValue == newValue })
+              newBean.roaster = selectedRoaster
           }
         }
         .sheet(
           isPresented: $showNewRoaster,
           onDismiss: {
-            selectedRoaster = -1
+            //TODO: CHANGE THE SELECTED ROASTER TO MOST RECENTLY ADDED
+            selectedRoasterValue = -1
           }
         ) {
           NavigationStack {
@@ -107,6 +112,9 @@ struct NewBeanView: View {
     newBean.fbRoastKey = newBean.roastStyle.fbKey
     do {
       try await fb.client.createBeanInUser(newBean)
+      if let selectedRoaster {
+        try await fb.client.addBeanToRoaster(selectedRoaster, bean: newBean)
+      }
       dismiss()
     } catch {
       Logger.fbClient.error("\(#function) \(error)")

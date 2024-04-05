@@ -10,8 +10,8 @@ extension FirebaseClientLive {
   public func createRoasterInUser(_ roaster: Roaster) async throws {
     let docRef = try userDoc()
     let roastersCollection = docRef.collection(Collection.roasters.rawValue)
+    let newRoaster = roastersCollection.document(roaster.id.uuidString)
 
-    let newRoaster = roastersCollection.document()
     try newRoaster.setData(from: roaster)
     try await newRoaster.updateData(
       [
@@ -19,6 +19,16 @@ extension FirebaseClientLive {
         "dateModified": FieldValue.serverTimestamp(),
       ]
     )
+  }
+
+  public func addBeanToRoaster(_ roaster: Roaster, bean: Bean) async throws {
+    let docRef = try userDoc()
+    let roastersCollection = docRef.collection(Collection.roasters.rawValue)
+    let existingRoaster = roastersCollection.document(roaster.id.uuidString)
+
+    try await existingRoaster.updateData([
+      "beanIDs": FieldValue.arrayUnion([bean.id.uuidString])
+    ])
   }
 
   func setupUserRoastersSnapshotListener() {

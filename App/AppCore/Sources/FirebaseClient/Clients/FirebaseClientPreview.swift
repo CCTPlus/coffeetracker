@@ -30,4 +30,8 @@ public class FirebaseClientPreview: FBClient {
   public func createRoasterInUser(_ roaster: Models.Roaster) async throws {
     Logger.fbClient.debug("Writing a roaster was successful")
   }
+
+  public func addBeanToRoaster(_ roaster: Models.Roaster, bean: Models.Bean) async throws {
+    Logger.fbClient.debug("Preview addBeanToRoaster works")
+  }
 }

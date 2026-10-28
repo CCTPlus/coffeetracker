@@ -13,6 +13,7 @@
 import SwiftUI
 import RevenueCat
 import StoreKit
+import TelemetryDeck
 
 extension UIApplication {
     var foregroundActiveScene: UIWindowScene? {
@@ -30,13 +31,19 @@ struct CoffeeTrackerApp: App {
     @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
 
     init() {
+        // TelemetryDeck has to be initialized first so RevenueCat gets the hashed user ID
+        Analytics.configure()
+
         Purchases.configure(withAPIKey: APIKeys.revenueCat)
         #if DEBUG
         Purchases.logLevel = .debug
         #else
         Purchases.logLevel = .info
         #endif
-        Analytics.configure()
+        Purchases.shared.attribution.setAttributes([
+            "$telemetryDeckUserId": TelemetryManager.shared.hashedDefaultUser,
+            "$telemetryDeckAppId": APIKeys.telemetryDeckAppID
+        ])
     }
 
     var body: some Scene {

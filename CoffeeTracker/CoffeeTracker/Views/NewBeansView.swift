@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Photos
+import PhotosUI
 import CoreData
 
 struct NewBeansView: View {
@@ -32,8 +32,7 @@ struct NewBeansView: View {
                                  image: UIImage())
 
     @State private var isImageSelected = false
-    @State var selectedImage = UIImage()
-    @State private var showingPhotoPicker = false
+    @State private var selectedPhoto: PhotosPickerItem?
 
     @FocusState private var focusField: Field?
 
@@ -46,23 +45,7 @@ struct NewBeansView: View {
             VStack(alignment: .leading, spacing: Design.base*2) {
                 Section("Bean Information") {
                     HStack(spacing: 10) {
-                        Button {
-                            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                                switch status {
-                                case .notDetermined:
-                                    print("Not determined")
-                                case .authorized:
-                                    showingPhotoPicker.toggle()
-                                case .restricted:
-                                    print("Restricted")
-                                case .denied:
-                                    print("DENIED")
-                                default:
-                                    print("\(status)")
-                                    print("IDK WHAT HAPPENED")
-                                }
-                            }
-                        } label: {
+                        PhotosPicker(selection: $selectedPhoto, matching: .images) {
                             if isImageSelected {
                                 Image(uiImage: beanOO.coffee.image)
                                     .resizable()
@@ -134,8 +117,13 @@ struct NewBeansView: View {
 
             }.padding()
 
-        }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
-            ImagePicker(selectedImage: $beanOO.coffee.image, isImageSelected: $isImageSelected)
+        }.background(.thinMaterial)
+        .task(id: selectedPhoto) {
+            guard let selectedPhoto,
+                  let data = try? await selectedPhoto.loadTransferable(type: Data.self),
+                  let image = UIImage(data: data) else { return }
+            beanOO.coffee.image = image
+            isImageSelected = true
         }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {

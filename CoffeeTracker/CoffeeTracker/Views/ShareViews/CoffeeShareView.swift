@@ -92,8 +92,6 @@ struct CoffeeShareView: View {
     }
 }
 
-struct CoffeeShareView_Previews: PreviewProvider {
-    static var previews: some View {
-        CoffeeShareView(coffee: testRoast)
-    }
+#Preview {
+    CoffeeShareView(coffee: testRoast)
 }

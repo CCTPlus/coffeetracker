@@ -114,19 +114,20 @@ struct BuyDevCoffeeSection: View {
     }
 }
 
-struct BuyDevCoffeeSection_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
+#Preview("Dark") {
+    ZStack {
+        Image("Background")
+            .resizable()
+            .ignoresSafeArea()
         BuyDevCoffeeSection().preferredColorScheme(.dark).padding()
-        }.preferredColorScheme(.dark)
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
+    }.preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    ZStack {
+        Image("Background")
+            .resizable()
+            .ignoresSafeArea()
         BuyDevCoffeeSection().preferredColorScheme(.dark).padding()
-        }.preferredColorScheme(.light)
-    }
+    }.preferredColorScheme(.light)
 }

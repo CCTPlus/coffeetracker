@@ -125,10 +125,8 @@ struct UserFeedbackView: View {
     }
 }
 
-struct UserFeedbackView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            UserFeedbackView()
-        }
+#Preview {
+    NavigationView {
+        UserFeedbackView()
     }
 }

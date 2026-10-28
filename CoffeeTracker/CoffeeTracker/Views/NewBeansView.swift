@@ -200,8 +200,6 @@ struct NewBeansView: View {
     }
 }
 
-struct NewBeansView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewBeansView(navRouter: NavigationRouter(), isEdit: true)
-    }
+#Preview {
+    NewBeansView(navRouter: NavigationRouter(), isEdit: true)
 }

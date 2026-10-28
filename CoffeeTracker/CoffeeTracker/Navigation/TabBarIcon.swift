@@ -54,13 +54,11 @@ struct TabBarIcon: View {
     }
 }
 
-struct TabBarIcon_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarIcon(navRouter: NavigationRouter(),
-                   assignedPage: .coffees,
-                   width: 100,
-                   height: 100,
-                   systemIcon: SFSymbols.list,
-                   tabName: "Coffee")
-    }
+#Preview {
+    TabBarIcon(navRouter: NavigationRouter(),
+               assignedPage: .coffees,
+               width: 100,
+               height: 100,
+               systemIcon: SFSymbols.list,
+               tabName: "Coffee")
 }

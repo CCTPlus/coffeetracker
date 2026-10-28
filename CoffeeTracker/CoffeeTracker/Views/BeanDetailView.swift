@@ -82,10 +82,8 @@ struct BeanDetailView: View {
     }
 }
 
-struct BeanDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: testRoast))
-        }
+#Preview {
+    NavigationView {
+        BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: testRoast))
     }
 }

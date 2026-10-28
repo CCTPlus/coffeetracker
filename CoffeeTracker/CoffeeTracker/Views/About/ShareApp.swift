@@ -33,14 +33,12 @@ struct ShareApp: View {
     }
 }
 
-struct ShareApp_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
-            ShareApp()
-                .padding()
-        }
+#Preview {
+    ZStack {
+        Image("Background")
+            .resizable()
+            .ignoresSafeArea()
+        ShareApp()
+            .padding()
     }
 }

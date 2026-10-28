@@ -71,35 +71,36 @@ struct BeanRowView: View {
     }
 }
 
-struct BeanRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
-            ScrollView {
-                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                    .padding(.vertical, Design.base/2)
-                    .padding(.horizontal)
-                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                    .padding(.vertical, Design.base/2)
-                    .padding(.horizontal)
-            }
+#Preview("Dark") {
+    ZStack {
+        Image("Background")
+            .resizable()
+            .ignoresSafeArea()
+        ScrollView {
+            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+                .padding(.vertical, Design.base/2)
+                .padding(.horizontal)
+            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+                .padding(.vertical, Design.base/2)
+                .padding(.horizontal)
         }
-        .preferredColorScheme(.dark)
-        ZStack {
-            Image("Background")
-                .resizable()
-                .ignoresSafeArea()
-            ScrollView {
-                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                    .padding(.vertical, Design.base/2)
-                    .padding(.horizontal)
-                BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                    .padding(.vertical, Design.base/2)
-                    .padding(.horizontal)
-            }
-        }
-        .preferredColorScheme(.light)
     }
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    ZStack {
+        Image("Background")
+            .resizable()
+            .ignoresSafeArea()
+        ScrollView {
+            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+                .padding(.vertical, Design.base/2)
+                .padding(.horizontal)
+            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+                .padding(.vertical, Design.base/2)
+                .padding(.horizontal)
+        }
+    }
+    .preferredColorScheme(.light)
 }

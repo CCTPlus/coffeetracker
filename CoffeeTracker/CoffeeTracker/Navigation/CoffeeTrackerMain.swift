@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CoffeeTrackerMain: View {
     @AppStorage("showNewView") var showNewView: Bool = true
@@ -110,8 +111,6 @@ struct CoffeeTrackerMain: View {
     }
 }
 
-struct CoffeeTrackerMain_Previews: PreviewProvider {
-    static var previews: some View {
-        CoffeeTrackerMain(navRouter: NavigationRouter())
-    }
+#Preview {
+    CoffeeTrackerMain(navRouter: NavigationRouter())
 }

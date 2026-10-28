@@ -140,6 +140,9 @@ struct NewBeansView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel", role: .close) {
+                    if !isEdit {
+                        Analytics.coffeeAddCancelled.send()
+                    }
                     dismiss()
                 }
             }
@@ -161,9 +164,11 @@ struct NewBeansView: View {
         } else {
             if isEdit {
                 beanOO.coffee.updateBean(context: viewContext)
+                Analytics.coffeeEdited.send()
                 dismiss()
             } else {
                 beanOO.coffee.addBeansToData(context: viewContext)
+                Analytics.coffeeAdded(beanOO.coffee).send()
                 resetBeans()
                 dismiss()
             }

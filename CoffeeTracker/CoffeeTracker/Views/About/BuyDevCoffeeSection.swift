@@ -136,8 +136,11 @@ struct BuyDevCoffeeSection: View {
     Button {
       guard let package else { return }
       Purchases.shared.purchase(package: package) { _, _, error, userCancelled in
-        if error == nil && userCancelled == false {
+        if userCancelled {
+          Analytics.tipJarCancelled.send()
+        } else if error == nil {
           cupsPurchased += 1
+          Analytics.tipJarPurchased.send()
         }
       }
     } label: {

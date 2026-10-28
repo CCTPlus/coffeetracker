@@ -2,7 +2,7 @@
 //  ActivityView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 3/22/22.
+//  Created by Jay Wilson on 3/22/22.
 //
 
 import SwiftUI

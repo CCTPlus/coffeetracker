@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  BeanRowViewModel.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 4/6/22.
+//  Created by Jay Wilson on 4/6/22.
 //
 
 import SwiftUI

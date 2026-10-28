@@ -2,7 +2,7 @@
 //  WhatsNewView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 4/12/22.
+//  Created by Jay Wilson on 4/12/22.
 //
 
 import SwiftUI

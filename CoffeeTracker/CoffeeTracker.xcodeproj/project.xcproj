@@ -29,6 +29,12 @@
       "version": {
         "up-to-next-major-version": "2.14.2",
       },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/twostraws/KickstartSDK",
+      "version": {
+        "up-to-next-major-version": "0.6.0",
+      },
     },
   ],
   "files": [
@@ -103,6 +109,7 @@
           "children": [
             { "path": "SFSymbolHelper.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
             { "path": "Analytics.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "TipHistory.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         },
         { "path": "Info.plist" },
@@ -176,6 +183,10 @@
       ],
       "package-product-members": [
         {
+          "package": "KickstartSDK",
+          "product-name": "KickstartExchange",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "package": "octokit",
           "product-name": "OctoKit",
           "build-phase": { "build-phase": "frameworks" },

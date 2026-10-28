@@ -23,6 +23,12 @@
       "version": {
         "up-to-next-major-version": "0.9.0",
       },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/TelemetryDeck/SwiftSDK",
+      "version": {
+        "up-to-next-major-version": "2.14.2",
+      },
     },
   ],
   "files": [
@@ -97,6 +103,7 @@
           "path": "Helpers",
           "children": [
             { "path": "SFSymbolHelper.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "Analytics.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         },
         { "path": "Info.plist" },
@@ -176,6 +183,10 @@
         }, {
           "package": "purchases-ios",
           "product-name": "RevenueCat",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "SwiftSDK",
+          "product-name": "TelemetryDeck",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],

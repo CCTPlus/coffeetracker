@@ -36,6 +36,7 @@ struct CoffeeTrackerApp: App {
         #else
         Purchases.logLevel = .info
         #endif
+        Analytics.configure()
     }
 
     var body: some Scene {
@@ -44,6 +45,7 @@ struct CoffeeTrackerApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(beansVM)
                 .task {
+                    Analytics.appOpened(libraryCount: beansVM.beans.count).send()
                     timesLaunched += 1
                     if timesLaunched > 5 {
                         guard let scene = UIApplication.shared.foregroundActiveScene else { return }

@@ -116,6 +116,7 @@ struct UserFeedbackView: View {
             switch response {
             case .success:
                 buttonState = .sent
+                Analytics.feedbackSubmitted(type: selectedFeedbackType == .bug ? "bug" : "feature").send()
             case .failure(let error):
                 print(error)
                 errorText = "No summary given."

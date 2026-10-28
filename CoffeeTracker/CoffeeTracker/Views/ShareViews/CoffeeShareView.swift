@@ -36,6 +36,7 @@ struct CoffeeShareView: View {
                                                          showWatermark: $showWatermark,
                                                          coffee: coffee).asImage()
                         actionSheet(image: image)
+                        Analytics.coffeeShared.send()
                     } label: {
                         HStack {
                             Spacer()

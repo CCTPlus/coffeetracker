@@ -33,6 +33,7 @@ struct CoffeeTrackerMain: View {
           ToolbarItem(placement: .topBarTrailing) {
             Menu {
               Button {
+                Analytics.tipJarOpened.send()
                 withAnimation {
                   showingDevCoffee = true
                 }
@@ -40,22 +41,26 @@ struct CoffeeTrackerMain: View {
                 Label("Buy the dev a coffee", systemImage: SFSymbols.coffee)
               }
               Button {
+                Analytics.appShareTapped.send()
                 showingShare = true
               } label: {
                 Label("Share coffee_", systemImage: SFSymbols.share)
               }
               Button {
                 guard let writeReviewURL = URL(string: Urls.review) else { return }
+                Analytics.reviewTapped.send()
                 openURL(writeReviewURL)
               } label: {
                 Label("Leave Review", systemImage: SFSymbols.starLeadingHalfFilled)
               }
               Button {
+                Analytics.feedbackOpened.send()
                 showingFeedback = true
               } label: {
                 Label("Send Feedback", systemImage: SFSymbols.plane)
               }
               Button {
+                Analytics.releaseNotesViewed(source: .menu).send()
                 showingReleaseNotes = true
               } label: {
                 Label("Release Notes", systemImage: SFSymbols.star)
@@ -102,6 +107,7 @@ struct CoffeeTrackerMain: View {
           // Only show after an update, and only when this version has notes. Fresh installs skip it.
           if let lastSeenVersion, lastSeenVersion != currentVersion, releaseNotes != nil {
             showNewView = true
+            Analytics.releaseNotesViewed(source: .auto).send()
           }
           lastSeenVersion = currentVersion
         }

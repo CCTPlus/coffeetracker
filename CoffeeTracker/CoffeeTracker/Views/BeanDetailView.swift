@@ -37,7 +37,10 @@ struct BeanDetailView: View {
                     Label("Share", systemImage: SFSymbols.share)
                 }
                 Spacer()
-                Button(role: .destructive) { beanOO.coffee.deleteBean(context: viewContext) } label: {
+                Button(role: .destructive) {
+                    beanOO.coffee.deleteBean(context: viewContext)
+                    Analytics.coffeeDeleted.send()
+                } label: {
                     Label("Delete", systemImage: SFSymbols.trash)
                         .labelStyle(.iconOnly)
                 }

@@ -17,6 +17,8 @@ enum SFSymbols {
   static let share = "square.and.arrow.up"
   static let photo = "photo"
   static let coffee = "cup.and.saucer.fill"
+  static let coffeeSteaming = "cup.and.heat.waves"
+  static let xmark = "xmark"
   static let plane = "paperplane"
   static let list = "list.dash.header.rectangle"
   static let info = "info.circle"

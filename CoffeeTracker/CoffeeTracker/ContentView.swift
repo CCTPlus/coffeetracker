@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 import SwiftUI
@@ -85,8 +85,6 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+#Preview {
+    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

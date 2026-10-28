@@ -2,7 +2,7 @@
 //  Constants.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 3/18/22.
+//  Created by Jay Wilson on 3/18/22.
 //
 
 import Foundation
@@ -14,6 +14,7 @@ enum APIKeys {
 
 enum Design {
     static let base: CGFloat = 10
+    static let thumbnail: CGFloat = 76
 }
 
 enum ASKeys {
@@ -22,4 +23,5 @@ enum ASKeys {
 
 enum Urls {
     static let review = "https://apps.apple.com/us/app/coffee/id1611166034?action=write-review"
+    static let appStore = "https://apps.apple.com/us/app/coffee/id1611166034"
 }

@@ -2,90 +2,67 @@
 //  BeanDetailView.swift
 //
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 import SwiftUI
 
 struct BeanDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.colorScheme) private var colorScheme
 
-    @StateObject var navRouter: NavigationRouter
     @StateObject var beanOO: NewBeanOO
     @State private var showEditView = false
     @State private var showShareView = false
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: Design.base) {
+            VStack(alignment: .leading, spacing: Design.base/2) {
+                LabeledContent("Bought", value: beanOO.coffee.boughtOn.formatted(date: .abbreviated, time: .omitted))
+                LabeledContent("Roasted", value: beanOO.coffee.roastedOn.formatted(date: .abbreviated, time: .omitted))
+            }
+            .font(.subheadline)
 
-            Group {
-                HStack {
-                    Text("Bought on")
-                    Spacer()
-                    Text(beanOO.coffee.boughtOn.formatted(
-                        .iso8601
-                            .month()
-                            .day()
-                            .year()
-                            .dateSeparator(.dash))
-                    )
-                }
-                HStack {
-                    Text("Roasted on")
-                    Spacer()
-                    Text(beanOO.coffee.roastedOn.formatted(
-                        .iso8601
-                            .month()
-                            .day()
-                            .year()
-                            .dateSeparator(.dash))
-                    )
-                }
-                if beanOO.coffee.notes.count > 0 {
-                    VStack(alignment: .leading) {
-                        Text("Notes")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .padding(.bottom, Design.base/4)
-                        Text(beanOO.coffee.notes)
-                            .lineLimit(nil)
-                    }
-                }
-            }.padding(.all)
+            if beanOO.coffee.notes.count > 0 {
+                Text(beanOO.coffee.notes)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(nil)
+            }
 
-            HStack {
-                Button { showShareView.toggle() }  label: {
-                    Image(systemName: SFSymbols.share)
-                }.sheet(isPresented: $showShareView) {
-                    CoffeeShareView(coffee: beanOO.coffee)
-                }
-                Spacer()
-                Button { beanOO.coffee.deleteBean(context: viewContext) } label: {
-                    Image(systemName: SFSymbols.trash)
-                }
-                Spacer()
+            HStack(spacing: Design.base) {
                 Button { showEditView.toggle() } label: {
-                    Image(systemName: SFSymbols.pencil)
-                }.foregroundColor(colorScheme == .dark ? .white : .accentColor)
-            }.padding()
-                .background(.thickMaterial)
-                .cornerRadius(Design.base,
-                              corners: [.bottomLeft, .bottomRight])
-                .sheet(isPresented: $showEditView) {
-                    showEditView = false
-                } content: {
-                    NewBeansView(navRouter: navRouter, beans: beanOO.coffee, isEdit: true)
-                        .environmentObject(beanOO)
+                    Label("Edit", systemImage: SFSymbols.pencil)
                 }
+                Button { showShareView.toggle() } label: {
+                    Label("Share", systemImage: SFSymbols.share)
+                }
+                Spacer()
+                Button(role: .destructive) { beanOO.coffee.deleteBean(context: viewContext) } label: {
+                    Label("Delete", systemImage: SFSymbols.trash)
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .buttonStyle(.borderless)
+            .font(.subheadline.weight(.semibold))
+            .padding(.top, Design.base/2)
+        }
+        .sheet(isPresented: $showShareView) {
+            CoffeeShareView(coffee: beanOO.coffee)
+        }
+        .sheet(isPresented: $showEditView) {
+            showEditView = false
+        } content: {
+            NavigationStack {
+                NewBeansView(beans: beanOO.coffee, isEdit: true)
+                    .environmentObject(beanOO)
+                    .navigationTitle("Edit Coffee")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
         }
     }
 }
 
-struct BeanDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: testRoast))
-        }
-    }
+#Preview {
+    BeanDetailView(beanOO: NewBeanOO(bean: testRoast))
+        .padding()
 }

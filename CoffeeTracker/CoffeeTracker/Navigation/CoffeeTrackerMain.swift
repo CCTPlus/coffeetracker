@@ -2,116 +2,135 @@
 //  CoffeeTrackerMain.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 import SwiftUI
+import CoreData
 
 struct CoffeeTrackerMain: View {
     @AppStorage("showNewView") var showNewView: Bool = true
     @AppStorage("lastSeenVersion") var version: String = "1.0"
 
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.openURL) private var openURL
 
-    @StateObject var navRouter: NavigationRouter
-
-    @State private var showButtons = false
+    @State private var showingNewBean = false
+    @State private var showingDevCoffee = false
+    @State private var showingShare = false
+    @State private var showingFeedback = false
+    @State private var showingReleaseNotes = false
     @StateObject var beanOO = NewBeanOO(bean: nil)
 
-    var plusRotation: Double {
-        return navRouter.currentPage == .newBeans ? 45 : 0
-    }
-
-    var addButtonColor: Color {
-        return navRouter.currentPage == .newBeans ? Color.red : Color.accentColor
-    }
-
     var body: some View {
-        GeometryReader { geometry in
-            NavigationView {
-                ZStack(alignment: .bottom) {
-                    Image("Background")
-                        .resizable()
-                        .opacity(0.9)
-                        .ignoresSafeArea()
-                    VStack {
-                        switch navRouter.currentPage {
-                        case .coffees:
-                            CoffeeListView()
-                                .popover(isPresented: $showNewView) {
-                                    WhatsNewView()
-                                        .onDisappear {
-                                            showNewView = false
-                                        }
-                                }
-                        case .info:
-                            AboutView()
-                        case .newBeans:
-                            NewBeansView(navRouter: navRouter)
-                                .environmentObject(beanOO)
-                        }
-                    }.onAppear {
-                        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-                        guard let currentVersion = currentVersion else {
-                            return
-                        }
-                        if currentVersion != version {
-                            showNewView = true
-                            version = currentVersion
-                        } else {
+        NavigationStack {
+            CoffeeListView()
+                .popover(isPresented: $showNewView) {
+                    WhatsNewView()
+                        .onDisappear {
                             showNewView = false
-                            version = currentVersion
                         }
-                    }
-                    HStack(alignment: .bottom) {
-                        TabBarIcon(navRouter: navRouter,
-                                   assignedPage: .coffees,
-                                   width: geometry.size.width/5,
-                                   height: geometry.size.height/28,
-                                   systemIcon: SFSymbols.list,
-                                   tabName: "Coffee")
-                        ZStack {
+                }
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
                             Button {
                                 withAnimation {
-                                    if navRouter.currentPage == .newBeans {
-                                        navRouter.currentPage = .coffees
-                                    } else {
-                                        navRouter.currentPage = .newBeans
-                                    }
+                                    showingDevCoffee = true
                                 }
                             } label: {
-                                Image(systemName: SFSymbols.plus)
-                                    .font(.largeTitle)
-                                    .foregroundColor(.bone)
-                                    .background(Circle()
-                                        .fill(addButtonColor)
-                                        .frame(width: geometry.size.width/7, height: geometry.size.width/7))
-                                    .padding(12)
-                                    .shadow(radius: 8, x: 4, y: 4)
-                                    .rotationEffect(Angle.degrees(plusRotation))
-                            }.padding(20)
-                                .tint(.white)
+                                Label("Buy the developer a coffee", systemImage: SFSymbols.coffee)
+                            }
+                            Button {
+                                showingShare = true
+                            } label: {
+                                Label("Share coffee_", systemImage: SFSymbols.share)
+                            }
+                            Button {
+                                guard let writeReviewURL = URL(string: Urls.review) else { return }
+                                openURL(writeReviewURL)
+                            } label: {
+                                Label("Leave Review", systemImage: SFSymbols.starLeadingHalfFilled)
+                            }
+                            Button {
+                                showingFeedback = true
+                            } label: {
+                                Label("Send Feedback", systemImage: SFSymbols.plane)
+                            }
+                            Button {
+                                showingReleaseNotes = true
+                            } label: {
+                                Label("Release Notes", systemImage: SFSymbols.star)
+                            }
+                        } label: {
+                            Label("More", systemImage: SFSymbols.ellipsis)
                         }
-                        .offset(y: -geometry.size.height/8/2)
-                        TabBarIcon(navRouter: navRouter,
-                                   assignedPage: .info,
-                                   width: geometry.size.width/5,
-                                   height: geometry.size.height/28,
-                                   systemIcon: SFSymbols.info,
-                                   tabName: "About")
-
-                    }.frame(width: geometry.size.width, height: geometry.size.height/8)
-                        .background(.ultraThinMaterial)
+                    }
+                    ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showingNewBean = true
+                        } label: {
+                            Label("Add Coffee", systemImage: SFSymbols.plus)
+                        }
+                        .buttonStyle(.glassProminent)
+                    }
                 }
-                .edgesIgnoringSafeArea(.bottom)
-                .padding(.horizontal, -4)
+                .sheet(isPresented: $showingShare) {
+                    ActivityView(activityItems: [NSURL(string: Urls.appStore)!] as [Any],
+                                 applicationActivities: nil)
+                }
+                .sheet(isPresented: $showingFeedback) {
+                    UserFeedbackView()
+                }
+                .sheet(isPresented: $showingReleaseNotes) {
+                    WhatsNewView()
+                }
+                .sheet(isPresented: $showingNewBean) {
+                    NavigationStack {
+                        NewBeansView()
+                            .environmentObject(beanOO)
+                            .navigationTitle("New Coffee")
+                            .navigationBarTitleDisplayMode(.inline)
+                    }
+                }
+                .onAppear {
+                    let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+                    guard let currentVersion = currentVersion else {
+                        return
+                    }
+                    if currentVersion != version {
+                        showNewView = true
+                        version = currentVersion
+                    } else {
+                        showNewView = false
+                        version = currentVersion
+                    }
+                }
+        }
+        .overlay {
+            if showingDevCoffee {
+                ZStack {
+                    Color.black.opacity(0.3)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                showingDevCoffee = false
+                            }
+                        }
+                        .accessibilityLabel("Close")
+                        .accessibilityAddTraits(.isButton)
+                    BuyDevCoffeeSection()
+                        .background(Color.canvas.opacity(0.3), in: RoundedRectangle(cornerRadius: 10))
+                        .padding()
+                }
+                .transition(.opacity)
             }
         }
     }
 }
 
-struct CoffeeTrackerMain_Previews: PreviewProvider {
-    static var previews: some View {
-        CoffeeTrackerMain(navRouter: NavigationRouter())
-    }
+#Preview {
+    CoffeeTrackerMain()
+        .environmentObject(BeansCollectionViewOO(context: PersistenceController.preview.container.viewContext))
 }

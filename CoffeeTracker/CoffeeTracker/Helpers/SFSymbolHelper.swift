@@ -2,7 +2,7 @@
 //  SFSymbolHelper.swift
 //
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 import Foundation
@@ -20,6 +20,7 @@ enum SFSymbols {
     static let plane = "paperplane"
     static let list = "list.dash.header.rectangle"
     static let info = "info.circle"
+    static let ellipsis = "ellipsis"
     static let rectRoundedBottom = "rectangle.roundedbottom"
     static let star = "star"
     static let starLeadingHalfFilled = "star.leadinghalf.filled"

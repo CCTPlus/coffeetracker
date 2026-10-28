@@ -2,7 +2,7 @@
 //  CoffeeShareImageView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 4/14/22.
+//  Created by Jay Wilson on 4/14/22.
 //
 
 import SwiftUI
@@ -126,13 +126,11 @@ struct CoffeeShareImageView: View {
     }
 }
 
-struct CoffeeShareImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        CoffeeShareImageView(showBoughtDate: .constant(true),
-                             showRoastedDate: .constant(true),
-                             showNotes: .constant(true),
-                             showWatermark: .constant(true),
-                             coffee: testRoast)
-            .padding()
-    }
+#Preview {
+    CoffeeShareImageView(showBoughtDate: .constant(true),
+                         showRoastedDate: .constant(true),
+                         showNotes: .constant(true),
+                         showWatermark: .constant(true),
+                         coffee: testRoast)
+        .padding()
 }

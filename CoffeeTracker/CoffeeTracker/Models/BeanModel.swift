@@ -15,6 +15,15 @@ struct BeanModel: Identifiable, Hashable {
     var objectID: NSManagedObjectID?
     var image: UIImage
 
+    /// Beans without a photo use an SF Symbol or empty image, and older edits saved that symbol as a tiny JPEG
+    var hasPhoto: Bool {
+        !image.isSymbolImage && min(image.size.width, image.size.height) * image.scale >= 100
+    }
+
+    var photoData: Data? {
+        hasPhoto ? image.jpegData(compressionQuality: 1) : nil
+    }
+
     mutating func updateNotes(_ note: String) {
         notes = note
     }
@@ -31,7 +40,7 @@ struct BeanModel: Identifiable, Hashable {
         newBean.boughtOn = boughtOn
         newBean.notes = notes
         newBean.beanType = beanType
-        newBean.beanPhoto = image.jpegData(compressionQuality: 1)
+        newBean.beanPhoto = photoData
 
         self.objectID = newBean.objectID
 
@@ -63,7 +72,7 @@ struct BeanModel: Identifiable, Hashable {
                 object.boughtOn = boughtOn
                 object.notes = notes
                 object.beanType = beanType
-                object.beanPhoto = image.jpegData(compressionQuality: 1)
+                object.beanPhoto = photoData
                 try context.save()
             }
         } catch {

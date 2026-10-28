@@ -2,7 +2,7 @@
 //  UserFeedback.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 3/21/22.
+//  Created by Jay Wilson on 3/21/22.
 //
 
 import SwiftUI
@@ -125,10 +125,8 @@ struct UserFeedbackView: View {
     }
 }
 
-struct UserFeedbackView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            UserFeedbackView()
-        }
+#Preview {
+    NavigationView {
+        UserFeedbackView()
     }
 }

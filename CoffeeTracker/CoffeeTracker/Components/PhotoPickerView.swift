@@ -2,7 +2,7 @@
 //  PhotoPickerView.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 3/8/2022.
+//  Created by Jay Wilson on 3/8/2022.
 //
 
 import UIKit

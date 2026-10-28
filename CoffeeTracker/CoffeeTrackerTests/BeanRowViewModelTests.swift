@@ -2,7 +2,7 @@
 //  CoffeeTrackerTests.swift
 //  CoffeeTrackerTests
 //
-//  Created by Maegan Wilson on 4/6/22.
+//  Created by Jay Wilson on 4/6/22.
 //
 
 import XCTest

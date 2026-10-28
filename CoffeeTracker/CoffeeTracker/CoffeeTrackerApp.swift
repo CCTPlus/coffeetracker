@@ -2,7 +2,7 @@
 //  CoffeeTrackerApp.swift
 //  CoffeeTracker
 //
-//  Created by Maegan Wilson on 2/21/22.
+//  Created by Jay Wilson on 2/21/22.
 //
 
 /*
@@ -28,7 +28,6 @@ struct CoffeeTrackerApp: App {
     let persistenceController = PersistenceController.shared
 
     @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
-    @StateObject var navRouter = NavigationRouter()
 
     init() {
         Purchases.configure(withAPIKey: APIKeys.revenueCat)
@@ -41,7 +40,7 @@ struct CoffeeTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CoffeeTrackerMain(navRouter: navRouter)
+            CoffeeTrackerMain()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(beansVM)
                 .task {

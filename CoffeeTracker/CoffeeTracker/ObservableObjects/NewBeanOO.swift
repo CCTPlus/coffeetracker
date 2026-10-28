@@ -16,7 +16,7 @@ final class NewBeanOO: ObservableObject {
     var isEditing: Bool
     /// Yes Button Foreground Color
     var yesButtonFGColor: Color {
-        coffee.buyAgain ? .black : .accentColor
+        coffee.buyAgain ? .white : .accentColor
     }
     /// Yes Button Foreground Color
     var yesButtonBGColor: Color {
@@ -24,7 +24,7 @@ final class NewBeanOO: ObservableObject {
     }
     /// No Button Foreground Color
     var noButtonFGColor: Color {
-        coffee.buyAgain ? .accentColor : .black
+        coffee.buyAgain ? .accentColor : .white
     }
     /// No Button Background Color
     var noButtonBGColor: Color {

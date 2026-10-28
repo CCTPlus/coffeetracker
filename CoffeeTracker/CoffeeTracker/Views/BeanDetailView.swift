@@ -52,8 +52,12 @@ struct BeanDetailView: View {
         .sheet(isPresented: $showEditView) {
             showEditView = false
         } content: {
-            NewBeansView(beans: beanOO.coffee, isEdit: true)
-                .environmentObject(beanOO)
+            NavigationStack {
+                NewBeansView(beans: beanOO.coffee, isEdit: true)
+                    .environmentObject(beanOO)
+                    .navigationTitle("Edit Coffee")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
         }
     }
 }

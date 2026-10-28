@@ -92,13 +92,6 @@ struct CoffeeTrackerMain: View {
                             .environmentObject(beanOO)
                             .navigationTitle("New Coffee")
                             .navigationBarTitleDisplayMode(.inline)
-                            .toolbar {
-                                ToolbarItem(placement: .cancellationAction) {
-                                    Button("Cancel") {
-                                        showingNewBean = false
-                                    }
-                                }
-                            }
                     }
                 }
                 .onAppear {

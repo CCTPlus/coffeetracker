@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Photos
+import CoreData
 
 struct NewBeansView: View {
 
@@ -114,13 +115,13 @@ struct NewBeansView: View {
                                 }.padding()
                                     .foregroundColor(beanOO.yesButtonFGColor)
                                     .background(beanOO.yesButtonBGColor)
-                                    .cornerRadius(5)
+                                    .cornerRadius(24)
                                 Button("No") {
                                     beanOO.coffee.buyAgain = false
                                 }.padding()
                                     .foregroundColor(beanOO.noButtonFGColor)
                                     .background(beanOO.noButtonBGColor)
-                                    .cornerRadius(5)
+                                    .cornerRadius(24)
                             }
                         }
                     }
@@ -130,53 +131,43 @@ struct NewBeansView: View {
                         .frame(height: 100.0)
                         .cornerRadius(10)
                 }
-                HStack {
-                    if isEdit {
-                        Spacer()
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("Cancel")
-                                .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
-                        }.buttonStyle(BorderedButtonStyle())
-                            .background(Color.red)
-                            .cornerRadius(5)
-                            .tint(.white)
-                    }
-                    Spacer()
-                    Button {
-                        if beanOO.coffee.name.isEmpty {
-                            focusField = .name
-                        } else if beanOO.coffee.style.isEmpty {
-                            focusField = .style
-                        } else if beanOO.coffee.roaster.isEmpty {
-                            focusField = .roaster
-                        } else {
-                            if isEdit {
-                                beanOO.coffee.updateBean(context: viewContext)
-                                dismiss()
-                            } else {
-                                beanOO.coffee.addBeansToData(context: viewContext)
-                                resetBeans()
-                                dismiss()
-                            }
-                            focusField = nil // dismisses keyboard
-                        }
-
-                    } label: {
-                        Text("Save")
-                            .frame(width: Design.base*10, height: Design.base*2, alignment: .center)
-                    }.buttonStyle(BorderedButtonStyle())
-                        .background(Color.green)
-                        .cornerRadius(5)
-                        .tint(.white)
-                    Spacer()
-                }
 
             }.padding()
 
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
             ImagePicker(selectedImage: $beanOO.coffee.image, isImageSelected: $isImageSelected)
+        }
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel", role: .close) {
+                    dismiss()
+                }
+            }
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save", role: .confirm) {
+                    save()
+                }
+            }
+        }
+    }
+
+    func save() {
+        if beanOO.coffee.name.isEmpty {
+            focusField = .name
+        } else if beanOO.coffee.style.isEmpty {
+            focusField = .style
+        } else if beanOO.coffee.roaster.isEmpty {
+            focusField = .roaster
+        } else {
+            if isEdit {
+                beanOO.coffee.updateBean(context: viewContext)
+                dismiss()
+            } else {
+                beanOO.coffee.addBeansToData(context: viewContext)
+                resetBeans()
+                dismiss()
+            }
+            focusField = nil // dismisses keyboard
         }
     }
 
@@ -194,5 +185,7 @@ struct NewBeansView: View {
 }
 
 #Preview {
-    NewBeansView(isEdit: true)
+    NavigationStack {
+        NewBeansView(isEdit: true)
+    }
 }

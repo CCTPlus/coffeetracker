@@ -61,10 +61,8 @@
               "kind": "group",
               "path": "About",
               "children": [
-                { "path": "AboutView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
                 { "path": "BuyDevCoffeeSection.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
                 { "path": "UserFeedback.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-                { "path": "ShareApp.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
                 { "path": "WhatsNewView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
               ],
             },
@@ -77,8 +75,6 @@
           "path": "Navigation",
           "children": [
             { "path": "CoffeeTrackerMain.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "NavigationRouter.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "TabBarIcon.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         }, {
           "kind": "group",

@@ -12,14 +12,6 @@ final class BeanRowViewOO: ObservableObject {
 
     let bean: BeanModel
 
-    var bottomPadding: CGFloat {
-        if !showDetails {
-            return Design.base
-        } else {
-            return 0
-        }
-    }
-
     var coffeeTypeIcon: Image {
         switch bean.beanType {
         case "pods":
@@ -33,6 +25,26 @@ final class BeanRowViewOO: ObservableObject {
 
     var image: UIImage {
         bean.image
+    }
+
+    var hasPhoto: Bool {
+        bean.hasPhoto
+    }
+
+    var beanTypeName: String {
+        switch bean.beanType {
+        case "beans":
+            return "Whole bean"
+        default:
+            return bean.beanType.capitalized
+        }
+    }
+
+    /// Style and bean type combined, e.g. "Dark roast · Grounds"
+    var metadata: String {
+        [bean.style, beanTypeName]
+            .filter { !$0.isEmpty }
+            .joined(separator: " · ")
     }
 
     var name: String {

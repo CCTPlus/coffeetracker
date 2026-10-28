@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 struct BeanRowView: View {
-    @Environment(\.colorScheme) private var colorScheme
-
     @StateObject var oo: BeanRowViewOO
 
     var tap: some Gesture {
@@ -23,84 +21,85 @@ struct BeanRowView: View {
     }
 
     var body: some View {
-        VStack {
-            HStack(alignment: .top, spacing: Design.base*2) {
-                Image(uiImage: oo.image)
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(Design.base)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black.opacity(0.5), lineWidth: 0.5))
-                    .frame(maxWidth: Design.base*10)
-                VStack(alignment: .leading, spacing: Design.base/2) {
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading) {
-                            Text(oo.name)
-                                .font(.headline)
-                            Text(oo.roaster)
-                                .font(.subheadline)
-                                .padding(.bottom, Design.base)
-                        }
-                        Spacer()
-                        if oo.buyAgain {
-                            Image(systemName: SFSymbols.thumbsup)
-                                .opacity(0.60)
-                        }
-                    }
-                    HStack(alignment: .bottom) {
-                        Text(oo.style)
+        VStack(spacing: Design.base) {
+            HStack(alignment: .center, spacing: Design.base*1.4) {
+                thumbnail
+                VStack(alignment: .leading, spacing: Design.base/5) {
+                    Text(oo.name)
+                        .font(.headline)
+                    Text(oo.roaster)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    if !oo.metadata.isEmpty {
+                        Text(oo.metadata)
                             .font(.footnote)
-                        Spacer()
-                        oo.coffeeTypeIcon
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20, height: 20, alignment: .center)
-                            .opacity(0.5)
+                            .foregroundStyle(.secondary)
+                            .padding(.top, Design.base/5)
                     }
                 }
-            }.padding(.horizontal, Design.base).padding(.top, Design.base)
-                .padding(.bottom, oo.bottomPadding)
-
-            if oo.showDetails {
-                BeanDetailView(navRouter: NavigationRouter(), beanOO: NewBeanOO(bean: oo.bean))
+                Spacer()
+                if oo.buyAgain {
+                    Image(systemName: SFSymbols.thumbsup)
+                        .foregroundStyle(.secondary)
+                        .accessibilityLabel("Would buy again")
+                }
             }
 
-        }.frame(maxWidth: .infinity)
-            .row(padding: false)
-            .gesture(tap)
+            if oo.showDetails {
+                BeanDetailView(beanOO: NewBeanOO(bean: oo.bean))
+                    .padding(.leading, Design.thumbnail + Design.base*1.4)
+            }
+        }
+        .padding(.vertical, Design.base*1.2)
+        .frame(maxWidth: .infinity)
+        .contentShape(Rectangle())
+        .gesture(tap)
+    }
+
+    @ViewBuilder
+    private var thumbnail: some View {
+        let shape = RoundedRectangle(cornerRadius: Design.base*1.2, style: .continuous)
+        if oo.hasPhoto {
+            Image(uiImage: oo.image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: Design.thumbnail, height: Design.thumbnail)
+                .clipShape(shape)
+        } else {
+            shape
+                .fill(Color.placeholderTile)
+                .frame(width: Design.thumbnail, height: Design.thumbnail)
+                .overlay {
+                    oo.coffeeTypeIcon
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(Design.base*2.2)
+                        .foregroundStyle(Color.placeholderIcon)
+                }
+                .accessibilityHidden(true)
+        }
     }
 }
 
 #Preview("Dark") {
-    ZStack {
-        Image("Background")
-            .resizable()
-            .ignoresSafeArea()
-        ScrollView {
-            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                .padding(.vertical, Design.base/2)
-                .padding(.horizontal)
-            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                .padding(.vertical, Design.base/2)
-                .padding(.horizontal)
-        }
+    ScrollView {
+        BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+            .padding(.horizontal)
+        BeanRowView(oo: BeanRowViewOO(bean: mediumRoast))
+            .padding(.horizontal)
     }
+    .background(Color.canvas)
     .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    ZStack {
-        Image("Background")
-            .resizable()
-            .ignoresSafeArea()
-        ScrollView {
-            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                .padding(.vertical, Design.base/2)
-                .padding(.horizontal)
-            BeanRowView(oo: BeanRowViewOO(bean: testRoast))
-                .padding(.vertical, Design.base/2)
-                .padding(.horizontal)
-        }
+    ScrollView {
+        BeanRowView(oo: BeanRowViewOO(bean: testRoast))
+            .padding(.horizontal)
+        BeanRowView(oo: BeanRowViewOO(bean: mediumRoast))
+            .padding(.horizontal)
     }
+    .background(Color.canvas)
     .preferredColorScheme(.light)
 }

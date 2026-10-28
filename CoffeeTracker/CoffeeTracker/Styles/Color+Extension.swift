@@ -11,4 +11,7 @@ import SwiftUI
 extension Color {
     static let bone = Color("Bone")
     static let sage = Color("Sage")
+    static let canvas = Color("Canvas")
+    static let placeholderTile = Color("PlaceholderTile")
+    static let placeholderIcon = Color("PlaceholderIcon")
 }

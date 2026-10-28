@@ -20,8 +20,6 @@ struct NewBeansView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var beanOO: NewBeanOO
 
-    @StateObject var navRouter: NavigationRouter
-
     @State var beans = BeanModel(name: "",
                                  style: "",
                                  buyAgain: false,
@@ -159,8 +157,8 @@ struct NewBeansView: View {
                                 dismiss()
                             } else {
                                 beanOO.coffee.addBeansToData(context: viewContext)
-                                navRouter.currentPage = .coffees
                                 resetBeans()
+                                dismiss()
                             }
                             focusField = nil // dismisses keyboard
                         }
@@ -176,11 +174,6 @@ struct NewBeansView: View {
                 }
 
             }.padding()
-
-            HStack {
-                Spacer()
-                    .frame(height: Design.base*13)
-            }
 
         }.background(.thinMaterial).sheet(isPresented: $showingPhotoPicker) {
             ImagePicker(selectedImage: $beanOO.coffee.image, isImageSelected: $isImageSelected)
@@ -201,5 +194,5 @@ struct NewBeansView: View {
 }
 
 #Preview {
-    NewBeansView(navRouter: NavigationRouter(), isEdit: true)
+    NewBeansView(isEdit: true)
 }

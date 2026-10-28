@@ -25,4 +25,5 @@ enum SFSymbols {
   static let star = "star"
   static let starLeadingHalfFilled = "star.leadinghalf.filled"
   static let ladybug = "ladybug"
+  static let bolt = "bolt"
 }

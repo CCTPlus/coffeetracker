@@ -9,8 +9,7 @@ import CoreData
 import SwiftUI
 
 struct CoffeeTrackerMain: View {
-  @AppStorage("showNewView") var showNewView: Bool = true
-  @AppStorage("lastSeenVersion") var version: String = "1.0"
+  @AppStorage("lastSeenVersion") var lastSeenVersion: String?
 
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.openURL) private var openURL
@@ -20,16 +19,15 @@ struct CoffeeTrackerMain: View {
   @State private var showingShare = false
   @State private var showingFeedback = false
   @State private var showingReleaseNotes = false
+  @State private var showNewView = false
+  private let releaseNotes = ReleaseNotes.current()
   @StateObject var beanOO = NewBeanOO(bean: nil)
 
   var body: some View {
     NavigationStack {
       CoffeeListView()
         .popover(isPresented: $showNewView) {
-          WhatsNewView()
-            .onDisappear {
-              showNewView = false
-            }
+          WhatsNewView(notes: releaseNotes)
         }
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
@@ -86,7 +84,7 @@ struct CoffeeTrackerMain: View {
           UserFeedbackView()
         }
         .sheet(isPresented: $showingReleaseNotes) {
-          WhatsNewView()
+          WhatsNewView(notes: releaseNotes)
         }
         .sheet(isPresented: $showingNewBean) {
           NavigationStack {
@@ -101,13 +99,11 @@ struct CoffeeTrackerMain: View {
           guard let currentVersion = currentVersion else {
             return
           }
-          if currentVersion != version {
+          // Only show after an update, and only when this version has notes. Fresh installs skip it.
+          if let lastSeenVersion, lastSeenVersion != currentVersion, releaseNotes != nil {
             showNewView = true
-            version = currentVersion
-          } else {
-            showNewView = false
-            version = currentVersion
           }
+          lastSeenVersion = currentVersion
         }
     }
     .overlay {

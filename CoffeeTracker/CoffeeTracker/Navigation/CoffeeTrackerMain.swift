@@ -37,7 +37,7 @@ struct CoffeeTrackerMain: View {
                   showingDevCoffee = true
                 }
               } label: {
-                Label("Buy the developer a coffee", systemImage: SFSymbols.coffee)
+                Label("Buy the dev a coffee", systemImage: SFSymbols.coffee)
               }
               Button {
                 showingShare = true
@@ -118,9 +118,12 @@ struct CoffeeTrackerMain: View {
             }
             .accessibilityLabel("Close")
             .accessibilityAddTraits(.isButton)
-          BuyDevCoffeeSection()
-            .background(Color.canvas.opacity(0.3), in: RoundedRectangle(cornerRadius: 10))
-            .padding()
+          BuyDevCoffeeSection {
+            withAnimation {
+              showingDevCoffee = false
+            }
+          }
+          .padding(32)
         }
         .transition(.opacity)
       }

@@ -1,12 +1,13 @@
 {
+  "originHash" : "c1984665aca010fb78c3f91061a2843fc14763613ba729dcedc4314c9e9c291b",
   "pins" : [
     {
       "identity" : "octokit.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nerdishbynature/octokit.swift",
       "state" : {
-        "revision" : "9521cdff919053868ab13cd08a228f7bc1bde2a9",
-        "version" : "0.11.0"
+        "revision" : "cd108b387782d8509e64e298cf4800dc47fc40ae",
+        "version" : "0.14.0"
       }
     },
     {
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "6bba57d6a3f19b9ae09c9540d49e4d45f8039048",
-        "version" : "4.9.1"
+        "revision" : "338022faafce4675788e405fbcaa4246aae2c93b",
+        "version" : "5.99.0"
       }
     },
     {
@@ -23,10 +24,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nerdishbynature/RequestKit.git",
       "state" : {
-        "revision" : "fd5e9e99aada7432170366c9e95967011ce13bad",
-        "version" : "2.4.0"
+        "revision" : "9d45c9aacc1d46c87def44dd120d9c71dab3c788",
+        "version" : "3.4.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

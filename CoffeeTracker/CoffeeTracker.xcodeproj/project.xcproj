@@ -43,6 +43,7 @@
           "path": "Models",
           "children": [
             { "path": "BeanModel.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "ReleaseNotes.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         }, {
           "kind": "group",
@@ -137,8 +138,11 @@
       "path": "CoffeeTrackerTests",
       "children": [
         { "path": "BeanRowViewModelTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
+        { "path": "ReleaseNotesTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
       ],
-    }, {
+    },
+    { "path": "../CHANGELOG.md", "target-membership": [ "CoffeeTracker/resources" ] },
+    {
       "kind": "group",
       "name": "Products",
       "children": [
@@ -199,7 +203,7 @@
           "$(inherited)",
           "@executable_path/Frameworks",
         ],
-        "MARKETING_VERSION": "2.0",
+        "MARKETING_VERSION": "1.1.0", // x-release-please-version
         "PRODUCT_BUNDLE_IDENTIFIER": "dev.cctplus.CoffeeTracker",
         "PRODUCT_NAME": "Coffee_",
         "SWIFT_EMIT_LOC_STRINGS": "YES",
@@ -225,8 +229,7 @@
         "CODE_SIGN_STYLE": "Automatic",
         "CURRENT_PROJECT_VERSION": "1",
         "GENERATE_INFOPLIST_FILE": "YES",
-        "IPHONEOS_DEPLOYMENT_TARGET": "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)",
-        "MARKETING_VERSION": "1.0",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
         "PRODUCT_BUNDLE_IDENTIFIER": "dev.cctplus.CoffeeTrackerTests",
         "PRODUCT_NAME": "$(TARGET_NAME)",
         "SWIFT_EMIT_LOC_STRINGS": "NO",

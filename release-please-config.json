@@ -4,7 +4,18 @@
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "coffeetracker"
+      "package-name": "coffeetracker",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "CoffeeTracker/CoffeeTracker.xcodeproj/project.xcproj"
+        },
+        {
+          "type": "json",
+          "path": "package.json",
+          "jsonpath": "$.version"
+        }
+      ]
     }
   }
 }

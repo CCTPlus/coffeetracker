@@ -1,0 +1,30 @@
+name: "Check App Version"
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  main:
+    name: App version matches release-please
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # release-please bumps MARKETING_VERSION through the `x-release-please-version` marker.
+      # If Xcode rewrites the project file and drops the marker, the version silently stops updating.
+      - name: Compare MARKETING_VERSION with the release-please manifest
+        run: |
+          expected=$(jq -r '."."' .release-please-manifest.json)
+          line=$(grep 'x-release-please-version' CoffeeTracker/CoffeeTracker.xcodeproj/project.xcproj || true)
+          if [ -z "$line" ]; then
+            echo "::error::MARKETING_VERSION lost its '// x-release-please-version' marker in project.xcproj. Add it back to the end of the line."
+            exit 1
+          fi
+          actual=$(echo "$line" | sed -E 's/.*"MARKETING_VERSION": "([^"]+)".*/\1/')
+          if [ "$actual" != "$expected" ]; then
+            echo "::error::MARKETING_VERSION is $actual but release-please expects $expected. Don't change the version by hand."
+            exit 1
+          fi
+          echo "MARKETING_VERSION $actual matches release-please"

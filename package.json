@@ -1,6 +1,6 @@
 {
   "name": "coffeetracker",
-  "version": "2.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "devDependencies": {
@@ -11,7 +11,7 @@
   "scripts": {
     "commitlint": ". ./scripts/commitlint.sh",
     "format-changes": ". ./scripts/format-changed-files.sh",
-    "format": "swift-format format . -r --configuration .swift-format.json -i",
+    "format": "xcrun swift-format format . -r --configuration .swift-format.json -i",
     "prepare": "husky install",
     "test": ""
   },

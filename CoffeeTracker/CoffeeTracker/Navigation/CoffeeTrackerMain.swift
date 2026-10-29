@@ -24,6 +24,8 @@ struct CoffeeTrackerMain: View {
   @State private var showingDevCoffee = false
   @State private var showingShare = false
   @State private var showingFeedback = false
+  @State private var feedbackSent = false
+  @State private var showingFeedbackSent = false
   @State private var showingReleaseNotes = false
   @State private var showNewView = false
   @State private var showingReviewPrompt = false
@@ -110,7 +112,13 @@ struct CoffeeTrackerMain: View {
         }
         .reviewPrompt(isPresented: $showingReviewPrompt)
         .sheet(isPresented: $showingFeedback) {
-          UserFeedbackView()
+          guard feedbackSent else { return }
+          feedbackSent = false
+          withAnimation {
+            showingFeedbackSent = true
+          }
+        } content: {
+          UserFeedbackView { feedbackSent = true }
         }
         .sheet(isPresented: $showingReleaseNotes) {
           promptForReview(after: .whatsNew)
@@ -171,6 +179,28 @@ struct CoffeeTrackerMain: View {
           .padding(32)
         }
         .transition(.opacity)
+      }
+    }
+    .overlay {
+      if showingFeedbackSent {
+        FeedbackSentView()
+          .padding(32)
+          .onTapGesture {
+            withAnimation {
+              showingFeedbackSent = false
+            }
+          }
+          .transition(.scale(scale: 0.9).combined(with: .opacity))
+          .task {
+            do {
+              try await Task.sleep(for: .seconds(3))
+            } catch {
+              return
+            }
+            withAnimation {
+              showingFeedbackSent = false
+            }
+          }
       }
     }
   }

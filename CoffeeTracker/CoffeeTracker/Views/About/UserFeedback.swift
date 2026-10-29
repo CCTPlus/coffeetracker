@@ -5,84 +5,115 @@
 //  Created by Jay Wilson on 3/21/22.
 //
 
+import os
 import SwiftUI
+
+private let logger = Logger(subsystem: "CoffeeTracker", category: "Feedback")
 
 struct UserFeedbackView: View {
     @Environment(\.dismiss) private var dismiss
 
-//    @Binding var issueSubmitted: Bool?
+    var onSent: () -> Void = {}
 
     @State private var title: String = ""
-    @State private var details: String = "Include any additional information here."
-    @State private var selectedFeedbackType: FeedbackType = .feature
-    @State private var buttonState: ButtonState = .neutral
-    @State private var errorText = ""
+    @State private var details: String = ""
+    @State private var email: String = ""
+    @State private var selectedFeedbackType: FeedbackType? = .bug
+    @State private var state: SubmitState = .idle
+    @State private var showingError = false
 
     var body: some View {
-        Form {
-            Section {
-                TextField("Summary", text: $title)
-            } header: {
-                Text("Short summary")
-            }
+        NavigationStack {
+            Form {
+                Section {
+                    Picker("Type", selection: $selectedFeedbackType) {
+                        Text("Bug").tag(FeedbackType.bug)
+                        Text("Feature Request").tag(FeedbackType.feature)
+                    }
+                    .pickerStyle(.segmented)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(.init())
+                } header: {
+                    Text("Type")
+                }
 
-            Section {
-                Picker("Feedback", selection: $selectedFeedbackType) {
-                    Text("Bug").tag(FeedbackType.bug)
-                    Text("Feature Request").tag(FeedbackType.feature)
-                }.pickerStyle(.menu)
-            } header: {
-                Text("Type")
-            }
+                Section {
+                    TextField("Summary", text: $title)
+                } header: {
+                    Text("Summary")
+                } footer: {
+                    Text(summaryHint)
+                }
 
-            Section {
-                TextEditor(text: $details)
-                    .frame(height: 100.0)
-            } header: {
-                Text("Feedback Details")
-            }
+                Section {
+                    TextField("Steps or anything else that helps", text: $details, axis: .vertical)
+                        .lineLimit(5...10)
+                } header: {
+                    Text("Feedback Details")
+                }
 
-            // MARK: Submit Button
-            VStack {
-                Button(action: addIssueToGithub) {
-                    switch buttonState {
-                    case .neutral:
-                        Text("\(Image(systemName: "paperplane")) Submit")
-                            .frame(width: 200.0, height: 50.0)
-                            .background(Color.blue)
-                    case .error:
-                        Text("\(Image(systemName: "paperplane")) Submit")
-                            .frame(width: 200.0, height: 50.0)
-                            .background((title.count == 0) ? Color.red : Color.blue)
-                    case .sending:
-                        Text("\(Image(systemName: "paperplane.fill")) Sending")
-                            .frame(width: 200.0, height: 50.0)
-                            .background(Color.gray)
-                    case .sent:
-                        Text("\(Image(systemName: "checkmark")) Submitted")
-                            .frame(width: 200.0, height: 50.0)
-                            .background(Color.green)
+                Section {
+                    TextField("Email (optional)", text: $email)
+                        .keyboardType(.emailAddress)
+                        .textContentType(.emailAddress)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                } header: {
+                    Text("Email")
+                } footer: {
+                    Text("Add your email if you'd like a reply.")
+                }
+            }
+            .navigationTitle("Feedback")
+            .navigationBarTitleDisplayMode(.inline)
+            .alert("Couldn't send feedback", isPresented: $showingError) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Please try again.")
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .close) {
+                        dismiss()
                     }
                 }
-                .animation(.easeInOut, value: buttonState)
-                .animation(.easeInOut, value: title)
-                .foregroundColor(Color.white)
-                .cornerRadius(10.0)
-
-                Text(errorText)
-                    .foregroundColor(.red)
-            }.frame(maxWidth: .infinity)
-            .listRowBackground(Color.clear)
-            .listRowInsets(.init())
-            .border(.clear, width: 0)
-        }.navigationTitle("Feedback")
+                ToolbarItem(placement: .confirmationAction) {
+                    if state == .sending {
+                        ProgressView()
+                    } else {
+                        Button("Send", systemImage: "paperplane", role: .confirm) {
+                            addIssueToGithub()
+                        }
+                        .disabled(trimmedTitle.isEmpty || selectedFeedbackType == nil)
+                    }
+                }
+            }
+        }
     }
 
-    private enum ButtonState {
-        case neutral
-        case error
+    private var summaryHint: String {
+        switch selectedFeedbackType {
+        case .bug:
+            "Describe what went wrong in one line, like \"The app crashes when I add a photo.\""
+        case .feature:
+            "Describe what you'd like in one line, like \"Let me sort coffees by roaster.\""
+        case nil:
+            "A one-line description of the bug or idea. Add the details below."
+        }
+    }
+
+    private var trimmedTitle: String {
+        title.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedEmail: String? {
+        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    private enum SubmitState {
+        case idle
         case sending
-        case sent
     }
 
     private enum FeedbackType: String {
@@ -91,25 +122,30 @@ struct UserFeedbackView: View {
     }
 
     private func addIssueToGithub() {
-        buttonState = .sending
+        guard let selectedFeedbackType else { return }
+        state = .sending
 
         Task {
             do {
                 let type = selectedFeedbackType == .bug ? "bug" : "feature"
-                try await FormspreeFeedback.submit(type: type, message: details, summary: title)
-                buttonState = .sent
+                try await FormspreeFeedback.submit(
+                    type: type,
+                    message: details.trimmingCharacters(in: .whitespacesAndNewlines),
+                    summary: trimmedTitle,
+                    email: trimmedEmail
+                )
                 Analytics.feedbackSubmitted(type: type).send()
+                onSent()
+                dismiss()
             } catch {
-                print(error)
-                errorText = "No summary given."
-                buttonState = .error
+                logger.error("Failed to submit feedback: \(error.localizedDescription)")
+                state = .idle
+                showingError = true
             }
         }
     }
 }
 
 #Preview {
-    NavigationView {
-        UserFeedbackView()
-    }
+    UserFeedbackView()
 }

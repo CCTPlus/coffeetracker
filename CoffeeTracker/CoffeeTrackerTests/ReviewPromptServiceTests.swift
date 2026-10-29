@@ -75,10 +75,4 @@ class ReviewPromptServiceTests: XCTestCase {
     advance(weeks: 0, days: 1)
     XCTAssertTrue(service.canPrompt)
   }
-
-  func testFeedbackTitleUsesTruncatedFirstLine() {
-    XCTAssertEqual(ReviewFeedbackView.title(for: "Too slow\nmore details"), "Feedback: Too slow")
-    let long = String(repeating: "a", count: 70)
-    XCTAssertEqual(ReviewFeedbackView.title(for: long), "Feedback: " + String(repeating: "a", count: 60) + "…")
-  }
 }

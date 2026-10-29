@@ -72,7 +72,7 @@ struct ReviewFeedbackView: View {
     state = .sending
     Task {
       do {
-        try await FormspreeFeedback.submit(subject: Self.title(for: details), message: details, email: trimmedEmail)
+        try await FormspreeFeedback.submit(type: "feedback", message: details, email: trimmedEmail)
         Analytics.reviewPromptFeedbackSubmitted.send()
         dismiss()
       } catch {
@@ -81,12 +81,6 @@ struct ReviewFeedbackView: View {
         showingError = true
       }
     }
-  }
-
-  static func title(for details: String) -> String {
-    let firstLine = details.split(whereSeparator: \.isNewline).first.map(String.init) ?? details
-    let summary = firstLine.count > 60 ? String(firstLine.prefix(60)) + "…" : firstLine
-    return "Feedback: \(summary)"
   }
 
   private enum SubmitState {

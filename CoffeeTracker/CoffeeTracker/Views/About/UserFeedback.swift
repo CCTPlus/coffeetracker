@@ -96,7 +96,7 @@ struct UserFeedbackView: View {
         Task {
             do {
                 let type = selectedFeedbackType == .bug ? "bug" : "feature"
-                try await FormspreeFeedback.submit(subject: title, message: details, type: type)
+                try await FormspreeFeedback.submit(type: type, message: details, summary: title)
                 buttonState = .sent
                 Analytics.feedbackSubmitted(type: type).send()
             } catch {

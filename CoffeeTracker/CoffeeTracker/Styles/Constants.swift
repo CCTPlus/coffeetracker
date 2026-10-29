@@ -12,7 +12,7 @@ enum APIKeys {
     static let revenueCat = "appl_hDVVtfzcSvbjYhGHLdgrltgZTIX"
     static let telemetryDeckAppID = "B37FB1EF-F3FA-41F7-9329-F93ADAB8BDA2"
     static let telemetryDeckNamespace = "dev.cctplus"
-    static let kickstartExchange = "preview"
+    static let kickstartExchange = "ks_live_1I7vg7sS03OOgOzsiY1coEFV_DLAlO-iXVmaA6kTjXE"
 }
 
 enum Design {

@@ -2,6 +2,15 @@
   "originHash" : "a457bea7219e0817f7d0aac510e12f6d653bceccbfc8124d07a54a7b9f8f28e9",
   "pins" : [
     {
+      "identity" : "kickstartsdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/KickstartSDK",
+      "state" : {
+        "revision" : "f368c7e79695ec6370c96e5656896d972d581621",
+        "version" : "0.6.0"
+      }
+    },
+    {
       "identity" : "octokit.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nerdishbynature/octokit.swift",

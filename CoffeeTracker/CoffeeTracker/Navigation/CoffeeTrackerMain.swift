@@ -6,11 +6,16 @@
 //
 
 import CoreData
+import KickstartExchange
+import os
+import RevenueCat
 import SwiftUI
+
+private let logger = Logger(subsystem: "CoffeeTracker", category: "Tips")
 
 struct CoffeeTrackerMain: View {
   @AppStorage("lastSeenVersion") var lastSeenVersion: String?
-
+  @AppStorage(ASKeys.hasTippedDev) private var hasTippedDev = false
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.openURL) private var openURL
 
@@ -26,7 +31,13 @@ struct CoffeeTrackerMain: View {
   var body: some View {
     NavigationStack {
       CoffeeListView()
-        .popover(isPresented: $showNewView) {
+        .safeAreaInset(edge: .bottom) {
+          if !hasTippedDev {
+            ExchangeBannerAdView(apiKey: APIKeys.kickstartExchange)
+              .padding(.horizontal)
+          }
+        }
+        .sheet(isPresented: $showNewView) {
           WhatsNewView(notes: releaseNotes)
         }
         .toolbar {
@@ -110,6 +121,15 @@ struct CoffeeTrackerMain: View {
             Analytics.releaseNotesViewed(source: .auto).send()
           }
           lastSeenVersion = currentVersion
+        }
+        .task {
+          guard await TipHistory.coffeesPurchased() > 0 else { return }
+          hasTippedDev = true
+          do {
+            _ = try await Purchases.shared.syncPurchases()
+          } catch {
+            logger.error("Failed to sync tips to RevenueCat: \(error.localizedDescription)")
+          }
         }
     }
     .overlay {

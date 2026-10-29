@@ -13,6 +13,7 @@ struct BuyDevCoffeeSection: View {
   /// Shows a close button in the corner when set.
   var onClose: (() -> Void)?
 
+  @AppStorage(ASKeys.hasTippedDev) private var hasTippedDev = false
   @State private var package: Package?
   @State private var cupsPurchased = 0
 
@@ -42,7 +43,9 @@ struct BuyDevCoffeeSection: View {
       DottedDivider()
       total
       buyButton
-      Text("One-time tip. No physical item or extra features.")
+      Text(hasTippedDev
+        ? "Ads are removed. Extra tips are just a thank-you."
+        : "One-time tip. Your first one removes ads for good.")
         .font(.caption)
         .foregroundStyle(.secondary)
         .multilineTextAlignment(.center)
@@ -83,8 +86,13 @@ struct BuyDevCoffeeSection: View {
           for package in packages {
             self.package = package
           }
-          getAllPurchases()
         }
+      }
+    }
+    .task {
+      cupsPurchased = await TipHistory.coffeesPurchased()
+      if cupsPurchased > 0 {
+        hasTippedDev = true
       }
     }
   }
@@ -100,7 +108,7 @@ struct BuyDevCoffeeSection: View {
         .padding(.bottom, 4)
       Text("Buy Jay a coffee")
         .font(.largeTitle.bold())
-      Text("Support future development\nwith an optional tip.")
+      Text("Support future development.\nAny tip removes the ad banner.")
         .font(.subheadline)
         .fixedSize()
         .foregroundStyle(.secondary)
@@ -116,7 +124,7 @@ struct BuyDevCoffeeSection: View {
         Text(price)
       }
       .font(.system(.body, design: .monospaced))
-      Text("A small thank-you for the developer.")
+      Text(hasTippedDev ? "A small thank-you for the developer." : "Thank-you for the dev + no more ads.")
         .font(.system(.caption, design: .monospaced))
         .fixedSize()
         .foregroundStyle(.secondary)
@@ -141,6 +149,7 @@ struct BuyDevCoffeeSection: View {
         } else if error == nil {
           cupsPurchased += 1
           Analytics.tipJarPurchased.send()
+          hasTippedDev = true
         }
       }
     } label: {
@@ -170,6 +179,11 @@ struct BuyDevCoffeeSection: View {
         Spacer()
         Text(amount)
       }
+      HStack {
+        Text("Ads")
+        Spacer()
+        Text(hasTippedDev ? "Removed" : "Showing")
+      }
     }
     .font(.system(.subheadline, design: .monospaced))
   }
@@ -180,21 +194,6 @@ struct BuyDevCoffeeSection: View {
     }
 
     return package.localizedPriceString
-  }
-
-  func getAllPurchases() {
-    Purchases.shared.getCustomerInfo { customerInfo, _ in
-      guard let customerInfo = customerInfo else {
-        return
-      }
-
-      for transaction in customerInfo.nonSubscriptions {
-        print(transaction.productIdentifier)
-        if package?.storeProduct.productIdentifier == transaction.productIdentifier {
-          cupsPurchased += 1
-        }
-      }
-    }
   }
 }
 

@@ -28,11 +28,18 @@ struct CoffeeTrackerMain: View {
   private let releaseNotes = ReleaseNotes.current()
   @StateObject var beanOO = NewBeanOO(bean: nil)
 
+  private var showsAds: Bool {
+    #if DEBUG
+    if ScreenshotSampleData.isEnabled { return false }
+    #endif
+    return !hasTippedDev
+  }
+
   var body: some View {
     NavigationStack {
       CoffeeListView()
         .safeAreaInset(edge: .bottom) {
-          if !hasTippedDev {
+          if showsAds {
             ExchangeBannerAdView(apiKey: APIKeys.kickstartExchange)
               .padding(.horizontal)
           }

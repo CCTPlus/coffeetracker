@@ -33,135 +33,21 @@
   ],
   "files": [
     {
-      "kind": "group",
+      "kind": "folder",
       "path": "CoffeeTracker",
-      "children": [
-        {
-          "kind": "group",
-          "path": "ObservableObjects",
-          "children": [
-            { "path": "BeanRowOO.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "BeansCollectionViewOO.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "NewBeanOO.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Models",
-          "children": [
-            { "path": "BeanModel.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "ReleaseNotes.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Views",
-          "children": [
-            {
-              "kind": "group",
-              "path": "ShareViews",
-              "children": [
-                { "path": "CoffeeShareView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-                { "path": "CoffeeShareImageView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-              ],
-            },
-            { "path": "BeanRowView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            {
-              "kind": "group",
-              "path": "About",
-              "children": [
-                { "path": "BuyDevCoffeeSection.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-                { "path": "UserFeedback.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-                { "path": "WhatsNewView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-              ],
-            },
-            {
-              "kind": "group",
-              "path": "ReviewPrompt",
-              "children": [
-                { "path": "ReviewPromptView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-                { "path": "ReviewFeedbackView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-              ],
-            },
-            { "path": "BeanDetailView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "CoffeeListView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "NewBeansView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Navigation",
-          "children": [
-            { "path": "CoffeeTrackerMain.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Components",
-          "children": [
-            { "path": "ActivityView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "LaunchAnimationView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Styles",
-          "children": [
-            { "path": "View+Extensions.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "Constants.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "RowModifier.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Helpers",
-          "children": [
-            { "path": "SFSymbolHelper.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "Analytics.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "TipHistory.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "ReviewPromptService.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "FormspreeFeedback.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        },
-        { "path": "Info.plist" },
-        { "path": "CoffeeTracker.entitlements" },
-        {
-          "kind": "group",
-          "path": "Fixtures",
-          "children": [
-            { "path": "BeanFixtures.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-            { "path": "ScreenshotSampleData.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-          ],
-        },
-        { "path": "ContentView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-        { "path": "CoffeeTrackerApp.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-        { "path": "Assets.xcassets", "target-membership": [ "CoffeeTracker/resources" ] },
-        { "path": "AppIcon.icon", "target-membership": [ "CoffeeTracker/resources" ] },
-        { "path": "Persistence.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
-        {
-          "kind": "version-group",
-          "path": "CoffeeTracker.xcdatamodeld",
-          "current-version": "CoffeeTracker.xcdatamodel",
-          "type": "wrapper.xcdatamodel",
-          "target-membership": [
-            "CoffeeTracker/compile-sources",
-          ],
-          "children": [
-            {
-              "path": "CoffeeTracker.xcdatamodel",
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Preview Content",
-          "children": [
-            { "path": "Preview Assets.xcassets", "target-membership": [ "CoffeeTracker/resources" ] },
-          ],
-        },
+      "target-membership": [
+        "CoffeeTracker",
       ],
-    }, {
-      "kind": "group",
-      "path": "CoffeeTrackerTests",
-      "children": [
-        { "path": "BeanRowViewModelTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
-        { "path": "ReleaseNotesTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
-        { "path": "ReviewPromptServiceTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
+      "membership-exceptions": [
+        {
+          "target": "CoffeeTracker",
+          "exclusions": [
+            "Info.plist",
+          ],
+        },
       ],
     },
+    { "kind": "folder", "path": "CoffeeTrackerTests", "target-membership": [ "CoffeeTrackerTests" ] },
     { "path": "../CHANGELOG.md", "target-membership": [ "CoffeeTracker/resources" ] },
     {
       "kind": "group",

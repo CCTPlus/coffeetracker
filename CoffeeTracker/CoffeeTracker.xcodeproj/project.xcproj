@@ -112,7 +112,7 @@
           "$(inherited)",
           "@executable_path/Frameworks",
         ],
-        "MARKETING_VERSION": "1.1.0", // x-release-please-version
+        "MARKETING_VERSION": "1.2.0", // x-release-please-version
         "PRODUCT_BUNDLE_IDENTIFIER": "dev.cctplus.CoffeeTracker",
         "PRODUCT_NAME": "Coffee_",
         "SWIFT_EMIT_LOC_STRINGS": "YES",

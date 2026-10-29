@@ -18,6 +18,7 @@ struct CoffeeTrackerMain: View {
   @AppStorage(ASKeys.hasTippedDev) private var hasTippedDev = false
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.openURL) private var openURL
+  @Environment(ReviewPromptService.self) private var reviewPrompt
 
   @State private var showingNewBean = false
   @State private var showingDevCoffee = false
@@ -25,6 +26,8 @@ struct CoffeeTrackerMain: View {
   @State private var showingFeedback = false
   @State private var showingReleaseNotes = false
   @State private var showNewView = false
+  @State private var showingReviewPrompt = false
+  @State private var addedCoffee = false
   private let releaseNotes = ReleaseNotes.current()
   @StateObject var beanOO = NewBeanOO(bean: nil)
 
@@ -45,6 +48,8 @@ struct CoffeeTrackerMain: View {
           }
         }
         .sheet(isPresented: $showNewView) {
+          promptForReview(after: .whatsNew)
+        } content: {
           WhatsNewView(notes: releaseNotes)
         }
         .toolbar {
@@ -103,15 +108,22 @@ struct CoffeeTrackerMain: View {
             applicationActivities: nil
           )
         }
+        .reviewPrompt(isPresented: $showingReviewPrompt)
         .sheet(isPresented: $showingFeedback) {
           UserFeedbackView()
         }
         .sheet(isPresented: $showingReleaseNotes) {
+          promptForReview(after: .whatsNew)
+        } content: {
           WhatsNewView(notes: releaseNotes)
         }
         .sheet(isPresented: $showingNewBean) {
+          guard addedCoffee else { return }
+          addedCoffee = false
+          promptForReview(after: .coffeeAdded)
+        } content: {
           NavigationStack {
-            NewBeansView()
+            NewBeansView { addedCoffee = true }
               .environmentObject(beanOO)
               .navigationTitle("New Coffee")
               .navigationBarTitleDisplayMode(.inline)
@@ -162,6 +174,10 @@ struct CoffeeTrackerMain: View {
       }
     }
   }
+
+  private func promptForReview(after trigger: ReviewPromptService.Trigger) {
+    showingReviewPrompt = reviewPrompt.promptIfEligible(after: trigger)
+  }
 }
 
 #Preview {
@@ -169,4 +185,5 @@ struct CoffeeTrackerMain: View {
     .environmentObject(
       BeansCollectionViewOO(context: PersistenceController.preview.container.viewContext)
     )
+    .environment(ReviewPromptService())
 }

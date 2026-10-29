@@ -37,6 +37,7 @@ struct NewBeansView: View {
     @FocusState private var focusField: Field?
 
     var isEdit = false
+    var onAdded: () -> Void = {}
 
     let beanTypes = ["pods", "beans", "grounds"]
 
@@ -157,6 +158,7 @@ struct NewBeansView: View {
             } else {
                 beanOO.coffee.addBeansToData(context: viewContext)
                 Analytics.coffeeAdded(beanOO.coffee).send()
+                onAdded()
                 resetBeans()
                 dismiss()
             }

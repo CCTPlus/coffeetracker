@@ -19,12 +19,6 @@
       },
     }, {
       "kind": "remote",
-      "repository": "https://github.com/nerdishbynature/octokit.swift",
-      "version": {
-        "up-to-next-major-version": "0.9.0",
-      },
-    }, {
-      "kind": "remote",
       "repository": "https://github.com/TelemetryDeck/SwiftSDK",
       "version": {
         "up-to-next-major-version": "2.14.2",
@@ -79,6 +73,14 @@
                 { "path": "WhatsNewView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
               ],
             },
+            {
+              "kind": "group",
+              "path": "ReviewPrompt",
+              "children": [
+                { "path": "ReviewPromptView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+                { "path": "ReviewFeedbackView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+              ],
+            },
             { "path": "BeanDetailView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
             { "path": "CoffeeListView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
             { "path": "NewBeansView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
@@ -111,6 +113,8 @@
             { "path": "SFSymbolHelper.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
             { "path": "Analytics.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
             { "path": "TipHistory.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "ReviewPromptService.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "FormspreeFeedback.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         },
         { "path": "Info.plist" },
@@ -155,6 +159,7 @@
       "children": [
         { "path": "BeanRowViewModelTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
         { "path": "ReleaseNotesTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
+        { "path": "ReviewPromptServiceTests.swift", "target-membership": [ "CoffeeTrackerTests/compile-sources" ] },
       ],
     },
     { "path": "../CHANGELOG.md", "target-membership": [ "CoffeeTracker/resources" ] },
@@ -192,10 +197,6 @@
         }, {
           "package": "SwiftSDK",
           "product-name": "TelemetryDeck",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "octokit",
-          "product-name": "OctoKit",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "purchases-ios",

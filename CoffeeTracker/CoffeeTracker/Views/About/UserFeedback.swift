@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import OctoKit
 
 struct UserFeedbackView: View {
     @Environment(\.dismiss) private var dismiss
@@ -91,33 +90,16 @@ struct UserFeedbackView: View {
         case feature = "enhancement"
     }
 
-    let config = TokenConfiguration(ProcessInfo.processInfo.environment["GitHubAPI"])
-
-    let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "2022"
-    let appBuild: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
-
     private func addIssueToGithub() {
         buttonState = .sending
 
-        var issueBody = "| Auto Gen | Information |\n"
-        issueBody += "|---|---|\n"
-        issueBody += "| Date | \(Date.now) |\n"
-        issueBody += "|App Version| \(appVersion) \(appBuild)|\n"
-        issueBody += "|OS Version| \(UIDevice.current.systemVersion)|\n"
-        issueBody += "|Device Model| \(UIDevice.current.model)|\n"
-        issueBody += "\n" + details + "\n"
-
-        Octokit(config).postIssue(owner: "CCTPlus",
-                                  repository: "coffeetracker",
-                                  title: title,
-                                  body: issueBody,
-                                  assignee: "maeganwilson",
-                                  labels: [selectedFeedbackType.rawValue]) { response in
-            switch response {
-            case .success:
+        Task {
+            do {
+                let type = selectedFeedbackType == .bug ? "bug" : "feature"
+                try await FormspreeFeedback.submit(subject: title, message: details, type: type)
                 buttonState = .sent
-                Analytics.feedbackSubmitted(type: selectedFeedbackType == .bug ? "bug" : "feature").send()
-            case .failure(let error):
+                Analytics.feedbackSubmitted(type: type).send()
+            } catch {
                 print(error)
                 errorText = "No summary given."
                 buttonState = .error

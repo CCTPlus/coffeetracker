@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CoffeeShareView: View {
+    @Environment(ReviewPromptService.self) private var reviewPrompt
 
     @State private var showingShare = false
     @State private var shareImage: [Any] = []
@@ -15,6 +16,7 @@ struct CoffeeShareView: View {
     @State private var showRoastedDate: Bool = true
     @State private var showNotes: Bool = true
     @State private var showWatermark: Bool = true
+    @State private var showingReviewPrompt = false
 
     var coffee: BeanModel
     var body: some View {
@@ -71,6 +73,7 @@ struct CoffeeShareView: View {
                             shareImage = []
                         }
                 }
+                .reviewPrompt(isPresented: $showingReviewPrompt)
         }
     }
 
@@ -78,6 +81,10 @@ struct CoffeeShareView: View {
         let imageToShare = [ image ] as [AnyObject]
         let activityVC = UIActivityViewController(activityItems: imageToShare as [AnyObject],
                                                   applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { _, completed, _, _ in
+            guard completed else { return }
+            showingReviewPrompt = reviewPrompt.promptIfEligible(after: .coffeeShared)
+        }
         if let popOverController = activityVC.popoverPresentationController {
             popOverController.permittedArrowDirections = [.right]
         }
@@ -95,4 +102,5 @@ struct CoffeeShareView: View {
 
 #Preview {
     CoffeeShareView(coffee: testRoast)
+        .environment(ReviewPromptService())
 }

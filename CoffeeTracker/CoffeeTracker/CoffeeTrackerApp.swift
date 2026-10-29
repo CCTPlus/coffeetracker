@@ -12,21 +12,12 @@
 
 import SwiftUI
 import RevenueCat
-import StoreKit
 import TelemetryDeck
-
-extension UIApplication {
-    var foregroundActiveScene: UIWindowScene? {
-        connectedScenes
-            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
-    }
-}
 
 @main
 struct CoffeeTrackerApp: App {
-    @AppStorage(ASKeys.timesLaunched) var timesLaunched = 0
-
     @State private var beansVM: BeansCollectionViewOO?
+    @State private var reviewPrompt = ReviewPromptService()
 
     @State private var showingLaunchAnimation: Bool = {
         #if DEBUG
@@ -59,13 +50,9 @@ struct CoffeeTrackerApp: App {
                     CoffeeTrackerMain()
                         .environment(\.managedObjectContext, beansVM.context)
                         .environmentObject(beansVM)
+                        .environment(reviewPrompt)
                         .task {
                             Analytics.appOpened(libraryCount: beansVM.beans.count).send()
-                            timesLaunched += 1
-                            if timesLaunched > 5 {
-                                guard let scene = UIApplication.shared.foregroundActiveScene else { return }
-                                SKStoreReviewController.requestReview(in: scene)
-                            }
                         }
                 }
                 if showingLaunchAnimation {

@@ -18,13 +18,18 @@ struct CoffeeTrackerMain: View {
   @AppStorage(ASKeys.hasTippedDev) private var hasTippedDev = false
   @Environment(\.managedObjectContext) private var viewContext
   @Environment(\.openURL) private var openURL
+  @Environment(ReviewPromptService.self) private var reviewPrompt
 
   @State private var showingNewBean = false
   @State private var showingDevCoffee = false
   @State private var showingShare = false
   @State private var showingFeedback = false
+  @State private var feedbackSent = false
+  @State private var showingFeedbackSent = false
   @State private var showingReleaseNotes = false
   @State private var showNewView = false
+  @State private var showingReviewPrompt = false
+  @State private var addedCoffee = false
   private let releaseNotes = ReleaseNotes.current()
   @StateObject var beanOO = NewBeanOO(bean: nil)
 
@@ -45,6 +50,8 @@ struct CoffeeTrackerMain: View {
           }
         }
         .sheet(isPresented: $showNewView) {
+          promptForReview(after: .whatsNew)
+        } content: {
           WhatsNewView(notes: releaseNotes)
         }
         .toolbar {
@@ -103,15 +110,28 @@ struct CoffeeTrackerMain: View {
             applicationActivities: nil
           )
         }
+        .reviewPrompt(isPresented: $showingReviewPrompt)
         .sheet(isPresented: $showingFeedback) {
-          UserFeedbackView()
+          guard feedbackSent else { return }
+          feedbackSent = false
+          withAnimation {
+            showingFeedbackSent = true
+          }
+        } content: {
+          UserFeedbackView { feedbackSent = true }
         }
         .sheet(isPresented: $showingReleaseNotes) {
+          promptForReview(after: .whatsNew)
+        } content: {
           WhatsNewView(notes: releaseNotes)
         }
         .sheet(isPresented: $showingNewBean) {
+          guard addedCoffee else { return }
+          addedCoffee = false
+          promptForReview(after: .coffeeAdded)
+        } content: {
           NavigationStack {
-            NewBeansView()
+            NewBeansView { addedCoffee = true }
               .environmentObject(beanOO)
               .navigationTitle("New Coffee")
               .navigationBarTitleDisplayMode(.inline)
@@ -161,6 +181,32 @@ struct CoffeeTrackerMain: View {
         .transition(.opacity)
       }
     }
+    .overlay {
+      if showingFeedbackSent {
+        FeedbackSentView()
+          .padding(32)
+          .onTapGesture {
+            withAnimation {
+              showingFeedbackSent = false
+            }
+          }
+          .transition(.scale(scale: 0.9).combined(with: .opacity))
+          .task {
+            do {
+              try await Task.sleep(for: .seconds(3))
+            } catch {
+              return
+            }
+            withAnimation {
+              showingFeedbackSent = false
+            }
+          }
+      }
+    }
+  }
+
+  private func promptForReview(after trigger: ReviewPromptService.Trigger) {
+    showingReviewPrompt = reviewPrompt.promptIfEligible(after: trigger)
   }
 }
 
@@ -169,4 +215,5 @@ struct CoffeeTrackerMain: View {
     .environmentObject(
       BeansCollectionViewOO(context: PersistenceController.preview.container.viewContext)
     )
+    .environment(ReviewPromptService())
 }

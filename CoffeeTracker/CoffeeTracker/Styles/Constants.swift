@@ -21,7 +21,6 @@ enum Design {
 }
 
 enum ASKeys {
-    static let timesLaunched = "timesLaunched"
     static let hasTippedDev = "hasTippedDev"
 }
 

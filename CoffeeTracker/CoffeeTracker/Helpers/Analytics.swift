@@ -27,6 +27,12 @@ enum Analytics {
     case feedbackSubmitted(type: String)
     case releaseNotesViewed(source: ReleaseNotesSource)
 
+    case reviewPromptShown(trigger: ReviewPromptService.Trigger)
+    case reviewPromptReviewTapped
+    case reviewPromptFeedbackTapped
+    case reviewPromptFeedbackSubmitted
+    case reviewPromptDismissed
+
     enum ReleaseNotesSource: String {
         case auto
         case menu
@@ -58,6 +64,11 @@ enum Analytics {
         case .feedbackOpened: return "feedback.opened"
         case .feedbackSubmitted: return "feedback.submitted"
         case .releaseNotesViewed: return "releaseNotes.viewed"
+        case .reviewPromptShown: return "reviewPrompt.shown"
+        case .reviewPromptReviewTapped: return "reviewPrompt.reviewTapped"
+        case .reviewPromptFeedbackTapped: return "reviewPrompt.feedbackTapped"
+        case .reviewPromptFeedbackSubmitted: return "reviewPrompt.feedbackSubmitted"
+        case .reviewPromptDismissed: return "reviewPrompt.dismissed"
         }
     }
 
@@ -76,6 +87,8 @@ enum Analytics {
             return ["type": type]
         case .releaseNotesViewed(let source):
             return ["source": source.rawValue]
+        case .reviewPromptShown(let trigger):
+            return ["trigger": trigger.rawValue]
         default:
             return [:]
         }

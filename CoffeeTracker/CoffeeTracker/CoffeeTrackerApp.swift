@@ -26,9 +26,15 @@ extension UIApplication {
 struct CoffeeTrackerApp: App {
     @AppStorage(ASKeys.timesLaunched) var timesLaunched = 0
 
-    let persistenceController = PersistenceController.shared
+    @State private var beansVM: BeansCollectionViewOO?
 
-    @StateObject var beansVM = BeansCollectionViewOO(context: PersistenceController.shared.container.viewContext)
+    @State private var showingLaunchAnimation: Bool = {
+        #if DEBUG
+        return !ScreenshotSampleData.isEnabled
+        #else
+        return true
+        #endif
+    }()
 
     init() {
         // TelemetryDeck has to be initialized first so RevenueCat gets the hashed user ID
@@ -48,17 +54,31 @@ struct CoffeeTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            CoffeeTrackerMain()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(beansVM)
-                .task {
-                    Analytics.appOpened(libraryCount: beansVM.beans.count).send()
-                    timesLaunched += 1
-                    if timesLaunched > 5 {
-                        guard let scene = UIApplication.shared.foregroundActiveScene else { return }
-                        SKStoreReviewController.requestReview(in: scene)
+            ZStack {
+                if let beansVM {
+                    CoffeeTrackerMain()
+                        .environment(\.managedObjectContext, beansVM.context)
+                        .environmentObject(beansVM)
+                        .task {
+                            Analytics.appOpened(libraryCount: beansVM.beans.count).send()
+                            timesLaunched += 1
+                            if timesLaunched > 5 {
+                                guard let scene = UIApplication.shared.foregroundActiveScene else { return }
+                                SKStoreReviewController.requestReview(in: scene)
+                            }
+                        }
+                }
+                if showingLaunchAnimation {
+                    LaunchAnimationView(isReady: beansVM != nil) {
+                        showingLaunchAnimation = false
                     }
                 }
+            }
+            .task {
+                guard beansVM == nil else { return }
+                let persistenceController = await Task.detached { PersistenceController.shared }.value
+                beansVM = BeansCollectionViewOO(context: persistenceController.container.viewContext)
+            }
         }
     }
 }

@@ -94,6 +94,7 @@
           "path": "Components",
           "children": [
             { "path": "ActivityView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "LaunchAnimationView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         }, {
           "kind": "group",
@@ -119,11 +120,13 @@
           "path": "Fixtures",
           "children": [
             { "path": "BeanFixtures.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
+            { "path": "ScreenshotSampleData.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
           ],
         },
         { "path": "ContentView.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
         { "path": "CoffeeTrackerApp.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
         { "path": "Assets.xcassets", "target-membership": [ "CoffeeTracker/resources" ] },
+        { "path": "AppIcon.icon", "target-membership": [ "CoffeeTracker/resources" ] },
         { "path": "Persistence.swift", "target-membership": [ "CoffeeTracker/compile-sources" ] },
         {
           "kind": "version-group",
@@ -187,16 +190,16 @@
           "product-name": "KickstartExchange",
           "build-phase": { "build-phase": "frameworks" },
         }, {
+          "package": "SwiftSDK",
+          "product-name": "TelemetryDeck",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
           "package": "octokit",
           "product-name": "OctoKit",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "purchases-ios",
           "product-name": "RevenueCat",
-          "build-phase": { "build-phase": "frameworks" },
-        }, {
-          "package": "SwiftSDK",
-          "product-name": "TelemetryDeck",
           "build-phase": { "build-phase": "frameworks" },
         },
       ],

@@ -8,7 +8,16 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    static let shared: PersistenceController = {
+        #if DEBUG
+        if ScreenshotSampleData.isEnabled {
+            let controller = PersistenceController(inMemory: true)
+            ScreenshotSampleData.seed(into: controller.container.viewContext)
+            return controller
+        }
+        #endif
+        return PersistenceController()
+    }()
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
@@ -35,6 +44,7 @@ struct PersistenceController {
         container = NSPersistentCloudKitContainer(name: "CoffeeTracker")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            container.persistentStoreDescriptions.first!.cloudKitContainerOptions = nil
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (_, error) in
